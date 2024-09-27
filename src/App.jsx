@@ -1,13 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root";
-import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
 import Index from "./pages";
 import ProfilePage from "./pages/ProfilePage";
-import { useEffect } from "react";
 import { useGetUserQuery } from "./store";
-import { useDispatch } from "react-redux";
+
 import LoadingPage from "./pages/LoadingPage";
+import { skipToken } from "@reduxjs/toolkit/query";
+import { useDetectLogin } from "./hooks/useDetectLogin.js";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { isLoading } = useGetUserQuery();
+  const userToken = useDetectLogin();
+  const { isLoading } = useGetUserQuery(userToken ?? skipToken);
 
   return isLoading ? (
     <LoadingPage />

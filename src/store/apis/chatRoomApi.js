@@ -1,11 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { io } from "socket.io-client";
+import { useDetectLogin } from "../../hooks/useDetectLogin";
 
 const chatRoomApi = createApi({
   reducerPath: "roomApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://127.0.0.1:8080/room",
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().user.userToken;
+    prepareHeaders: (headers) => {
+      const token = useDetectLogin();
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);

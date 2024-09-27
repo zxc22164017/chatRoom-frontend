@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { useGetUserQuery } from "../store";
 
 export default function useGetLoginInfo() {

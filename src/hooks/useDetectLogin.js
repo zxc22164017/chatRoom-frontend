@@ -1,7 +1,6 @@
-import { useGetUserQuery } from "../store";
-
 export function useDetectLogin() {
-  const { isSuccess } = useGetUserQuery();
-
-  return isSuccess;
+  const token = localStorage.getItem("jwt")
+    ? localStorage.getItem("jwt")
+    : null;
+  return token;
 }

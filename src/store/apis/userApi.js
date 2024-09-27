@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import { useDetectLogin } from "../../hooks/useDetectLogin";
+
 const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
@@ -9,9 +11,7 @@ const userApi = createApi({
       return fetch(...args);
     },
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem("jwt")
-        ? localStorage.getItem("jwt")
-        : null;
+      const token = useDetectLogin();
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);

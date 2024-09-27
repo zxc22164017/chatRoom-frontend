@@ -42,7 +42,7 @@ export function PersonalInfo({ id }) {
     ];
     const { keys, filteredObject } = filterObj(keysToFilter, data);
 
-    filteredObject.birthday = dateConvert(data.birthday);
+    filteredObject.birthday = dateConvert("date", data.birthday);
     const renderInfo = keys.map((key) => {
       return (
         <p key={key} className="text-slate-500">

@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
+import { useGetUserQuery } from "../store";
 
 const useCheckIsCurrentUser = (userId) => {
-  const currentUser = useSelector((state) => {
-    return state.user.userInfo;
-  });
+  const currentUser = useGetUserQuery().data;
 
   return userId === currentUser?._id ? true : false;
 };

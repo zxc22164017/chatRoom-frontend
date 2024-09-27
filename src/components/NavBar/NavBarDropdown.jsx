@@ -70,7 +70,7 @@ function NavBarDropdown() {
       {isOpen && (
         <Panel
           className={
-            "absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg  "
+            "absolute block right-0 z-10 mt-2 w-[240px] origin-top-right  rounded-md bg-white shadow-lg  "
           }
         >
           {option01}
