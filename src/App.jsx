@@ -4,10 +4,12 @@ import ChatPage from "./pages/ChatPage";
 import Index from "./pages";
 import ProfilePage from "./pages/ProfilePage";
 import { useGetUserQuery } from "./store";
-
+import CommunityPage from "./pages/CommunityPage.jsx";
 import LoadingPage from "./pages/LoadingPage";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useDetectLogin } from "./hooks/useDetectLogin.js";
+import CreatePostPage from "./pages/CreatePostPage.jsx";
+import PostPage from "./pages/PostPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,18 @@ const router = createBrowserRouter([
       {
         path: "/profile/:_id",
         element: <ProfilePage />,
+      },
+      {
+        path: "/newPost",
+        element: <CreatePostPage />,
+      },
+      {
+        path: "/post/:_id",
+        element: <PostPage />,
+      },
+      {
+        path: "/c/:name",
+        element: <CommunityPage />,
       },
     ],
   },

@@ -1,19 +1,17 @@
 import React from "react";
-import { Thumbnail } from "../Thumbnail";
+import { Thumbnail } from "../Thumbnails/Thumbnail";
 import { useSelector, useDispatch } from "react-redux";
 import Panel from "../Panel";
 import { useState, useEffect, useRef } from "react";
 import NavBarDropdownOption from "./NavBarDropdownOption";
 import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
-import { useGetUserQuery } from "../../store";
-// import { logOut } from "../../store";
+import { useGetUserQuery, useLogoutMutation } from "../../store";
 
 function NavBarDropdown() {
-  const dispatch = useDispatch();
   const nav = useNavigate();
   const divElement = useRef();
-
+  const [logout, result] = useLogoutMutation();
   const userInfo = useGetUserQuery().data;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -26,9 +24,13 @@ function NavBarDropdown() {
     nav(`/profile/${userInfo._id}`);
   };
   const handleLogOut = () => {
-    // dispatch(logOut());
+    logout(userInfo._id);
     setIsOpen(false);
+    localStorage.removeItem("jwt");
     nav("/");
+    setTimeout(() => {
+      location.reload();
+    }, 500);
   };
 
   useEffect(() => {
@@ -48,7 +50,7 @@ function NavBarDropdown() {
 
   const option01 = (
     <NavBarDropdownOption onChange={handleProfileNav} className={" border-b-2"}>
-      <Thumbnail className={"w-8 h-8"} />
+      <Thumbnail className={"w-8 h-8"} image={userInfo?.thumbnail} />
       <h1 className="ml-2 font-semibold group-hover:text-sky-500">
         {userInfo?.username}
       </h1>
@@ -66,11 +68,15 @@ function NavBarDropdown() {
 
   return (
     <div className="relative mr-4 " ref={divElement}>
-      <Thumbnail className={"w-10 h-10"} onClick={handleOpen} />
+      <Thumbnail
+        className={"w-10 h-10"}
+        onClick={handleOpen}
+        image={userInfo?.thumbnail}
+      />
       {isOpen && (
         <Panel
           className={
-            "absolute block right-0 z-10 mt-2 w-[240px] origin-top-right  rounded-md bg-white shadow-lg  "
+            "absolute block right-0 z-10 mt-2 w-[280px] origin-top-right  rounded-md bg-white shadow-lg  "
           }
         >
           {option01}

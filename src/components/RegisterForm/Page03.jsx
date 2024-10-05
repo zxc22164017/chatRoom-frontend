@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 
-const Page03 = ({ handleLastPage, handleSubmit, formData }) => {
-  const [error, setError] = useState("");
-
+const Page03 = ({
+  handleLastPage,
+  handleSubmit,
+  formData,
+  error,
+  setError,
+}) => {
   useEffect(() => {
     const check = Object.values(formData);
     check.forEach((item) => {
@@ -18,21 +22,16 @@ const Page03 = ({ handleLastPage, handleSubmit, formData }) => {
     <form action="" className="">
       {error ? (
         <h1 className="font-bold font-sans text-red-800 text-center text-2xl my-8">
-          OOPS! Form is not completed!!
+          {error}
         </h1>
       ) : (
         <h1 className="font-bold font-sans text-center text-2xl my-8">
-          Congretulation!! click the button to submit
+          Click the button to submit
         </h1>
       )}
 
       {error ? (
-        <Button
-          disabled
-          rounded
-          className=" my-8 "
-          onClick={handleSubmit}
-        >
+        <Button disabled rounded className=" my-8 " onClick={handleSubmit}>
           Submit
         </Button>
       ) : (

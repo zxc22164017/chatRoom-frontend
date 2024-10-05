@@ -36,10 +36,30 @@ export default {
           "40%": { transform: "scaleX(1)", opacity: "0.7" },
           "100%": { transform: "scaleX(.2)", opacity: "0.4" },
         },
+        slideIn: {
+          "0%": { transform: "translateX(100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        slideOut: {
+          "0%": { transform: "translateX(0%)", opacity: "1" },
+          "100%": { transform: "translateX(100%)", opacity: "0" },
+        },
+        expand: {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "100%": { transform: "translateY(0%) ", opacity: "1" },
+        },
+        collapse: {
+          "0%": { transform: "translateY(0%)", opacity: "1" },
+          "100%": { transform: "translateY(-10%)", opacity: "0" },
+        },
       },
       animation: {
         loadingCircle: "circle .5s alternate infinite ease",
         loadingShadow: " shadow .5s alternate infinite ease;",
+        slideIn: "slideIn .5s cubic-bezier(0, 0, 0.2, 1)",
+        slideOut: "slideOut .5s cubic-bezier(0, 0, 0.2, 1)",
+        expand: "expand .1s cubic-bezier(0, 0, 0.2, 1)",
+        collapse: "collapse .1s cubic-bezier(0, 0, 0.2, 1)",
       },
     },
   },

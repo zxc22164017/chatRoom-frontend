@@ -17,7 +17,7 @@ const Button = ({
 }) => {
   const classes = twMerge(
     classNames(
-      "px-3 py-1.5 border-2 flex items-center justify-center hover:scale-105 active:ring w-full",
+      "px-3 py-1.5 border-2 flex items-center justify-center hover:scale-105 active:ring w-full active:scale-90",
       rest.className,
       {
         "border-blue-500 bg-blue-500 text-white": primary,

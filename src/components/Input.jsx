@@ -3,14 +3,14 @@ import classNames from "classnames";
 
 const Input = ({ text, type, id, onChange, value, ...rest }) => {
   const classes = classNames(
-    " group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full mt-6 ",
-    rest.className
+    " group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full ",
+    rest.className ? rest.className : "mt-6"
   );
   return (
     <div className={classes}>
       <input
+        placeholder={rest.placeholder ? rest.placeholder : " "}
         id={id}
-        placeholder=" "
         onChange={onChange}
         className="peer focus:outline-none p-1 w-full"
         type={type}

@@ -1,10 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-
+import { Thumbnail } from "./Thumbnails/Thumbnail";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./Panel";
 
-const Dropdown = ({ options, value, onChange, text, ...rest }) => {
+const Dropdown = ({
+  options,
+  value,
+  onChange,
+  text,
+  optClassname,
+  ...rest
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const divElement = useRef();
   const handleClick = () => {
@@ -18,6 +25,7 @@ const Dropdown = ({ options, value, onChange, text, ...rest }) => {
     "flex justify-between items-center cursor-pointer ",
     rest.className
   );
+  const optionClassname = classNames("absolute top-full z-50", optClassname);
   useEffect(() => {
     const handler = (e) => {
       if (!divElement.current) {
@@ -43,7 +51,7 @@ const Dropdown = ({ options, value, onChange, text, ...rest }) => {
         {text}
       </label>
       {isOpen && (
-        <Panel className="absolute top-full ">
+        <Panel className={optionClassname}>
           {options.map((option) => {
             return (
               <div
@@ -53,6 +61,9 @@ const Dropdown = ({ options, value, onChange, text, ...rest }) => {
                 }}
                 key={option.value}
               >
+                {option?.icon && (
+                  <Thumbnail className={"h-10 w-10"} image={option.icon} />
+                )}
                 {option.label}
               </div>
             );

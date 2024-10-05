@@ -1,4 +1,4 @@
-import { Thumbnail } from "../Thumbnail";
+import { Thumbnail } from "../Thumbnails/Thumbnail";
 import React from "react";
 import classNames from "classnames";
 

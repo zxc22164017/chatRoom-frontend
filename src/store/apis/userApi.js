@@ -48,6 +48,17 @@ const userApi = createApi({
           };
         },
       }),
+      logout: builder.mutation({
+        query: (_id) => {
+          return {
+            url: "/logout",
+            method: "PATCH",
+            body: {
+              _id,
+            },
+          };
+        },
+      }),
       getUser: builder.query({
         providesTags: (result, error) => {
           return [{ type: "user", id: result._id }];
@@ -128,6 +139,7 @@ const pause = (duration) => {
 };
 
 export const {
+  useLogoutMutation,
   useRemoveFriendMutation,
   useAddFriendMutation,
   useSignupUserMutation,

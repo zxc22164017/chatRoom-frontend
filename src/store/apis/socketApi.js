@@ -4,6 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { userApi } from "./userApi";
 import { store } from "..";
+import { useSelector } from "react-redux";
 
 export const createSocket = () => {
   let socket;
@@ -28,7 +29,7 @@ export const socketEmitAsPromise = (socket) => {
   return (roomId, message) => {
     return new Promise((resolve, reject) => {
       socket.emit("sendMessage", roomId, message, (response) => {
-        if (response.status !== 200) {
+        if (response?.status !== 200) {
           reject({ error: response });
         } else {
           resolve({ data: response.newMessage });
@@ -54,9 +55,12 @@ const socketApi = createApi({
   endpoints(builder) {
     return {
       getMessage: builder.query({
-        query: (id) => {
+        providesTags: (result, error, { roomId }) => [
+          { type: "chat", id: roomId },
+        ],
+        query: (roomId) => {
           return {
-            url: `/${id}`,
+            url: `/${roomId}?page=0`,
             method: "GET",
           };
         },
@@ -99,9 +103,11 @@ const socketApi = createApi({
           }
         ) {
           const user = userApi.endpoints.getUser.select()(getState()).data;
+          const { roomId } = data;
           const patchResult = dispatch(
-            socketApi.util.updateQueryData("getMessage", data, (draft) => {
-              draft.psuh({
+            socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
+              draft.push({
+                _id: 1,
                 message: data.input,
                 room: data.roomId,
                 readed: false,
@@ -109,7 +115,7 @@ const socketApi = createApi({
                   _id: user._id,
                   username: user.username,
                 },
-                createTime: new Date().toLocaleTimeString().now(),
+                createTime: new Date().toISOString(),
               });
             })
           );
@@ -117,25 +123,60 @@ const socketApi = createApi({
           try {
             const result = await queryFulfilled;
             dispatch(
-              socketApi.util.updateQueryData(
-                "getMessage",
-                undefined,
-                (draft) => {
-                  const index = draft.findIndex((item) => !item._id);
-                  if (index !== -1) {
-                    draft[index] = result.data;
-                  }
-                }
-              )
+              socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
+                const index = draft.findIndex((item) => !item._id);
+                draft[index] = result.data;
+              })
             );
-          } catch (error) {
             patchResult.undo();
+          } catch (error) {
+            console.log(error);
+            patchResult.undo();
+            dispatch(
+              socketApi.util.invalidateTags([{ type: "chat", id: data.roomId }])
+            );
           }
+        },
+      }),
+      getMoreMessage: builder.mutation({
+        query: ({ roomId, page }) => {
+          return {
+            url: `/${roomId}`,
+            method: "GET",
+            params: {
+              page,
+            },
+          };
+        },
+        async onQueryStarted(
+          data,
+          {
+            dispatch,
+            getState,
+            extra,
+            requestId,
+            queryFulfilled,
+            getCacheEntry,
+          }
+        ) {
+          const { roomId } = data;
+          try {
+            const result = (await queryFulfilled).data;
+            const patchResult = dispatch(
+              socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
+                draft.unshift(...result);
+              })
+            );
+          } catch (error) {}
         },
       }),
     };
   },
 });
 
-export const { useGetMessageQuery, useSendMessageMutation } = socketApi;
+export const {
+  useGetMessageQuery,
+  useSendMessageMutation,
+  useGetMoreMessageMutation,
+} = socketApi;
 export { socketApi };

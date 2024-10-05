@@ -1,12 +1,8 @@
 import { AddFriendButton } from "./AddFriendButton";
-import React, { useState, useEffect } from "react";
-import { Thumbnail } from "../Thumbnail";
+import React, { useEffect, useState } from "react";
+import { Thumbnail } from "../Thumbnails/Thumbnail";
 import Button from "../Button";
-import {
-  useGetProfileInfoQuery,
-  useAddFriendMutation,
-  useRemoveFriendMutation,
-} from "../../store";
+import { useGetProfileInfoQuery, useUploadImgMutation } from "../../store";
 import LoadingDot from "../Loading/LoadingDot";
 import Alert from "../Alert";
 import useConvertToDate from "../../hooks/useConvertToDate";
@@ -17,9 +13,26 @@ import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 export function PersonalInfo({ id }) {
   const currentUser = useGetLoginInfo();
   const { data, error, isLoading } = useGetProfileInfoQuery(id);
+
   const dateConvert = useConvertToDate;
   const filterObj = useFilterObject;
   const check = useCheckIsCurrentUser(id);
+  const [upload, result] = useUploadImgMutation();
+
+  const handleThumbnail = (e) => {
+    upload({
+      file: e.target.files[0],
+      type: "userThumbnail",
+      id: currentUser._id,
+    });
+  };
+  const handleCoverPhoto = (e) => {
+    upload({
+      file: e.target.files[0],
+      type: "userCoverPhoto",
+      id: currentUser._id,
+    });
+  };
 
   let content;
 
@@ -39,6 +52,8 @@ export function PersonalInfo({ id }) {
       "createDate",
       "__v",
       "isOnline",
+      "thumbnail",
+      "coverPhoto",
     ];
     const { keys, filteredObject } = filterObj(keysToFilter, data);
 
@@ -50,16 +65,32 @@ export function PersonalInfo({ id }) {
         </p>
       );
     });
+
     content = (
       <div className="flex flex-col rounded bg-white shadow-lg">
-        <div className="bg-gray-700 h-64  rounded">Cover photo</div>
         <Thumbnail
+          htmlFor={"coverPhoto"}
+          onChange={handleCoverPhoto}
+          upload={check}
+          image={data.coverPhoto}
           className={
-            "w-48 h-48 self-center -mt-24 z-10 border-2 border-black hover:border-none  hover:ring-4 active:ring-8 active:scale-90 "
+            "bg-gray-700 h-64  rounded-sm ml-0 hover:ring-0 active:blur-md active:ring-0 active:scale-100 "
           }
         />
+        <Thumbnail
+          onChange={handleThumbnail}
+          htmlFor={"thumbnail"}
+          upload={check}
+          image={data.thumbnail}
+          className={
+            "w-48 h-48 self-center -mt-24 z-10 border-2 border-black hover:border-none   "
+          }
+        />
+
         <div className="flex flex-col md:flex-row justify-between items-center border-b-2 p-2 ">
-          <div className="w-48 p-2  flex flex-col -mt-24 ">{renderInfo}</div>
+          <div className="hidden w-48 p-2  md:flex flex-col -mt-24 ">
+            {renderInfo}
+          </div>
           <div className="flex flex-col justify-center items-center ">
             <h1 className="text-3xl text-center ">{data.username}</h1>
             <p>friends:{data.friends.length}</p>
@@ -75,6 +106,9 @@ export function PersonalInfo({ id }) {
           ) : (
             <AddFriendButton currentUser={currentUser} id={id} />
           )}
+          <div className="flex w-48 p-2  md:hidden flex-col text-center ">
+            {renderInfo}
+          </div>
         </div>
       </div>
     );

@@ -13,6 +13,7 @@ import LoadingDot from "../components/Loading/LoadingDot";
 const RegisterModel = ({ onChange, onLogin }) => {
   const [page, setPage] = useState(0);
   const [time, setTime] = useState();
+  const [error, setError] = useState("");
 
   const options = [
     { label: "male", value: "male" },
@@ -26,7 +27,6 @@ const RegisterModel = ({ onChange, onLogin }) => {
     username: "",
     gender: "",
   });
-
   const [signupUser, results] = useSignupUserMutation();
   const handleNav = () => {
     onChange();
@@ -37,6 +37,7 @@ const RegisterModel = ({ onChange, onLogin }) => {
 
   const handleNextPage = (e) => {
     e.preventDefault();
+
     setPage(page + 50);
   };
   const handleLastPage = (e) => {
@@ -47,8 +48,12 @@ const RegisterModel = ({ onChange, onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     signupUser(formData);
-    console.log(results);
   };
+  useEffect(() => {
+    if (results.error) {
+      setError(results.error.data);
+    }
+  }, [results.error]);
 
   if (page == 0) {
     content = (
@@ -58,6 +63,8 @@ const RegisterModel = ({ onChange, onLogin }) => {
         formData={formData}
         setPage={setPage}
         handleNextPage={handleNextPage}
+        error={error}
+        setError={setError}
       />
     );
   } else if (page == 50) {
@@ -75,6 +82,8 @@ const RegisterModel = ({ onChange, onLogin }) => {
         handleLastPage={handleLastPage}
         handleSubmit={handleSubmit}
         formData={formData}
+        error={error}
+        setError={setError}
       />
     );
   }

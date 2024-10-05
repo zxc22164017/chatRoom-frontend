@@ -3,9 +3,15 @@ import Input from "../Input";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
 import Alert from "../Alert";
-export function Page01({ options, formData, setFormData, handleNextPage }) {
+export function Page01({
+  options,
+  formData,
+  setFormData,
+  handleNextPage,
+  error,
+  setError,
+}) {
   const [gender, setGender] = useState();
-  const [error, setError] = useState("");
   const [confirm, setConfirm] = useState("");
   const handleDropDown = (e) => {
     setFormData({ ...formData, gender: e.value });
@@ -22,9 +28,10 @@ export function Page01({ options, formData, setFormData, handleNextPage }) {
 
   return (
     <form action="" className="">
-      <h1 className="font-bold font-sans text-2xl my-8">
+      <h1 className="font-bold font-sans text-2xl mt-8 ">
         Create your own account
       </h1>
+      <Alert error={error} />
       <Input
         type={"email"}
         text={"email"}
@@ -43,7 +50,6 @@ export function Page01({ options, formData, setFormData, handleNextPage }) {
             setFormData({ ...formData, password: e.target.value })
           }
         />
-        <Alert error={error} />
       </div>
       <Input
         type={"password"}
@@ -68,9 +74,15 @@ export function Page01({ options, formData, setFormData, handleNextPage }) {
         text={"gender"}
       />
 
-      <Button primary rounded className=" my-8 " onClick={handleNextPage}>
-        Next
-      </Button>
+      {error ? (
+        <Button disabled rounded className=" my-8 ">
+          Next
+        </Button>
+      ) : (
+        <Button primary rounded className=" my-8 " onClick={handleNextPage}>
+          Next
+        </Button>
+      )}
     </form>
   );
 }

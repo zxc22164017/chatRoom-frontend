@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import useConvertToDate from "../../hooks/useConvertToDate";
-import { Thumbnail } from "../Thumbnail";
+import { Thumbnail } from "../Thumbnails/Thumbnail";
+import useIsUrl from "../../hooks/useIsUrl";
 
 import classNames from "classnames";
 
 const Message = ({ sender, reciever, message, ...rest }) => {
+  const isUrl = useIsUrl(message.message);
   const classOuter = classNames(
-    "max-w-sm my-1 flex items-center group",
+    "max-w-sm my-1 flex items-center group flex-wrap",
     rest.className,
     {
       " self-end": sender,
@@ -17,13 +19,29 @@ const Message = ({ sender, reciever, message, ...rest }) => {
     "bg-amber-100 ": sender,
     "bg-violet-100 ": reciever,
   });
+
   const date = useConvertToDate("time", message.createTime);
   return (
     <div className={classOuter}>
-      {sender ?? <Thumbnail className={"w-8 h-8 mr-2"} />}
+      {sender ?? (
+        <Thumbnail
+          className={"w-8 h-8 mr-2"}
+          image={message.sender.thumbnail}
+        />
+      )}
       <div className="relative">
         <div className={classInner}>
-          <p className="text-pretty text-lg text-ellipsis">{message.message}</p>
+          {isUrl ? (
+            <a
+              href={message.message}
+              className="text-pretty text-blue-700 underline text-lg "
+              style={{ wordBreak: "break-word" }}
+            >
+              {message.message}
+            </a>
+          ) : (
+            <p className="text-pretty text-lg ">{message.message}</p>
+          )}
         </div>
         <p className="hidden text-xs group-hover:block text-gray-500">{date}</p>
       </div>

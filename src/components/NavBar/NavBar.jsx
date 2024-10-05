@@ -4,7 +4,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { useSearchUsersMutation } from "../../store";
 import NavBarDropdown from "./NavBarDropdown";
-
+import { BsPencilSquare } from "react-icons/bs";
 function NavBar() {
   const [searchUsers, results] = useSearchUsersMutation({
     fixedCacheKey: "search",
@@ -47,8 +47,19 @@ function NavBar() {
             <HiMagnifyingGlass />
           </Button>
         </form>
+        <div className="flex items-center gap-4 justify-between">
+          <Button
+            onClick={() => {
+              nav("/newPost");
+            }}
+            rounded
+            className="h-14 w-14 border-none active:ring-0 active:scale-90"
+          >
+            <BsPencilSquare className="h-full w-full text-white" />
+          </Button>
 
-        <NavBarDropdown />
+          <NavBarDropdown />
+        </div>
       </div>
     </div>
   );
