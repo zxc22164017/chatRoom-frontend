@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import LoginModel from "../models/LoginModel";
 import RegisterModel from "../models/RegisterModel";
 
-function LandingPage() {
+const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
@@ -57,6 +57,6 @@ function LandingPage() {
       </div>
     </div>
   );
-}
+};
 
 export default LandingPage;

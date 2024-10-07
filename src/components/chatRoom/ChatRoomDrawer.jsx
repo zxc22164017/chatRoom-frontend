@@ -3,10 +3,11 @@ import Drawer from "../drawer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleRoomQuery } from "../../store";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import { useUploadImgMutation } from "../../store";
+import Button from "../Button";
 
-export function ChatRoomDrawer({ setShow }) {
+const ChatRoomDrawer = ({ setShow }) => {
   const nav = useNavigate();
   const { _id } = useParams();
 
@@ -35,18 +36,30 @@ export function ChatRoomDrawer({ setShow }) {
           <div className="flex flex-wrap mt-2 ">
             {data.users.map((user) => {
               return (
-                <div className="group" key={user._id}>
-                  <Thumbnail
-                    className={"h-10 w-10"}
-                    image={user.thumbnail}
-                    onClick={() => {
-                      nav(`/profile/${user._id}`);
-                    }}
-                  />
-                  <p className="hidden group-hover:block">{user.username}</p>
+                <div className="group flex flex-wrap" key={user._id}>
+                  <div className="relative mx-1">
+                    <Thumbnail
+                      className={"h-10 w-10"}
+                      image={user.thumbnail}
+                      onClick={() => {
+                        nav(`/profile/${user._id}`);
+                      }}
+                    />
+                    <p className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                      {user.username}
+                    </p>
+                  </div>
                 </div>
               );
             })}
+          </div>
+          <div className="mt-6">
+            <Button primary rounded className="my-2">
+              Edit Chatroom
+            </Button>
+            <Button danger rounded>
+              Leave Chatroom
+            </Button>
           </div>
         </>
       );
@@ -72,4 +85,6 @@ export function ChatRoomDrawer({ setShow }) {
   }
 
   return <Drawer setShow={setShow}>{content}</Drawer>;
-}
+};
+
+export default ChatRoomDrawer;

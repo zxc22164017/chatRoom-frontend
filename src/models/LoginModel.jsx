@@ -4,9 +4,9 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import { useSigninUserMutation } from "../store";
 import { useNavigate } from "react-router-dom";
-import { LoadingFancy } from "../components/Loading/LoadingFancy";
+import LoadingFancy from "../components/Loading/LoadingFancy";
 
-function LoginModel({ onChange, onRegister }) {
+const LoginModel = ({ onChange, onRegister }) => {
   const [signinUser, results] = useSigninUserMutation();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -79,6 +79,6 @@ function LoginModel({ onChange, onRegister }) {
   }
 
   return <Modal onChange={onChange}>{content}</Modal>;
-}
+};
 
 export default LoginModel;

@@ -1,11 +1,12 @@
 import Footer from "../PostPage/Footer";
-import React from "react";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import React, { useState } from "react";
+import Thumbnail from "../Thumbnails/Thumbnail";
 
 import useConvertToDate from "../../hooks/useConvertToDate";
 import { useNavigate } from "react-router-dom";
+import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 
-function Post({ post }) {
+const Post = ({ post }) => {
   const nav = useNavigate();
   const { community } = post;
   const time = useConvertToDate("time", post.postTime);
@@ -29,12 +30,15 @@ function Post({ post }) {
       </p>
       <div className="">
         {post.image && (
-          <img className="bg-slate-600 w-full mx-auto h-[390px] rounded-md"></img>
+          <Thumbnail
+            image={post.image}
+            className="bg-slate-600 w-full mx-auto h-[390px] rounded-md"
+          />
         )}
-        <Footer likes={post.likes.length} comments={post.comments.length} />
+        <Footer likes={post.likes} comments={post.comments.length} />
       </div>
     </div>
   );
-}
+};
 
 export default Post;

@@ -1,21 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetSinglePostQuery } from "../../store";
-import { LoadingFancy } from "../Loading/LoadingFancy";
+import {
+  useGetSinglePostQuery,
+  useAddCommentMutation,
+  useUploadImgMutation,
+} from "../../store";
+import LoadingFancy from "../Loading/LoadingFancy";
 import Header from "./Header";
-import { UserTemplate } from "../UserTemplate";
+import UserTemplate from "../UserTemplate";
 import useConvertToDate from "../../hooks/useConvertToDate";
 import Footer from "./Footer";
 import CommentSection from "./CommentSection";
 import Textarea from "../Textarea";
+import Thumbnail from "../Thumbnails/Thumbnail";
 
-function MainPost() {
+const MainPost = () => {
   const nav = useNavigate();
   const { _id } = useParams();
   const { data, error, isLoading } = useGetSinglePostQuery(_id);
+  const [addComment, result] = useAddCommentMutation();
+  const [uploadImg, finalResult] = useUploadImgMutation();
   const convertToDate = useConvertToDate;
+  const [formData, setformData] = useState("");
+  const [img, setImg] = useState(null);
+
   let content;
-  console.log(data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (img) {
+      const result = await addComment({
+        postId: _id,
+        formData: formData,
+      }).unwrap();
+      uploadImg({ file: img, type: "comment", id: result._id });
+      setformData("");
+      setImg(null);
+    } else {
+      addComment({
+        postId: _id,
+        formData: formData,
+      });
+      setformData("");
+    }
+  };
 
   if (isLoading) {
     content = (
@@ -47,16 +74,36 @@ function MainPost() {
           </div>
           <div className="mt-4 whitespace-pre text-wrap">
             <p>{data.content}</p>
+            {data.image && (
+              <Thumbnail
+                className={"max-w-max max-h-max rounded-none"}
+                image={data.image}
+              />
+            )}
           </div>
           <Footer
             className="mt-6"
             iconClassName="text-2xl"
             textClassName="text-sm"
-            likes={data.likes.length}
+            enableButton
+            likes={data.likes}
             comments={data.comments.length}
           />
           <CommentSection />
-          <Textarea />
+          <form className=" sticky bottom-1" onSubmit={handleSubmit}>
+            <Textarea
+              htmlFor={"comment"}
+              value={formData}
+              onChange={(e) => {
+                setformData(e.target.value);
+              }}
+              handleImage={(e) => {
+                setImg(e.target.files[0]);
+              }}
+              img={img}
+              text={"Comment"}
+            />
+          </form>
         </div>
       </>
     );
@@ -67,6 +114,6 @@ function MainPost() {
       {content}
     </div>
   );
-}
+};
 
 export default MainPost;

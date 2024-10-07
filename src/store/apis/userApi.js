@@ -72,7 +72,7 @@ const userApi = createApi({
         },
       }),
       searchUsers: builder.mutation({
-        query: (search) => {
+        query: ({ search }) => {
           return {
             url: "/search",
             params: { search },
@@ -109,24 +109,6 @@ const userApi = createApi({
           };
         },
       }),
-      removeFriend: builder.mutation({
-        invalidatesTags: (result, error, { user01Id, user02Id }) => {
-          return [
-            { type: "user", id: user01Id },
-            { type: "user", id: user02Id },
-          ];
-        },
-        query: ({ user01Id, user02Id }) => {
-          return {
-            url: "/friend",
-            body: {
-              user01Id: user01Id,
-              user02Id: user02Id,
-            },
-            method: "DELETE",
-          };
-        },
-      }),
     };
   },
 });
@@ -140,7 +122,6 @@ const pause = (duration) => {
 
 export const {
   useLogoutMutation,
-  useRemoveFriendMutation,
   useAddFriendMutation,
   useSignupUserMutation,
   useSigninUserMutation,

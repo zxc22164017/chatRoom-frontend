@@ -1,4 +1,4 @@
-import { Page01 } from "../components/RegisterForm/Page01";
+import Page01 from "../components/RegisterForm/Page01";
 import Page02 from "../components/RegisterForm/Page02";
 import Page03 from "../components/RegisterForm/Page03";
 import React, { useEffect, useState } from "react";

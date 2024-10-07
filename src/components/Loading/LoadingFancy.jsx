@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-export function LoadingFancy() {
+const LoadingFancy = () => {
   const loadingCircle = classNames(
     "absolute w-[20px] h-[20px] animate-loadingCircle bg-sky-500 origin-center rounded-full z-10 "
   );
@@ -33,4 +33,6 @@ export function LoadingFancy() {
       </span>
     </div>
   );
-}
+};
+
+export default LoadingFancy;

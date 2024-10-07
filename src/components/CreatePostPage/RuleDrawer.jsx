@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Drawer from "../drawer";
 import ExpandablePanel from "../ExpandablePanel";
 
-function RuleDrawer({ setShow, selectOption }) {
+const RuleDrawer = ({ setShow, selectOption }) => {
   let renderRules;
 
   if (selectOption?.rules) {
@@ -26,6 +26,6 @@ function RuleDrawer({ setShow, selectOption }) {
       <ol className="list-decimal">{renderRules}</ol>
     </Drawer>
   );
-}
+};
 
 export default RuleDrawer;

@@ -115,7 +115,7 @@ const socketApi = createApi({
                   _id: user._id,
                   username: user.username,
                 },
-                createTime: new Date().toISOString(),
+                createTime: "sending",
               });
             })
           );

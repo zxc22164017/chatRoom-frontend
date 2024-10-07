@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { GrClose } from "react-icons/gr";
 import { useState } from "react";
 
-function Drawer({ setShow, children, ...rest }) {
+const Drawer = ({ setShow, children, ...rest }) => {
   const [slideOut, setSlidOut] = useState(false);
   const handleClose = () => {
     setSlidOut(true);
@@ -36,6 +36,6 @@ function Drawer({ setShow, children, ...rest }) {
     </div>,
     document.querySelector(".modal-container")
   );
-}
+};
 
 export default Drawer;

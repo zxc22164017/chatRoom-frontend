@@ -1,6 +1,6 @@
-import { AddFriendButton } from "./AddFriendButton";
+import AddFriendButton from "./AddFriendButton";
 import React, { useEffect, useState } from "react";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import Button from "../Button";
 import { useGetProfileInfoQuery, useUploadImgMutation } from "../../store";
 import LoadingDot from "../Loading/LoadingDot";
@@ -10,7 +10,7 @@ import useFilterObject from "../../hooks/useFilterObject";
 import useCheckIsCurrentUser from "../../hooks/useCheckIsCurrentUser";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 
-export function PersonalInfo({ id }) {
+const PersonalInfo = ({ id }) => {
   const currentUser = useGetLoginInfo();
   const { data, error, isLoading } = useGetProfileInfoQuery(id);
 
@@ -118,4 +118,6 @@ export function PersonalInfo({ id }) {
   }
 
   return content;
-}
+};
+
+export default PersonalInfo;

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useGetCommunitiesQuery } from "../../store";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import Dropdown from "../Dropdown";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Button from "../Button";
 import { FaInfoCircle } from "react-icons/fa";
 import RuleDrawer from "./RuleDrawer";
 
-export function CommunityAndRules({ formData, setFormData }) {
+const CommunityAndRules = ({ formData, setFormData }) => {
   const { data } = useGetCommunitiesQuery();
   const [selectOption, setSelectOption] = useState(null);
   const handleOption = (option) => {
@@ -37,9 +37,9 @@ export function CommunityAndRules({ formData, setFormData }) {
           <HiMagnifyingGlass />
         )}
         <Dropdown
-          className="border-none shadow-none"
+          className="border-none shadow-none bg-white"
           options={options}
-          optClassname={"w-full"}
+          optClassname={"w-full bg-white"}
           text={"Community"}
           onChange={handleOption}
           value={selectOption}
@@ -58,4 +58,5 @@ export function CommunityAndRules({ formData, setFormData }) {
       {show && <RuleDrawer setShow={setShow} selectOption={selectOption} />}
     </div>
   );
-}
+};
+export default CommunityAndRules;

@@ -7,7 +7,7 @@ import Button from "../Button";
 import ChatRoomModal from "../../models/ChatRoomModal";
 import { useState } from "react";
 
-function SideBar({}) {
+const SideBar = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const currentUser = useGetLoginInfo();
   const { data, error, isLoading } = useGetRoomsQuery(currentUser?._id);
@@ -50,6 +50,6 @@ function SideBar({}) {
       <div className="flex flex-col pt-16 md:p-0">{content}</div>
     </div>
   );
-}
+};
 
 export default SideBar;

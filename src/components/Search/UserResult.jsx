@@ -1,5 +1,5 @@
 import React from "react";
-import { UserTemplate } from "../UserTemplate";
+import UserTemplate from "../UserTemplate";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const UserResult = ({ user }) => {
   return (
     <div className="border-b-2  ">
       <UserTemplate
-        className={"mx-0 "}
+        className={"mx-0 py-4 px-2"}
         name={user.username}
         info={user.friends.length}
         onClick={handleClick}

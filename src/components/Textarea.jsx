@@ -1,31 +1,48 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Button from "./Button";
-function Textarea() {
+
+import UploadImg from "./UploadImg";
+const Textarea = ({ htmlFor, value, onChange, text, img, handleImage }) => {
+  const textRef = useRef();
+
+  useEffect(() => {
+    textRef.current.style.height = "auto";
+    textRef.current.style.height = textRef.current.scrollHeight + "px";
+  }, [value]);
   return (
-    <form className=" sticky bottom-1">
-      <div className=" bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full">
-        <textarea
-          name=""
-          id="comment"
-          placeholder=" "
-          className="w-full peer h-6 text-gray-900  bg-white border-0 outline-none transition-all duration-150 group-hover:h-20 focus:h-20"
-        ></textarea>
-        <label
-          htmlFor="comment"
-          className="absolute hover:cursor-text text-md text-gray-500 duration-150 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-        >
-          Comment
-        </label>
+    <div className=" bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full">
+      <textarea
+        ref={textRef}
+        onChange={onChange}
+        value={value}
+        name=""
+        id={htmlFor}
+        placeholder=" "
+        className="w-full peer h-6 text-gray-900  bg-white border-0 outline-none  "
+      ></textarea>
+      <label
+        htmlFor={htmlFor}
+        className="absolute hover:cursor-text text-md text-gray-500 duration-150 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/4 peer-placeholder-shown:top-1/4 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+      >
+        {text}
+      </label>
+      {img && (
+        <div className="border-t-2">
+          <img className="max-h-16 " src={URL.createObjectURL(img)} />
+        </div>
+      )}
+      <div className="hidden group-hover:flex justify-between">
+        <UploadImg handleImage={handleImage} />
         <Button
           primary
           rounded
-          className="hidden group-hover:block  absolute right-1 bottom-1 h-9 w-24  transition-all duration-150 "
+          className=" h-9 w-24  transition-all duration-150 "
         >
-          Comment
+          {text}
         </Button>
       </div>
-    </form>
+    </div>
   );
-}
+};
 
 export default Textarea;

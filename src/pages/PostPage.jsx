@@ -1,14 +1,14 @@
 import React from "react";
-import { SideBar } from "../components/HomePage/SideBar";
+import SideBar from "../components/HomePage/SideBar";
 import MainPost from "../components/PostPage/MainPost";
 
-function PostPage() {
+const PostPage = () => {
   return (
     <>
       <SideBar />
       <MainPost />
     </>
   );
-}
+};
 
 export default PostPage;

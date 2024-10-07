@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import UserResult from "../Search/UserResult";
-import { useGetPostsQuery } from "../../store";
+import { useSearchUsersMutation, useSearchPostMutation } from "../../store";
 import Skeleton from "../Loading/Skeleton";
 import Post from "../Posts/Post";
 import Alert from "../Alert";
+import { useSelector } from "react-redux";
 
 const MainContent = ({}) => {
+  const searchType = useSelector((state) => {
+    return state.searchType;
+  });
+  const [searchUsers, userResults] = useSearchUsersMutation({
+    fixedCacheKey: "searchUser",
+  });
+  const [searchPost, postResult] = useSearchPostMutation({
+    fixedCacheKey: "searchPost",
+  });
   const [page, setPage] = useState(0);
   function scrollEvent() {
     if (
@@ -24,20 +34,23 @@ const MainContent = ({}) => {
     };
   }, [page]);
 
-  const { data, error, isLoading } = useGetPostsQuery(page);
-
   let content;
-  if (data) {
-    content = data.map((post) => {
+
+  if (userResults.isLoading || postResult.isLoading) {
+    content = <Skeleton times={5} className={"w-full h-20"} />;
+  }
+  if (postResult.isSuccess && searchType.value === "posts") {
+    content = postResult.data.map((post) => {
       return <Post key={post._id} post={post} />;
     });
   }
-
-  if (isLoading) {
-    content = <Skeleton times={5} className={"w-full h-20"} />;
+  if (userResults.isSuccess && searchType.value === "users") {
+    content = userResults.data.map((user) => {
+      return <UserResult user={user} key={user._id} />;
+    });
   }
 
-  if (error) {
+  if (userResults.isError || postResult.isError) {
     content = (
       <div>
         <Alert error={"Internal server error"} />

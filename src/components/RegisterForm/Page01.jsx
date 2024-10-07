@@ -3,14 +3,14 @@ import Input from "../Input";
 import Button from "../Button";
 import Dropdown from "../Dropdown";
 import Alert from "../Alert";
-export function Page01({
+const Page01 = ({
   options,
   formData,
   setFormData,
   handleNextPage,
   error,
   setError,
-}) {
+}) => {
   const [gender, setGender] = useState();
   const [confirm, setConfirm] = useState("");
   const handleDropDown = (e) => {
@@ -85,4 +85,6 @@ export function Page01({
       )}
     </form>
   );
-}
+};
+
+export default Page01;

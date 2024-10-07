@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import { Thumbnail } from "./Thumbnails/Thumbnail";
+import Thumbnail from "../components/Thumbnails/Thumbnail";
 
-export function UserTemplate({
+const UserTemplate = ({
   children,
   name,
   className,
@@ -12,7 +12,7 @@ export function UserTemplate({
   info,
   image,
   ...rest
-}) {
+}) => {
   const classes = classNames(
     "flex items-center overflow-hidden  hover:bg-slate-200 mx-2 h-auto rounded justify-between",
     className
@@ -45,4 +45,5 @@ export function UserTemplate({
       {children}
     </div>
   );
-}
+};
+export default UserTemplate;

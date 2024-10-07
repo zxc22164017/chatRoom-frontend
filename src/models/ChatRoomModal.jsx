@@ -2,12 +2,12 @@ import React, { useState, useCallback } from "react";
 import Modal from "../components/Modal";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useSearchUsersMutation, useAddRoomMutation } from "../store";
+import { useAddRoomMutation, useSearchUsersMutation } from "../store";
 import useDeBounce from "../hooks/useDeBounce";
-import { UserTemplate } from "../components/UserTemplate";
+import UserTemplate from "../components/UserTemplate";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
 
-function ChatRoomModal({ onChange }) {
+const ChatRoomModal = ({ onChange }) => {
   const currentUser = useGetLoginInfo();
   const [search, setSearch] = useState("");
   const [searchUser, result] = useSearchUsersMutation();
@@ -134,6 +134,6 @@ function ChatRoomModal({ onChange }) {
       </form>
     </Modal>
   );
-}
+};
 
 export default ChatRoomModal;

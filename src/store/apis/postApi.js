@@ -38,7 +38,10 @@ const postApi = createApi({
         serializeQueryArgs({ endpointName }) {
           return endpointName;
         },
-        merge: (currentCacheData, newItems) => {
+        merge: (currentCacheData, newItems, { arg }) => {
+          if (arg === 0) {
+            return newItems;
+          }
           currentCacheData.push(...newItems);
         },
         forceRefetch({ currentArg, previousArg }) {
@@ -46,6 +49,9 @@ const postApi = createApi({
         },
       }),
       getSinglePost: builder.query({
+        providesTags: (result, error, _id) => {
+          return [{ type: "post", id: _id }];
+        },
         query: (_id) => {
           return {
             url: `/${_id}`,
@@ -53,8 +59,43 @@ const postApi = createApi({
           };
         },
       }),
+      getUserPosts: builder.query({
+        query: ({ userId, page }) => {
+          return {
+            url: "/user",
+            method: "GET",
+            params: {
+              userId,
+              page,
+            },
+          };
+        },
+        serializeQueryArgs({ endpointName }) {
+          return endpointName;
+        },
+        merge: (currentCacheData, newItems, { arg }) => {
+          if (arg.page === 0) {
+            return newItems;
+          }
+          currentCacheData.push(...newItems);
+        },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg;
+        },
+      }),
+      searchPost: builder.mutation({
+        query: ({ search, page }) => {
+          return {
+            url: "/search",
+            method: "GET",
+            params: {
+              search,
+              page,
+            },
+          };
+        },
+      }),
       addPost: builder.mutation({
-        invalidatesTags: [{ type: "posts", id: "posts" }],
         query: ({ title, content, communityId }) => {
           return {
             url: "/",
@@ -67,10 +108,30 @@ const postApi = createApi({
           };
         },
       }),
+      likePost: builder.mutation({
+        invalidatesTags: (result, error, postId) => {
+          return [
+            { type: "post", id: postId },
+            { type: "posts", id: "posts" },
+          ];
+        },
+        query: (postId) => {
+          return {
+            url: `/like/${postId}`,
+            method: "PATCH",
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetPostsQuery, useAddPostMutation, useGetSinglePostQuery } =
-  postApi;
+export const {
+  useGetPostsQuery,
+  useAddPostMutation,
+  useGetSinglePostQuery,
+  useLikePostMutation,
+  useGetUserPostsQuery,
+  useSearchPostMutation,
+} = postApi;
 export default postApi;

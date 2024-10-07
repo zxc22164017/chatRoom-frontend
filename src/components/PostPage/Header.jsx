@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "../Button";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-function Header({ community }) {
+const Header = ({ community }) => {
   const nav = useNavigate();
   return (
     <div className="flex items-center  p-2 border-b-2">
@@ -28,6 +28,6 @@ function Header({ community }) {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

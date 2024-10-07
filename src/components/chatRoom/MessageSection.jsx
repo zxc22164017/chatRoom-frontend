@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useGetMessageQuery, useGetMoreMessageMutation } from "../../store";
 import Message from "./Message";
-import { LoadingFancy } from "../Loading/LoadingFancy";
+import LoadingFancy from "../Loading/LoadingFancy";
 import { useParams } from "react-router-dom";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { useDispatch } from "react-redux";
 
-export function MessageSection({ sendMessageResult }) {
+const MessageSection = ({ sendMessageResult }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const roomId = useParams()._id;
@@ -50,11 +50,13 @@ export function MessageSection({ sendMessageResult }) {
 
   return (
     <div
-      className="flex flex-col  justify-start grow mx-2 overflow-y-scroll overflow-x-hidden"
+      className="flex flex-col  justify-start grow mx-2 overflow-y-auto overflow-x-hidden"
       ref={chatRoomElement}
       onScroll={handleInfiniteScroll}
     >
       {messages}
     </div>
   );
-}
+};
+
+export default MessageSection;

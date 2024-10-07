@@ -2,11 +2,10 @@ import React from "react";
 import Button from "../Button";
 import Alert from "../Alert";
 import { useEffect, useState } from "react";
-import { useAddFriendMutation, useRemoveFriendMutation } from "../../store";
+import { useAddFriendMutation } from "../../store";
 import LoadingDot from "../Loading/LoadingDot";
-export function AddFriendButton({ currentUser, id }) {
+const AddFriendButton = ({ currentUser, id }) => {
   const [addFriend, addResult] = useAddFriendMutation();
-  const [removeFriend, removeResult] = useRemoveFriendMutation();
   const [isFriend, setIsFriend] = useState(false);
 
   const [error, setError] = useState("");
@@ -28,11 +27,11 @@ export function AddFriendButton({ currentUser, id }) {
   }, [currentUser, id]);
 
   const handleRemoveFriend = () => {
-    removeFriend({ user01Id: currentUser._id, user02Id: id });
+    addFriend({ user01Id: currentUser._id, user02Id: id });
     setIsFriend(!isFriend);
 
-    if (removeResult.isError) {
-      setError(removeResult.error.data);
+    if (addResult.isError) {
+      setError(addResult.data);
     }
   };
 
@@ -48,7 +47,7 @@ export function AddFriendButton({ currentUser, id }) {
         Add Friend
       </Button>
     );
-  } else if (addResult.isLoading || removeResult.isLoading) {
+  } else if (addResult.isLoading) {
     content = (
       <Button rounded className={" w-48 h-12 ml-0 mr-4 xl:-mt-24"} disabled>
         loading
@@ -76,4 +75,5 @@ export function AddFriendButton({ currentUser, id }) {
   }
 
   return content;
-}
+};
+export default AddFriendButton;

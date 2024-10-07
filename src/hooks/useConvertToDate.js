@@ -2,6 +2,9 @@ const useConvertToDate = (type, time) => {
   if (type === "date") {
     return new Date(time).toLocaleDateString();
   } else if (type === "time") {
+    if (time === "sending") {
+      return time;
+    }
     let result = Date.now() - Date.parse(time);
     result = Math.floor(result / 1000);
     if (result < 60) {

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useGetCommunitiesQuery } from "../../store";
 import { RiGroup2Line } from "react-icons/ri";
 import ExpandablePanel from "../ExpandablePanel";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import Drawer from "../drawer";
 import { useNavigate } from "react-router-dom";
 
-function Communities() {
+const Communities = () => {
   const nav = useNavigate();
   const { data, isLoading, error } = useGetCommunitiesQuery();
   const [show, setShow] = useState(false);
@@ -59,6 +59,6 @@ function Communities() {
       )}
     </>
   );
-}
+};
 
 export default Communities;

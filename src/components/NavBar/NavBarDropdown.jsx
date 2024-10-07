@@ -1,5 +1,5 @@
 import React from "react";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import { useSelector, useDispatch } from "react-redux";
 import Panel from "../Panel";
 import { useState, useEffect, useRef } from "react";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { useGetUserQuery, useLogoutMutation } from "../../store";
 
-function NavBarDropdown() {
+const NavBarDropdown = () => {
   const nav = useNavigate();
   const divElement = useRef();
   const [logout, result] = useLogoutMutation();
@@ -85,6 +85,6 @@ function NavBarDropdown() {
       )}
     </div>
   );
-}
+};
 
 export default NavBarDropdown;

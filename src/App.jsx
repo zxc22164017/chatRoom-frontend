@@ -10,6 +10,7 @@ import { skipToken } from "@reduxjs/toolkit/query";
 import { useDetectLogin } from "./hooks/useDetectLogin.js";
 import CreatePostPage from "./pages/CreatePostPage.jsx";
 import PostPage from "./pages/PostPage.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/c/:name",
         element: <CommunityPage />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
     ],
   },

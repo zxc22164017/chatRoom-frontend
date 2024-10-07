@@ -1,8 +1,8 @@
-import { UserTemplate } from "../UserTemplate";
+import UserTemplate from "../UserTemplate";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 
 const SideBarItem = ({ object, currentUser }) => {
   const nav = useNavigate();

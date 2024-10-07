@@ -5,7 +5,7 @@ import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Communities from "./Communities";
 
-export function SideBar({}) {
+const SideBar = ({}) => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
   const [chatLink, setchatLink] = useState("");
@@ -35,4 +35,6 @@ export function SideBar({}) {
       <Communities />
     </div>
   );
-}
+};
+
+export default SideBar;

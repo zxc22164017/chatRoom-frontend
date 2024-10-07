@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { Thumbnail } from "./Thumbnails/Thumbnail";
+import Thumbnail from "../components/Thumbnails/Thumbnail";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./Panel";
 

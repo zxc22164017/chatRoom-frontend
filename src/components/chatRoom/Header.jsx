@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import { BsFillTelephoneFill, BsFillInfoCircleFill } from "react-icons/bs";
-import { Thumbnail } from "../Thumbnails/Thumbnail";
+import Thumbnail from "../Thumbnails/Thumbnail";
 import { useGetSingleRoomQuery } from "../../store";
 import { useParams } from "react-router-dom";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import Skeleton from "../Loading/Skeleton";
 import { useNavigate } from "react-router-dom";
 
-export function Header({ setShow }) {
+const Header = ({ setShow }) => {
   const nav = useNavigate();
   const { _id } = useParams();
   const currentUser = useGetLoginInfo();
@@ -81,4 +81,6 @@ export function Header({ setShow }) {
       </div>
     </div>
   );
-}
+};
+
+export default Header;

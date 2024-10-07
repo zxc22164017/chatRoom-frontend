@@ -1,7 +1,7 @@
 import { MdFace6 } from "react-icons/md";
 import classNames from "classnames";
 import React from "react";
-export function Thumbnail({
+const Thumbnail = ({
   className,
   children,
   onChange,
@@ -9,7 +9,7 @@ export function Thumbnail({
   upload,
   image,
   ...rest
-}) {
+}) => {
   const classes = classNames(
     " rounded-full flex items-center justify-center bg-gray-300 hover:cursor-pointer overflow-hidden",
     { "hover:ring-4 active:ring-8 active:scale-90": upload },
@@ -46,4 +46,5 @@ export function Thumbnail({
       {content}
     </label>
   );
-}
+};
+export default Thumbnail;
