@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import CommentSection from "./CommentSection";
 import Textarea from "../Textarea";
 import Thumbnail from "../Thumbnails/Thumbnail";
+import Dropdown from "./Dropdown";
 
 const MainPost = () => {
   const nav = useNavigate();
@@ -27,21 +28,14 @@ const MainPost = () => {
   let content;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (img) {
-      const result = await addComment({
-        postId: _id,
-        formData: formData,
-      }).unwrap();
-      uploadImg({ file: img, type: "comment", id: result._id });
-      setformData("");
-      setImg(null);
-    } else {
-      addComment({
-        postId: _id,
-        formData: formData,
-      });
-      setformData("");
-    }
+
+    const key = (await uploadImg({ file: img })).data;
+    addComment({
+      postId: _id,
+      formData: formData,
+      image: key,
+    });
+    window.location.reload();
   };
 
   if (isLoading) {
@@ -52,13 +46,14 @@ const MainPost = () => {
     );
   } else if (data) {
     const { author } = data;
+
     const time = convertToDate("time", data.postTime);
     content = (
       <>
         <Header community={data.community} />
         <div className="flex flex-col px-8">
           <h1 className="text-4xl my-4">{data.title}</h1>
-          <div className="flex">
+          <div className="flex justify-between group">
             <UserTemplate
               onClick={() => {
                 nav(`/profile/${author._id}`);
@@ -71,6 +66,7 @@ const MainPost = () => {
               name={author.username}
               info={time}
             />
+            <Dropdown author={author} postId={data._id} />
           </div>
           <div className="mt-4 whitespace-pre text-wrap">
             <p>{data.content}</p>
@@ -99,6 +95,9 @@ const MainPost = () => {
               }}
               handleImage={(e) => {
                 setImg(e.target.files[0]);
+              }}
+              resetImage={() => {
+                setImg(null);
               }}
               img={img}
               text={"Comment"}

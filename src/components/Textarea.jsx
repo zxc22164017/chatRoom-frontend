@@ -2,7 +2,17 @@ import React, { useRef, useState, useEffect } from "react";
 import Button from "./Button";
 
 import UploadImg from "./UploadImg";
-const Textarea = ({ htmlFor, value, onChange, text, img, handleImage }) => {
+const Textarea = ({
+  htmlFor,
+  value,
+  onChange,
+  text,
+  img,
+  handleImage,
+  noSubmit,
+  resetImage,
+  ...rest
+}) => {
   const textRef = useRef();
 
   useEffect(() => {
@@ -10,7 +20,9 @@ const Textarea = ({ htmlFor, value, onChange, text, img, handleImage }) => {
     textRef.current.style.height = textRef.current.scrollHeight + "px";
   }, [value]);
   return (
-    <div className=" bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full">
+    <div
+      className={` bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full ${rest.className}`}
+    >
       <textarea
         ref={textRef}
         onChange={onChange}
@@ -28,19 +40,25 @@ const Textarea = ({ htmlFor, value, onChange, text, img, handleImage }) => {
       </label>
       {img && (
         <div className="border-t-2">
-          <img className="max-h-16 " src={URL.createObjectURL(img)} />
+          <img
+            className="max-h-16 hover:cursor-pointer "
+            onClick={resetImage}
+            src={URL.createObjectURL(img)}
+          />
         </div>
       )}
-      <div className="hidden group-hover:flex justify-between">
-        <UploadImg handleImage={handleImage} />
-        <Button
-          primary
-          rounded
-          className=" h-9 w-24  transition-all duration-150 "
-        >
-          {text}
-        </Button>
-      </div>
+      {!noSubmit && (
+        <div className="hidden group-hover:flex justify-between">
+          <UploadImg handleImage={handleImage} />
+          <Button
+            primary
+            rounded
+            className=" h-9 w-24  transition-all duration-150 "
+          >
+            {text}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

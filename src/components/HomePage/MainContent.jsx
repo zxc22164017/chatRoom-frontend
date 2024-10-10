@@ -7,12 +7,16 @@ import Alert from "../Alert";
 
 const MainContent = ({}) => {
   const [page, setPage] = useState(0);
+  const [noMore, setNoMore] = useState(false);
+  const { data, error, isLoading } = useGetPostsQuery(page);
   function scrollEvent() {
     if (
       window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight
-    )
+        document.documentElement.scrollHeight &&
+      !noMore
+    ) {
       setPage(page + 1);
+    }
   }
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -23,8 +27,11 @@ const MainContent = ({}) => {
       window.removeEventListener("scroll", scrollEvent);
     };
   }, [page]);
-
-  const { data, error, isLoading } = useGetPostsQuery(page);
+  useEffect(() => {
+    if (error?.status === 404) {
+      setNoMore(true);
+    }
+  }, [error]);
 
   let content;
   if (data) {
@@ -38,16 +45,23 @@ const MainContent = ({}) => {
   }
 
   if (error) {
-    content = (
-      <div>
-        <Alert error={"Internal server error"} />
-      </div>
-    );
+    if (error.status !== 404) {
+      content = (
+        <div>
+          <Alert error={"Internal server error"} />
+        </div>
+      );
+    }
   }
 
   return (
     <div className="bg-white ml-12 md:mx-96 min-w-sm flex flex-grow flex-col mt-14">
       {content}
+      {noMore && (
+        <div className="flex justify-center items-center">
+          <p className="">no more data</p>
+        </div>
+      )}
     </div>
   );
 };

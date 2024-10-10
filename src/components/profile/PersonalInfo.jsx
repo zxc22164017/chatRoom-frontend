@@ -9,30 +9,31 @@ import useConvertToDate from "../../hooks/useConvertToDate";
 import useFilterObject from "../../hooks/useFilterObject";
 import useCheckIsCurrentUser from "../../hooks/useCheckIsCurrentUser";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
+import { useNavigate } from "react-router-dom";
 
 const PersonalInfo = ({ id }) => {
   const currentUser = useGetLoginInfo();
   const { data, error, isLoading } = useGetProfileInfoQuery(id);
-
+  const nav = useNavigate();
   const dateConvert = useConvertToDate;
   const filterObj = useFilterObject;
   const check = useCheckIsCurrentUser(id);
-  const [upload, result] = useUploadImgMutation();
+  // const [upload, result] = useUploadImgMutation();
 
-  const handleThumbnail = (e) => {
-    upload({
-      file: e.target.files[0],
-      type: "userThumbnail",
-      id: currentUser._id,
-    });
-  };
-  const handleCoverPhoto = (e) => {
-    upload({
-      file: e.target.files[0],
-      type: "userCoverPhoto",
-      id: currentUser._id,
-    });
-  };
+  // const handleThumbnail = (e) => {
+  //   upload({
+  //     file: e.target.files[0],
+  //     type: "userThumbnail",
+  //     id: currentUser._id,
+  //   });
+  // };
+  // const handleCoverPhoto = (e) => {
+  //   upload({
+  //     file: e.target.files[0],
+  //     type: "userCoverPhoto",
+  //     id: currentUser._id,
+  //   });
+  // };
 
   let content;
 
@@ -54,6 +55,7 @@ const PersonalInfo = ({ id }) => {
       "isOnline",
       "thumbnail",
       "coverPhoto",
+      "identity",
     ];
     const { keys, filteredObject } = filterObj(keysToFilter, data);
 
@@ -70,17 +72,11 @@ const PersonalInfo = ({ id }) => {
       <div className="flex flex-col rounded bg-white shadow-lg">
         <Thumbnail
           htmlFor={"coverPhoto"}
-          onChange={handleCoverPhoto}
-          upload={check}
           image={data.coverPhoto}
-          className={
-            "bg-gray-700 h-64  rounded-sm ml-0 hover:ring-0 active:blur-md active:ring-0 active:scale-100 "
-          }
+          className={"bg-gray-700 h-64  rounded-sm ml-0  "}
         />
         <Thumbnail
-          onChange={handleThumbnail}
           htmlFor={"thumbnail"}
-          upload={check}
           image={data.thumbnail}
           className={
             "w-48 h-48 self-center -mt-24 z-10 border-2 border-black hover:border-none   "
@@ -100,6 +96,9 @@ const PersonalInfo = ({ id }) => {
               primary
               rounded
               className={" w-48 h-12 ml-0 mr-4 xl:-mt-24"}
+              onClick={() => {
+                nav("/setting");
+              }}
             >
               Edit Profile
             </Button>

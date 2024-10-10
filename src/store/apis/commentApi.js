@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userApi } from "./userApi";
 
 import { useDetectLogin } from "../../hooks/useDetectLogin";
+import postApi from "./postApi";
 
 const commentApi = createApi({
   reducerPath: "comment",
@@ -24,10 +25,15 @@ const commentApi = createApi({
     return {
       getComment: builder.query({
         providesTags: (result, error, { postId }) => {
-          const tags = result.map((item) => {
-            return [{ type: "comment", id: item._id }];
-          });
-          tags.push({ type: "comments", id: "comments" });
+          let tags;
+          if (result) {
+            tags = result.map((item) => {
+              return [{ type: "comment", id: item._id }];
+            });
+            tags.push({ type: "comments", id: "comments" });
+          } else {
+            tags = [{ type: "comments", id: "comments" }];
+          }
           return tags;
         },
         query: ({ postId, page }) => {
@@ -52,27 +58,57 @@ const commentApi = createApi({
       }),
 
       addComment: builder.mutation({
-        invalidatesTags: (result, error) => {
-          return [{ type: "comments", id: "comments" }];
-        },
-        query: ({ postId, formData }) => {
+        query: ({ postId, formData, image }) => {
           return {
             url: `/${postId}`,
             method: "POST",
             body: {
               content: formData,
+              image,
             },
           };
         },
+        async onQueryStarted(
+          data,
+          {
+            dispatch,
+            getState,
+            extra,
+            requestId,
+            queryFulfilled,
+            getCacheEntry,
+          }
+        ) {
+          const { postId } = data;
+          try {
+            await queryFulfilled;
+            dispatch(
+              postApi.util.invalidateTags([{ type: "post", id: postId }])
+            );
+          } catch (error) {
+            return { error: error };
+          }
+        },
       }),
       likeComment: builder.mutation({
-        invalidatesTags: (result, error) => {
-          return [{ type: "comments", id: "comments" }];
-        },
+        invalidatesTags: [{ type: "comments", id: "comments" }],
         query: (commentId) => {
           return {
             url: `/like/${commentId}`,
             method: "PATCH",
+          };
+        },
+      }),
+      patchComment: builder.mutation({
+        invalidatesTags: [{ type: "comments", id: "comments" }],
+        query: ({ formData, commentId, image }) => {
+          return {
+            url: `/${commentId}`,
+            method: "PATCH",
+            body: {
+              content: formData,
+              image,
+            },
           };
         },
       }),
@@ -83,7 +119,7 @@ const commentApi = createApi({
 export const {
   useGetCommentQuery,
   useAddCommentMutation,
-
+  usePatchCommentMutation,
   useLikeCommentMutation,
 } = commentApi;
 export default commentApi;

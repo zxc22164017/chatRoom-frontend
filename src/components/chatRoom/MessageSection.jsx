@@ -15,11 +15,13 @@ const MessageSection = ({ sendMessageResult }) => {
   const { data, isLoading } = useGetMessageQuery(roomId);
   const chatRoomElement = useRef();
   const [getMoreMessage, result] = useGetMoreMessageMutation();
-
+  const [noMore, setNoMore] = useState(false);
   const handleInfiniteScroll = (e) => {
     if (
       e.target.scrollTop === 0 &&
-      e.target.scrollHeight > e.target.clientHeight
+      e.target.scrollHeight > e.target.clientHeight &&
+      !noMore &&
+      !result.isLoading
     ) {
       getMoreMessage({ roomId, page });
       setPage(page + 1);
@@ -27,8 +29,14 @@ const MessageSection = ({ sendMessageResult }) => {
     }
   };
   useEffect(() => {
+    setNoMore(false);
     setPage(1);
   }, [roomId]);
+  useEffect(() => {
+    if (result.error?.status === 404) {
+      setNoMore(true);
+    }
+  }, [result.error]);
   let messages;
   if (isLoading) {
     messages = <LoadingFancy />;
@@ -54,6 +62,11 @@ const MessageSection = ({ sendMessageResult }) => {
       ref={chatRoomElement}
       onScroll={handleInfiniteScroll}
     >
+      {noMore && (
+        <div className="flex items-center justify-center">
+          <p>No More</p>
+        </div>
+      )}
       {messages}
     </div>
   );

@@ -11,8 +11,10 @@ const Thumbnail = ({
   ...rest
 }) => {
   const classes = classNames(
-    " rounded-full flex items-center justify-center bg-gray-300 hover:cursor-pointer overflow-hidden",
-    { "hover:ring-4 active:ring-8 active:scale-90": upload },
+    " rounded-full flex items-center justify-center bg-gray-300 overflow-hidden",
+    {
+      "hover:ring-4 active:ring-8 active:scale-90 hover:cursor-pointer": upload,
+    },
 
     className ? className : "h-14 w-14 ml-2"
   );

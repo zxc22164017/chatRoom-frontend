@@ -4,23 +4,21 @@ import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Communities from "./Communities";
+import Button from "../Button";
 
 const SideBar = ({}) => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
-  const [chatLink, setchatLink] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!currentUser) return;
-
-    if (currentUser.friends.length > 0) {
-      setchatLink(`/chat/${currentUser.friends[0]}`);
-    } else {
-      setchatLink("/");
+    if (currentUser.identity === "admin") {
+      setIsAdmin(true);
     }
   }, [currentUser]);
   const handleNavChat = () => {
-    nav(chatLink);
+    nav(`/chat/${currentUser?._id}`);
   };
 
   return (
@@ -33,6 +31,15 @@ const SideBar = ({}) => {
         <h1 className="hidden md:block text-xl">chat room</h1>
       </div>
       <Communities />
+      {isAdmin && (
+        <Button
+          onClick={() => {
+            nav("/rhufiewjifewfwepfNewCommunity");
+          }}
+        >
+          add community
+        </Button>
+      )}
     </div>
   );
 };

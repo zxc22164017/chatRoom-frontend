@@ -1,22 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Drawer from "../drawer";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetSingleRoomQuery } from "../../store";
+import {
+  useGetSingleRoomQuery,
+  useUploadImgMutation,
+  usePatchRoomMutation,
+} from "../../store";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import Thumbnail from "../Thumbnails/Thumbnail";
-import { useUploadImgMutation } from "../../store";
 import Button from "../Button";
-
-const ChatRoomDrawer = ({ setShow }) => {
+import Input from "../Input";
+import ThumbnailWithPreview from "../Thumbnails/ThumbnailWithPreview";
+const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
   const nav = useNavigate();
   const { _id } = useParams();
-
+  const [edit, setEdit] = useState(false);
+  const [name, setName] = useState("");
+  const [img, setImg] = useState(null);
   const { data, error, isLoading } = useGetSingleRoomQuery(_id);
+  const [patchRoom, patchResult] = usePatchRoomMutation();
   const [uploadImg, result] = useUploadImgMutation();
   const currentUser = useGetLoginInfo();
-  const handleRoomThumbnail = (e) => {
-    uploadImg({ file: e.target.files[0], type: "room", id: _id });
+
+  const handleSave = async () => {
+    let key;
+    if (img) {
+      key = (await uploadImg({ file: img })).data;
+    }
+
+    if (name !== data.name || img) {
+      patchRoom({ name, roomId: _id, image: key || data.thumbnail });
+    }
+
+    setEdit(false);
   };
+  useEffect(() => {
+    if (data?.name) {
+      setName(data.name);
+    }
+  }, [data]);
+  useEffect(() => {
+    if (patchResult.isSuccess) {
+      window.location.reload();
+    }
+  }, [patchResult]);
 
   let content;
   if (data) {
@@ -24,22 +51,35 @@ const ChatRoomDrawer = ({ setShow }) => {
     if (data.name) {
       content = (
         <>
-          <Thumbnail
-            className={"h-40 w-40"}
-            upload
-            onChange={handleRoomThumbnail}
-            htmlFor={"roomThumbnail"}
-            image={data.thumbnail}
+          <ThumbnailWithPreview
+            previewImg={img}
+            img={data.thumbnail}
+            upload={edit}
+            setPreviewImg={setImg}
+            htmlFor={"thumbnail"}
+            className={"h-40 w-40 rounded-full hover:cursor-pointer "}
           />
-          <h1 className="text-3xl mt-2">{data.name}</h1>
+          {edit ? (
+            <Input
+              id={"name"}
+              text={"Room name"}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              value={name}
+              className="m-2 py-1"
+            />
+          ) : (
+            <h1 className="text-3xl mt-2">{data.name}</h1>
+          )}
           <p className="text-gray-500">users:{data.users.length}</p>
           <div className="flex flex-wrap mt-2 ">
             {data.users.map((user) => {
               return (
-                <div className="group flex flex-wrap" key={user._id}>
+                <div className="group flex flex-wrap " key={user._id}>
                   <div className="relative mx-1">
                     <Thumbnail
-                      className={"h-10 w-10"}
+                      className={"h-10 w-10 hover:cursor-pointer"}
                       image={user.thumbnail}
                       onClick={() => {
                         nav(`/profile/${user._id}`);
@@ -54,8 +94,32 @@ const ChatRoomDrawer = ({ setShow }) => {
             })}
           </div>
           <div className="mt-6">
-            <Button primary rounded className="my-2">
-              Edit Chatroom
+            {edit ? (
+              <Button primary rounded className="my-2" onClick={handleSave}>
+                save
+              </Button>
+            ) : (
+              <Button
+                primary
+                rounded
+                className="my-2"
+                onClick={() => {
+                  setEdit(true);
+                }}
+              >
+                Edit Chatroom
+              </Button>
+            )}
+            <Button
+              rounded
+              secondary
+              className="my-2"
+              onClick={() => {
+                setShowUsers(true);
+                setShow(false);
+              }}
+            >
+              Add users
             </Button>
             <Button danger rounded>
               Leave Chatroom
@@ -72,7 +136,7 @@ const ChatRoomDrawer = ({ setShow }) => {
       content = (
         <>
           <Thumbnail
-            className={"h-40 w-40"}
+            className={"h-40 w-40 hover:cursor-pointer"}
             image={userToDisplay.thumbnail}
             onClick={() => {
               nav(`/profile/${userToDisplay._id}`);

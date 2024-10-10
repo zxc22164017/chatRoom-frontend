@@ -46,7 +46,7 @@ const chatRoomApi = createApi({
       }),
       addRoom: builder.mutation({
         invalidatesTags: (result, error, { users }) => {
-          return [{ type: "user", id: users[users.length - 1] }];
+          return [{ type: "userRooms", id: users[users.length - 1] }];
         },
         query: ({ name, users }) => {
           return {
@@ -55,6 +55,22 @@ const chatRoomApi = createApi({
             body: {
               name,
               users,
+            },
+          };
+        },
+      }),
+      patchRoom: builder.mutation({
+        invalidatesTags: (result, error, { roomId }) => {
+          return [{ type: "room", id: roomId }];
+        },
+        query: ({ name, users, roomId, image }) => {
+          return {
+            url: `/${roomId}`,
+            method: "PATCH",
+            body: {
+              name,
+              users,
+              image,
             },
           };
         },
@@ -70,6 +86,10 @@ const pause = (duration) => {
   });
 };
 
-export const { useGetRoomsQuery, useGetSingleRoomQuery, useAddRoomMutation } =
-  chatRoomApi;
+export const {
+  useGetRoomsQuery,
+  useGetSingleRoomQuery,
+  useAddRoomMutation,
+  usePatchRoomMutation,
+} = chatRoomApi;
 export { chatRoomApi };

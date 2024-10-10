@@ -7,11 +7,16 @@ import { socketApi } from "./apis/socketApi";
 import postApi from "./apis/postApi";
 import CommunityApi from "./apis/communityApi";
 import commentApi from "./apis/commentApi";
-import { searchTypeReducer, changeSearchType } from "./slices/SearchTypeSlice";
+import {
+  searchReducer,
+  changeSearchType,
+  changeSearchInput,
+  changeSkipSearch,
+} from "./slices/SearchTypeSlice";
 
 const store = configureStore({
   reducer: {
-    searchType: searchTypeReducer,
+    search: searchReducer,
     [userApi.reducerPath]: userApi.reducer,
     [chatRoomApi.reducerPath]: chatRoomApi.reducer,
     [socketApi.reducerPath]: socketApi.reducer,
@@ -39,9 +44,10 @@ export {
   useSignupUserMutation,
   useSigninUserMutation,
   useGetUserQuery,
-  useSearchUsersMutation,
+  useSearchUsersQuery,
   useGetProfileInfoQuery,
   useAddFriendMutation,
+  usePatchUserMutation,
 } from "./apis/userApi";
 export {
   useGetMessageQuery,
@@ -52,6 +58,7 @@ export {
   useGetRoomsQuery,
   useGetSingleRoomQuery,
   useAddRoomMutation,
+  usePatchRoomMutation,
 } from "./apis/chatRoomApi";
 export { useUploadImgMutation } from "./apis/uploadApi";
 export {
@@ -60,8 +67,21 @@ export {
   useGetSinglePostQuery,
   useLikePostMutation,
   useGetUserPostsQuery,
-  useSearchPostMutation,
+  useSearchPostQuery,
+  useGetCommunityPostsQuery,
+  useGetMoreCommunityPostsMutation,
+  usePatchPostMutation,
 } from "./apis/postApi";
-export { useGetCommunitiesQuery } from "./apis/communityApi";
-export { useAddCommentMutation, useGetCommentQuery } from "./apis/commentApi";
-export { store, changeSearchType };
+export {
+  useGetCommunitiesQuery,
+  useGetSingleCommunityQuery,
+  useAddCommunityMutation,
+  usePatchCommunityMutation,
+} from "./apis/communityApi";
+export {
+  useAddCommentMutation,
+  useGetCommentQuery,
+  useLikeCommentMutation,
+  usePatchCommentMutation,
+} from "./apis/commentApi";
+export { store, changeSearchType, changeSearchInput, changeSkipSearch };

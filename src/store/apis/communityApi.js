@@ -21,6 +21,7 @@ const CommunityApi = createApi({
   endpoints(builder) {
     return {
       getCommunities: builder.query({
+        providesTags: [{ type: "communities", id: "communities" }],
         query: () => {
           return {
             url: "/",
@@ -28,9 +29,62 @@ const CommunityApi = createApi({
           };
         },
       }),
+      getSingleCommunity: builder.query({
+        providesTags: (result, error, name) => {
+          return [{ type: "community", id: result._id }];
+        },
+        query: (name) => {
+          return {
+            url: `/${name}`,
+            method: "GET",
+          };
+        },
+      }),
+      addCommunity: builder.mutation({
+        query: ({ formData, icon, banner }) => {
+          return {
+            url: "/",
+            method: "POST",
+            body: {
+              name: formData.name,
+              description: formData.description,
+              rules: formData.rules,
+              icon,
+              banner,
+            },
+          };
+        },
+      }),
+      patchCommunity: builder.mutation({
+        invalidatesTags: (result, error, { communityId }) => {
+          return [
+            { type: "communities", id: "communities" },
+            { type: "community", id: communityId },
+          ];
+        },
+        query: ({ formData, icon, banner, communityId }) => {
+          console.log(formData.rules);
+          return {
+            url: `/${communityId}`,
+            method: "PATCH",
+            body: {
+              name: formData.name,
+              description: formData.description,
+              rules: formData.rules,
+              icon,
+              banner,
+            },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useGetCommunitiesQuery } = CommunityApi;
+export const {
+  useGetCommunitiesQuery,
+  useGetSingleCommunityQuery,
+  useAddCommunityMutation,
+  usePatchCommunityMutation,
+} = CommunityApi;
 export default CommunityApi;

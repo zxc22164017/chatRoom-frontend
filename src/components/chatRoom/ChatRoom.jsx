@@ -6,6 +6,7 @@ import Input from "../Input";
 import { IoSend } from "react-icons/io5";
 import { useSendMessageMutation, useUploadImgMutation } from "../../store";
 import Button from "../Button";
+import AddUsersModal from "../../models/AddUsersModal";
 
 import { useParams } from "react-router-dom";
 import UploadImg from "../UploadImg";
@@ -15,7 +16,7 @@ const ChatRoom = ({}) => {
   const [input, setInput] = useState("");
 
   const [show, setShow] = useState(false);
-
+  const [showUsers, setShowUsers] = useState(false);
   const [sendMessage, result] = useSendMessageMutation();
   const [uploadImg, imgResult] = useUploadImgMutation();
   const handleSendMessage = (e) => {
@@ -34,7 +35,16 @@ const ChatRoom = ({}) => {
     sendMessage({ roomId, input: result });
   };
 
-  const renderDrawer = show && <ChatRoomDrawer setShow={setShow} />;
+  const renderDrawer = show && (
+    <ChatRoomDrawer setShow={setShow} setShowUsers={setShowUsers} />
+  );
+  const renderAddUser = showUsers && (
+    <AddUsersModal
+      onChange={() => {
+        setShowUsers(false);
+      }}
+    />
+  );
 
   return (
     <div id="scrollable div" className="w-full flex flex-col">
@@ -62,6 +72,7 @@ const ChatRoom = ({}) => {
         </Button>
       </form>
       {renderDrawer}
+      {renderAddUser}
     </div>
   );
 };

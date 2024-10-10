@@ -22,7 +22,7 @@ const userApi = createApi({
   endpoints(builder) {
     return {
       signupUser: builder.mutation({
-        query: (formData) => {
+        query: ({ formData, thumbnail, coverPhoto }) => {
           return {
             url: "/signup",
             method: "POST",
@@ -32,6 +32,8 @@ const userApi = createApi({
               password: formData.password,
               birthday: formData.birthday,
               gender: formData.gender,
+              thumbnail,
+              coverPhoto,
             },
           };
         },
@@ -71,13 +73,26 @@ const userApi = createApi({
           };
         },
       }),
-      searchUsers: builder.mutation({
-        query: ({ search }) => {
+      searchUsers: builder.query({
+        providesTags: [{ type: "search", id: "search" }],
+        query: ({ search, page }) => {
           return {
             url: "/search",
-            params: { search },
+            params: { search, page },
             method: "GET",
           };
+        },
+        serializeQueryArgs({ endpointName }) {
+          return endpointName;
+        },
+        merge: (currentCacheData, newItems, { arg }) => {
+          if (arg.page === 0) {
+            return newItems;
+          }
+          currentCacheData.push(...newItems);
+        },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg;
         },
       }),
       getProfileInfo: builder.query({
@@ -109,6 +124,37 @@ const userApi = createApi({
           };
         },
       }),
+      patchUser: builder.mutation({
+        invalidatesTags: (result, error, { userId }) => {
+          return [{ type: "user", id: userId }];
+        },
+        query: ({ userId, formData, thumbnail, coverPhoto }) => {
+          const {
+            username,
+            email,
+            password,
+            patchPassword,
+            birthday,
+            gender,
+            info,
+          } = formData;
+          return {
+            url: `/${userId}`,
+            method: "PATCH",
+            body: {
+              username,
+              email,
+              password,
+              patchPassword,
+              birthday,
+              gender,
+              info,
+              thumbnail,
+              coverPhoto,
+            },
+          };
+        },
+      }),
     };
   },
 });
@@ -126,8 +172,9 @@ export const {
   useSignupUserMutation,
   useSigninUserMutation,
   useGetUserQuery,
-  useSearchUsersMutation,
+  useSearchUsersQuery,
   useGetProfileInfoQuery,
+  usePatchUserMutation,
 } = userApi;
 
 export { userApi };

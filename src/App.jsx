@@ -11,6 +11,11 @@ import { useDetectLogin } from "./hooks/useDetectLogin.js";
 import CreatePostPage from "./pages/CreatePostPage.jsx";
 import PostPage from "./pages/PostPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
+import SettingPage from "./pages/SettingPage.jsx";
+import Profile from "./components/SettingPage/Profile.jsx";
+import EditPostPage from "./pages/EditPostPage.jsx";
+import CreateCommunityPage from "./pages/CreateCommunityPage.jsx";
+import EditCommunityPage from "./pages/EditCommunityPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +49,28 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchPage />,
+      },
+      {
+        path: "/post/edit/:_id",
+        element: <EditPostPage />,
+      },
+      {
+        path: "/rhufiewjifewfwepfNewCommunity",
+        element: <CreateCommunityPage />,
+      },
+      {
+        path: "/editCommunity/:communityName",
+        element: <EditCommunityPage />,
+      },
+      {
+        path: "/setting/",
+        element: <SettingPage />,
+        children: [
+          {
+            index: true,
+            element: <Profile />,
+          },
+        ],
       },
     ],
   },

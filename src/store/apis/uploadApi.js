@@ -2,9 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { useDetectLogin } from "../../hooks/useDetectLogin";
 import axios from "axios";
 import { userApi } from "./userApi";
-import { chatRoomApi } from "./chatRoomApi";
-import postApi from "./postApi";
-import commentApi from "./commentApi";
 
 const uploadApi = createApi({
   reducerPath: "uploadApi",
@@ -68,40 +65,9 @@ const uploadApi = createApi({
                 },
               });
               return { data: null, error: null };
-            } else if (type === "room") {
-              const data = await baseQuery({
-                url: "/room",
-                method: "POST",
-                body: {
-                  key: key,
-                  roomId: id,
-                },
-              });
-
-              return { data: null, error: null };
-            } else if (type === "post") {
-              const data = await baseQuery({
-                url: "/post",
-                method: "POST",
-                body: {
-                  key: key,
-                  postId: id,
-                },
-              });
-              return { data: null, error: null };
-            } else if (type === "comment") {
-              const data = await baseQuery({
-                url: "/comment",
-                method: "POST",
-                body: {
-                  key: key,
-                  commentId: id,
-                },
-              });
-              return { data: null, error: null };
-            } else if (type === "message") {
-              return { data: key, error: null };
             }
+
+            return { data: key, error: null };
           } catch (error) {
             return { error: error };
           }
@@ -126,23 +92,6 @@ const uploadApi = createApi({
             ) {
               dispatch(
                 userApi.util.invalidateTags([{ type: "user", id: data.id }])
-              );
-            } else if (data.type === "room") {
-              dispatch(
-                chatRoomApi.util.invalidateTags([
-                  { type: "room", id: data.id },
-                  { type: "userRooms", id: user._id },
-                ])
-              );
-            } else if (data.type === "post") {
-              dispatch(
-                postApi.util.invalidateTags([{ type: "posts", id: "posts" }])
-              );
-            } else if (data.type === "comment") {
-              dispatch(
-                commentApi.util.invalidateTags([
-                  { type: "comments", id: "comments" },
-                ])
               );
             }
           } catch (error) {

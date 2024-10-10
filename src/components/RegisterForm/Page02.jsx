@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
+import Thumbnail from "../Thumbnails/Thumbnail";
 
 const Page02 = ({ handleNextPage, handleLastPage, setFormData, formData }) => {
   return (

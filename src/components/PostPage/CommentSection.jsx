@@ -8,11 +8,13 @@ const CommentSection = () => {
   const [page, setPage] = useState(0);
   const { _id } = useParams();
   const { data, error, isLoading } = useGetCommentQuery({ postId: _id, page });
-
+  const [noMore, setNoMore] = useState(false);
   function scrollEvent() {
     if (
       window.scrollY + window.innerHeight >=
-      document.documentElement.scrollHeight
+        document.documentElement.scrollHeight &&
+      !noMore &&
+      !isLoading
     )
       setPage(page + 1);
   }
@@ -24,7 +26,12 @@ const CommentSection = () => {
     return () => {
       window.removeEventListener("scroll", scrollEvent);
     };
-  }, [page]);
+  }, [page, isLoading]);
+  useEffect(() => {
+    if (error?.status === 404) {
+      setNoMore(true);
+    }
+  }, [error]);
 
   let content;
   if (isLoading) {
@@ -41,6 +48,7 @@ const CommentSection = () => {
           key={item._id}
           setPage={setPage}
           comment={item}
+          setNoMore={setNoMore}
         />
       );
     });

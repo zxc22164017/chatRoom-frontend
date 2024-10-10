@@ -1,17 +1,25 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-const searchTypeSlice = createSlice({
-  name: "searchType",
+const searchSlice = createSlice({
+  name: "search",
   initialState: {
-    label: "posts",
-    value: "posts",
+    searchType: { label: "posts", value: "posts" },
+    input: "",
+    skipSearch: true,
   },
   reducers: {
     changeSearchType(state, action) {
-      return action.payload;
+      return { ...state, searchType: action.payload };
+    },
+    changeSearchInput(state, action) {
+      state.input = action.payload;
+    },
+    changeSkipSearch(state, action) {
+      state.skipSearch = action.payload;
     },
   },
 });
 
-export const { changeSearchType } = searchTypeSlice.actions;
-export const searchTypeReducer = searchTypeSlice.reducer;
+export const { changeSearchType, changeSearchInput, changeSkipSearch } =
+  searchSlice.actions;
+export const searchReducer = searchSlice.reducer;

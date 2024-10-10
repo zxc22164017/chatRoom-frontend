@@ -23,6 +23,7 @@ const Communities = () => {
         <div
           onClick={() => {
             nav(`/c/${community.name}`);
+            setShow(false);
           }}
           key={community._id}
           className="  h-14 px-2 flex items-center rounded-md hover:bg-topic-300 hover:cursor-pointer"

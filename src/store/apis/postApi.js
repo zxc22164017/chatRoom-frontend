@@ -22,10 +22,15 @@ const postApi = createApi({
     return {
       getPosts: builder.query({
         providesTags: (result, error) => {
-          const tags = result.map((item) => {
-            return [{ type: "post", id: item._id }];
-          });
-          tags.push({ type: "posts", id: "posts" });
+          let tags;
+          if (result) {
+            tags = result?.map((item) => {
+              return [{ type: "post", id: item._id }];
+            });
+            tags.push({ type: "posts", id: "posts" });
+          } else {
+            tags = [{ type: "posts", id: "posts" }];
+          }
           return tags;
         },
         query: (page) => {
@@ -42,7 +47,9 @@ const postApi = createApi({
           if (arg === 0) {
             return newItems;
           }
-          currentCacheData.push(...newItems);
+          if (newItems.length !== 0) {
+            currentCacheData.push(...newItems);
+          }
         },
         forceRefetch({ currentArg, previousArg }) {
           return currentArg !== previousArg;
@@ -83,7 +90,59 @@ const postApi = createApi({
           return currentArg !== previousArg;
         },
       }),
-      searchPost: builder.mutation({
+      getCommunityPosts: builder.query({
+        query: (communityId) => {
+          return {
+            url: "/community",
+            method: "GET",
+            params: {
+              communityId,
+              page: 0,
+            },
+          };
+        },
+      }),
+      getMoreCommunityPosts: builder.mutation({
+        query: ({ communityId, page }) => {
+          return {
+            url: "/community",
+            method: "GET",
+            params: {
+              communityId,
+              page,
+            },
+          };
+        },
+        async onQueryStarted(
+          data,
+          {
+            dispatch,
+            getState,
+            extra,
+            requestId,
+            queryFulfilled,
+            getCacheEntry,
+          }
+        ) {
+          const { communityId } = data;
+          try {
+            const result = (await queryFulfilled).data;
+            const patchResult = dispatch(
+              postApi.util.updateQueryData(
+                "getCommunityPosts",
+                communityId,
+                (draft) => {
+                  draft.push(...result);
+                }
+              )
+            );
+          } catch (error) {
+            return { error };
+          }
+        },
+      }),
+      searchPost: builder.query({
+        providesTags: [{ type: "search", id: "search" }],
         query: ({ search, page }) => {
           return {
             url: "/search",
@@ -94,16 +153,47 @@ const postApi = createApi({
             },
           };
         },
+        serializeQueryArgs({ endpointName }) {
+          return endpointName;
+        },
+        merge: (currentCacheData, newItems, { arg }) => {
+          if (arg.page === 0) {
+            return newItems;
+          }
+          currentCacheData.push(...newItems);
+        },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg;
+        },
       }),
       addPost: builder.mutation({
-        query: ({ title, content, communityId }) => {
+        invalidatesTags: [{ type: "posts", id: "posts" }],
+        query: ({ formData, image }) => {
           return {
             url: "/",
             method: "POST",
             body: {
-              title,
-              content,
-              communityId,
+              title: formData.title,
+              content: formData.content,
+              communityId: formData.communityId,
+              image,
+            },
+          };
+        },
+      }),
+      patchPost: builder.mutation({
+        invalidatesTags: (result, error, { postId }) => {
+          return [{ type: "post", id: postId }];
+        },
+        query: ({ formData, postId, image }) => {
+          return {
+            url: `/${postId}`,
+            method: "PATCH",
+            body: {
+              title: formData.title,
+              content: formData.content,
+              communityId: formData.communityId,
+              image,
             },
           };
         },
@@ -132,6 +222,9 @@ export const {
   useGetSinglePostQuery,
   useLikePostMutation,
   useGetUserPostsQuery,
-  useSearchPostMutation,
+  useSearchPostQuery,
+  useGetCommunityPostsQuery,
+  useGetMoreCommunityPostsMutation,
+  usePatchPostMutation,
 } = postApi;
 export default postApi;

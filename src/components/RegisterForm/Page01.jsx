@@ -69,6 +69,7 @@ const Page01 = ({
       <Dropdown
         className="mt-6"
         options={options}
+        optClassname={"bg-white w-full"}
         onChange={handleDropDown}
         value={gender}
         text={"gender"}

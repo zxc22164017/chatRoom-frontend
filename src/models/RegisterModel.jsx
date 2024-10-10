@@ -14,6 +14,8 @@ const RegisterModel = ({ onChange, onLogin }) => {
   const [page, setPage] = useState(0);
   const [time, setTime] = useState();
   const [error, setError] = useState("");
+  const [thumbnail, setThumbnail] = useState();
+  const [coverPhoto, setCoverPhoto] = useState();
 
   const options = [
     { label: "male", value: "male" },
@@ -28,6 +30,7 @@ const RegisterModel = ({ onChange, onLogin }) => {
     gender: "",
   });
   const [signupUser, results] = useSignupUserMutation();
+
   const handleNav = () => {
     onChange();
     onLogin();
@@ -47,7 +50,8 @@ const RegisterModel = ({ onChange, onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signupUser(formData);
+
+    signupUser({ formData });
   };
   useEffect(() => {
     if (results.error) {
@@ -74,6 +78,10 @@ const RegisterModel = ({ onChange, onLogin }) => {
         handleLastPage={handleLastPage}
         setFormData={setFormData}
         formData={formData}
+        thumbnail={thumbnail}
+        setThumbnail={setThumbnail}
+        coverPhoto={coverPhoto}
+        setCoverPhoto={setCoverPhoto}
       />
     );
   } else if (page == 100) {

@@ -7,6 +7,7 @@ import NavBarDropdownOption from "./NavBarDropdownOption";
 import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { useGetUserQuery, useLogoutMutation } from "../../store";
+import { FaCog } from "react-icons/fa";
 
 const NavBarDropdown = () => {
   const nav = useNavigate();
@@ -22,6 +23,10 @@ const NavBarDropdown = () => {
   const handleProfileNav = () => {
     setIsOpen(false);
     nav(`/profile/${userInfo._id}`);
+  };
+  const handleSettingNav = () => {
+    setIsOpen(false);
+    nav("/setting");
   };
   const handleLogOut = () => {
     logout(userInfo._id);
@@ -56,8 +61,16 @@ const NavBarDropdown = () => {
       </h1>
     </NavBarDropdownOption>
   );
-
   const option02 = (
+    <NavBarDropdownOption onChange={handleSettingNav}>
+      <Thumbnail className={"h-8 w-8"}>
+        <FaCog />
+      </Thumbnail>
+      <h1 className="ml-2  group-hover:text-sky-500">Setting</h1>
+    </NavBarDropdownOption>
+  );
+
+  const option03 = (
     <NavBarDropdownOption onChange={handleLogOut}>
       <Thumbnail className={"h-8 w-8"}>
         <IoIosLogOut className="" />
@@ -69,7 +82,9 @@ const NavBarDropdown = () => {
   return (
     <div className="relative mr-4 " ref={divElement}>
       <Thumbnail
-        className={"w-10 h-10"}
+        className={
+          "w-10 h-10 hover:cursor-pointer hover:scale-105 active:scale-90 transition-all duration-150"
+        }
         onClick={handleOpen}
         image={userInfo?.thumbnail}
       />
@@ -81,6 +96,7 @@ const NavBarDropdown = () => {
         >
           {option01}
           {option02}
+          {option03}
         </Panel>
       )}
     </div>

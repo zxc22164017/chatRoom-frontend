@@ -5,8 +5,11 @@ const useConvertToDate = (type, time) => {
     if (time === "sending") {
       return time;
     }
-    let result = Date.now() - Date.parse(time);
+
+    let result = Date.now() - new Date(time);
+
     result = Math.floor(result / 1000);
+
     if (result < 60) {
       return "< 1 min";
     }

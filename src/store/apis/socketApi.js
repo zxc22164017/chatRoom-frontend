@@ -5,6 +5,7 @@ import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { userApi } from "./userApi";
 import { store } from "..";
 import { useSelector } from "react-redux";
+import { chatRoomApi } from "./chatRoomApi";
 
 export const createSocket = () => {
   let socket;
@@ -104,6 +105,7 @@ const socketApi = createApi({
         ) {
           const user = userApi.endpoints.getUser.select()(getState()).data;
           const { roomId } = data;
+          console.log("socket", data);
           const patchResult = dispatch(
             socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
               draft.push({
@@ -122,6 +124,7 @@ const socketApi = createApi({
 
           try {
             const result = await queryFulfilled;
+            console.log("socket-after ", result);
             dispatch(
               socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
                 const index = draft.findIndex((item) => !item._id);
@@ -167,7 +170,9 @@ const socketApi = createApi({
                 draft.unshift(...result);
               })
             );
-          } catch (error) {}
+          } catch (error) {
+            return { error };
+          }
         },
       }),
     };

@@ -1,29 +1,31 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Modal from "../components/Modal";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useAddRoomMutation, useSearchUsersQuery } from "../store";
+import {
+  useGetSingleRoomQuery,
+  useSearchUsersQuery,
+  usePatchRoomMutation,
+} from "../store";
 import useDeBounce from "../hooks/useDeBounce";
 import UserTemplate from "../components/UserTemplate";
-import useGetLoginInfo from "../hooks/useGetLoginInfo";
+import { useParams } from "react-router-dom";
 
-const ChatRoomModal = ({ onChange }) => {
-  const currentUser = useGetLoginInfo();
+const AddUsersModal = ({ onChange }) => {
+  const { _id } = useParams();
   const [search, setSearch] = useState("");
   const [skipSearch, setSkipSearch] = useState(true);
   const result = useSearchUsersQuery(
     { search, page: 0 },
     { skip: skipSearch || search === "" }
   );
-  const [addRoom, addResult] = useAddRoomMutation();
+  const [patchRoom, patchResult] = usePatchRoomMutation();
+  const { data, error, isLoading } = useGetSingleRoomQuery(_id);
   const [selectUser, setSelectUser] = useState([]);
-  const [name, setName] = useState("");
   const deBounce = useCallback(
     useDeBounce((search) => {
       if (search !== "") {
         setSkipSearch(false);
-      } else {
-        setSkipSearch(true);
       }
     }, 1000),
     [useDeBounce]
@@ -44,9 +46,6 @@ const ChatRoomModal = ({ onChange }) => {
     let filteredArray = [];
     if (selectUser.length === 0) {
       filteredArray = result.data.filter((item) => {
-        if (item._id === currentUser._id) {
-          return;
-        }
         return item;
       });
     } else {
@@ -57,9 +56,6 @@ const ChatRoomModal = ({ onChange }) => {
           }
         }
 
-        if (item._id === currentUser._id) {
-          return;
-        }
         return item;
       });
     }
@@ -81,6 +77,16 @@ const ChatRoomModal = ({ onChange }) => {
     setSearch(e.target.value);
     deBounce(e.target.value);
   };
+  const renderExistedUsers = data?.users.map((item) => {
+    return (
+      <div
+        key={item._id}
+        className=" p-1 hover:cursor-pointer rounded-full text-green-700 bg-emerald-200"
+      >
+        {item.username}
+      </div>
+    );
+  });
   const renderSelect = selectUser.map((item) => {
     return (
       <div
@@ -96,10 +102,10 @@ const ChatRoomModal = ({ onChange }) => {
   });
   const handlSubmit = (e) => {
     e.preventDefault();
+    const existUsers = data.users;
+    const uploadUsers = [...selectUser, ...existUsers];
 
-    const users = selectUser.map((user) => user._id);
-    users.push(currentUser._id);
-    addRoom({ users, name });
+    patchRoom({ users: uploadUsers, roomId: _id });
     onChange();
   };
 
@@ -109,21 +115,15 @@ const ChatRoomModal = ({ onChange }) => {
         onSubmit={handlSubmit}
         className="flex flex-col w-full items-center"
       >
-        <h1 className="font-bold ">New chat room</h1>
+        <h1 className="font-bold ">Add Users</h1>
         <div className="border-t-2 mt-2 w-full flex items-center border-collapse">
-          <h1>Name:</h1>
-          <Input
-            className="border-none mt-0"
-            value={name}
-            placeholder="Name"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          ></Input>
+          <h1 className="py-3">Name: {data?.name}</h1>
         </div>
         <div className="border-y-2 w-full  flex items-center ">
           <h1>With:</h1>
-          <div className="flex flex-wrap"> {renderSelect}</div>
+          <div className="flex flex-wrap">
+            {renderExistedUsers} {renderSelect}
+          </div>
           <Input
             value={search}
             onChange={handleSearch}
@@ -135,11 +135,11 @@ const ChatRoomModal = ({ onChange }) => {
           {renderSearchResult}
         </div>
         <Button primary rounded>
-          Chat
+          Add
         </Button>
       </form>
     </Modal>
   );
 };
 
-export default ChatRoomModal;
+export default AddUsersModal;

@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
 import UserResult from "../Search/UserResult";
-import { useSearchUsersMutation, useSearchPostMutation } from "../../store";
+import { useSearchUsersQuery, useSearchPostQuery } from "../../store";
 import Skeleton from "../Loading/Skeleton";
 import Post from "../Posts/Post";
 import Alert from "../Alert";
 import { useSelector } from "react-redux";
 
 const MainContent = ({}) => {
-  const searchType = useSelector((state) => {
-    return state.searchType;
+  const { searchType, input, skipSearch } = useSelector((state) => {
+    return state.search;
   });
-  const [searchUsers, userResults] = useSearchUsersMutation({
-    fixedCacheKey: "searchUser",
-  });
-  const [searchPost, postResult] = useSearchPostMutation({
-    fixedCacheKey: "searchPost",
-  });
+
   const [page, setPage] = useState(0);
+  const userResult = useSearchUsersQuery(
+    { search: input, page },
+    { skip: searchType.value !== "users" || skipSearch }
+  );
+  const postResult = useSearchPostQuery(
+    {
+      search: input,
+      page,
+    },
+    { skip: searchType.value !== "posts" || skipSearch }
+  );
+
   function scrollEvent() {
     if (
       window.scrollY + window.innerHeight >=
@@ -36,7 +43,7 @@ const MainContent = ({}) => {
 
   let content;
 
-  if (userResults.isLoading || postResult.isLoading) {
+  if (userResult.isLoading || postResult.isLoading) {
     content = <Skeleton times={5} className={"w-full h-20"} />;
   }
   if (postResult.isSuccess && searchType.value === "posts") {
@@ -44,13 +51,13 @@ const MainContent = ({}) => {
       return <Post key={post._id} post={post} />;
     });
   }
-  if (userResults.isSuccess && searchType.value === "users") {
-    content = userResults.data.map((user) => {
+  if (userResult.isSuccess && searchType.value === "users") {
+    content = userResult.data.map((user) => {
       return <UserResult user={user} key={user._id} />;
     });
   }
 
-  if (userResults.isError || postResult.isError) {
+  if (userResult.isError || postResult.isError) {
     content = (
       <div>
         <Alert error={"Internal server error"} />

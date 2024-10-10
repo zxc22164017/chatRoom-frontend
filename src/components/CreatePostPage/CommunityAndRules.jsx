@@ -7,7 +7,7 @@ import Button from "../Button";
 import { FaInfoCircle } from "react-icons/fa";
 import RuleDrawer from "./RuleDrawer";
 
-const CommunityAndRules = ({ formData, setFormData }) => {
+const CommunityAndRules = ({ formData, setFormData, editable, community }) => {
   const { data } = useGetCommunitiesQuery();
   const [selectOption, setSelectOption] = useState(null);
   const handleOption = (option) => {
@@ -30,21 +30,28 @@ const CommunityAndRules = ({ formData, setFormData }) => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="border-2 rounded-full w-1/3 px-4  flex items-center ">
-        {selectOption ? (
-          <Thumbnail className={"h-8 w-8"} image={selectOption?.icon} />
-        ) : (
-          <HiMagnifyingGlass />
-        )}
-        <Dropdown
-          className="border-none shadow-none bg-white"
-          options={options}
-          optClassname={"w-full bg-white"}
-          text={"Community"}
-          onChange={handleOption}
-          value={selectOption}
-        />
-      </div>
+      {editable ? (
+        <div className="border-2 rounded-full w-1/3 px-4  flex items-center ">
+          {selectOption ? (
+            <Thumbnail className={"h-8 w-8"} image={selectOption?.icon} />
+          ) : (
+            <HiMagnifyingGlass />
+          )}
+          <Dropdown
+            className="border-none shadow-none bg-white"
+            options={options}
+            optClassname={"w-full bg-white"}
+            text={"Community"}
+            onChange={handleOption}
+            value={selectOption}
+          />
+        </div>
+      ) : (
+        <div className="border-2 rounded-full w-1/3 px-4 py-2  flex items-center ">
+          <Thumbnail className={"h-8 w-8 "} image={community?.icon} />
+          <h1 className="w-full text-lg ml-2">{community.name}</h1>
+        </div>
+      )}
       <Button
         type="button"
         onClick={() => {
@@ -55,7 +62,9 @@ const CommunityAndRules = ({ formData, setFormData }) => {
         <FaInfoCircle className="h-4 w-4 pr-1" />
         <p className="text-xs">rules</p>
       </Button>
-      {show && <RuleDrawer setShow={setShow} selectOption={selectOption} />}
+      {show && (
+        <RuleDrawer setShow={setShow} community={selectOption || community} />
+      )}
     </div>
   );
 };

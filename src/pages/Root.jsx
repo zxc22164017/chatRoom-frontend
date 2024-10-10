@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useDetectLogin } from "../hooks/useDetectLogin";
 import NavBar from "../components/NavBar/NavBar";
+import BackToTop from "../components/BackToTop";
 function Root() {
   let content;
 
@@ -9,6 +10,7 @@ function Root() {
       <div className=" flex flex-col min-h-screen bg-topic-500">
         <NavBar />
         <Outlet />
+        <BackToTop />
       </div>
     );
   } else {
