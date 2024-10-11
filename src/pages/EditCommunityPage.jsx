@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { SearchUsers } from "../components/Search/SearchUsers";
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
@@ -24,6 +24,7 @@ const EditCommunityPage = () => {
     description: "",
     rules: [],
   });
+  const [selectUsers, setSelectUsers] = useState([]);
   const [rule, setRule] = useState({ title: "", content: "" });
   const [banner, setBanner] = useState(null);
   const [icon, setIcon] = useState(null);
@@ -49,6 +50,7 @@ const EditCommunityPage = () => {
         description: data.description,
         rules: cloneDeep(data.rules),
       });
+      setSelectUsers(data.managers);
     }
   }, [currentUser, data]);
   const renderRules = formData?.rules?.map((rule, index) => {
@@ -86,6 +88,7 @@ const EditCommunityPage = () => {
       icon: iconKey,
       banner: bannerKey,
       communityId: data._id,
+      managers: selectUsers,
     }).unwrap();
 
     nav(`/c/${formData.name}`);
@@ -128,6 +131,13 @@ const EditCommunityPage = () => {
         />
       </div>
       <div className="w-full mt-4">
+        <h1>managers:</h1>
+        <div className="mx-16 my-2">
+          <SearchUsers
+            selectUser={selectUsers}
+            setSelectUser={setSelectUsers}
+          />
+        </div>
         <h1>rules</h1>
         <Input
           className="mb-4"

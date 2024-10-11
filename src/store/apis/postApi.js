@@ -212,6 +212,17 @@ const postApi = createApi({
           };
         },
       }),
+      deletePost: builder.mutation({
+        query: (post) => {
+          return {
+            url: "/",
+            method: "DELETE",
+            body: {
+              post,
+            },
+          };
+        },
+      }),
     };
   },
 });
@@ -226,5 +237,6 @@ export const {
   useGetCommunityPostsQuery,
   useGetMoreCommunityPostsMutation,
   usePatchPostMutation,
+  useDeletePostMutation,
 } = postApi;
 export default postApi;

@@ -22,8 +22,10 @@ const CreatePostPage = () => {
   });
   const handleSubmitPost = async (e) => {
     e.preventDefault();
-
-    const key = (await uploadImg({ file: img })).data;
+    let key;
+    if (img) {
+      key = (await uploadImg({ file: img })).data;
+    }
     addPost({ formData, image: key });
   };
 

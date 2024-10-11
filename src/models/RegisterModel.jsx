@@ -14,8 +14,6 @@ const RegisterModel = ({ onChange, onLogin }) => {
   const [page, setPage] = useState(0);
   const [time, setTime] = useState();
   const [error, setError] = useState("");
-  const [thumbnail, setThumbnail] = useState();
-  const [coverPhoto, setCoverPhoto] = useState();
 
   const options = [
     { label: "male", value: "male" },
@@ -48,7 +46,7 @@ const RegisterModel = ({ onChange, onLogin }) => {
     setPage(page - 50);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     signupUser({ formData });
@@ -78,10 +76,6 @@ const RegisterModel = ({ onChange, onLogin }) => {
         handleLastPage={handleLastPage}
         setFormData={setFormData}
         formData={formData}
-        thumbnail={thumbnail}
-        setThumbnail={setThumbnail}
-        coverPhoto={coverPhoto}
-        setCoverPhoto={setCoverPhoto}
       />
     );
   } else if (page == 100) {

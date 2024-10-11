@@ -5,12 +5,18 @@ import Button from "../Button";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import NavBarDropdownOption from "../NavBar/NavBarDropdownOption";
 import { useNavigate } from "react-router-dom";
+import { useDeleteCommentMutation } from "../../store";
+import DoubleConfirmModal from "../../models/DoubleConfirmModal";
 
-const DropdownComment = ({ className, author, setEdit }) => {
+const DropdownComment = ({ className, author, setEdit, comment }) => {
   const currentUser = useGetLoginInfo();
+  const [deleteComment, commentResult] = useDeleteCommentMutation();
+
   const nav = useNavigate();
   const divElement = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -28,6 +34,12 @@ const DropdownComment = ({ className, author, setEdit }) => {
       document.removeEventListener("click", handler, true);
     };
   }, []);
+  const handleDelete = () => {
+    deleteComment(comment);
+  };
+  useEffect(() => {
+    if (commentResult.isSuccess) window.location.reload();
+  }, [commentResult]);
 
   let content;
   if (currentUser._id === author._id) {
@@ -41,7 +53,12 @@ const DropdownComment = ({ className, author, setEdit }) => {
         >
           Edit
         </NavBarDropdownOption>
-        <NavBarDropdownOption className={"hover:text-red-500 hover:bg-red-100"}>
+        <NavBarDropdownOption
+          className={"hover:text-red-500 hover:bg-red-100"}
+          onChange={() => {
+            setShow(true);
+          }}
+        >
           Delete
         </NavBarDropdownOption>
       </>
@@ -52,6 +69,14 @@ const DropdownComment = ({ className, author, setEdit }) => {
 
   return (
     <div ref={divElement} className={`relative mr-4 ${className}`}>
+      {show && (
+        <DoubleConfirmModal
+          onChange={() => {
+            setShow(false);
+          }}
+          handleDelete={handleDelete}
+        />
+      )}
       <Button
         onClick={handleOpen}
         rounded

@@ -41,7 +41,7 @@ const CommunityApi = createApi({
         },
       }),
       addCommunity: builder.mutation({
-        query: ({ formData, icon, banner }) => {
+        query: ({ formData, icon, banner, managers }) => {
           return {
             url: "/",
             method: "POST",
@@ -51,6 +51,7 @@ const CommunityApi = createApi({
               rules: formData.rules,
               icon,
               banner,
+              managers,
             },
           };
         },
@@ -62,8 +63,7 @@ const CommunityApi = createApi({
             { type: "community", id: communityId },
           ];
         },
-        query: ({ formData, icon, banner, communityId }) => {
-          console.log(formData.rules);
+        query: ({ formData, icon, banner, communityId, managers }) => {
           return {
             url: `/${communityId}`,
             method: "PATCH",
@@ -73,6 +73,7 @@ const CommunityApi = createApi({
               rules: formData.rules,
               icon,
               banner,
+              managers,
             },
           };
         },

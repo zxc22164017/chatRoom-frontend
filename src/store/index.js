@@ -71,6 +71,7 @@ export {
   useGetCommunityPostsQuery,
   useGetMoreCommunityPostsMutation,
   usePatchPostMutation,
+  useDeletePostMutation,
 } from "./apis/postApi";
 export {
   useGetCommunitiesQuery,
@@ -83,5 +84,6 @@ export {
   useGetCommentQuery,
   useLikeCommentMutation,
   usePatchCommentMutation,
+  useDeleteCommentMutation,
 } from "./apis/commentApi";
 export { store, changeSearchType, changeSearchInput, changeSkipSearch };

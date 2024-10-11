@@ -20,12 +20,12 @@ const uploadApi = createApi({
     return {
       uploadImg: builder.mutation({
         async queryFn(
-          { file, type, id },
+          { file, type, id, tokenFromReg },
           baseQueryApi,
           extraOptions,
           baseQuery
         ) {
-          const token = useDetectLogin();
+          const token = useDetectLogin() || tokenFromReg;
           let presignedUrl;
           let key;
           try {
@@ -44,58 +44,9 @@ const uploadApi = createApi({
               },
             });
 
-            if (type === "userThumbnail") {
-              const data = await baseQuery({
-                url: "/user",
-                method: "POST",
-                body: {
-                  key,
-                  type: "thumbnail",
-                },
-              });
-
-              return { data: null, error: null };
-            } else if (type === "userCoverPhoto") {
-              const data = await baseQuery({
-                url: "/user",
-                method: "POST",
-                body: {
-                  key,
-                  type: "coverPhoto",
-                },
-              });
-              return { data: null, error: null };
-            }
-
             return { data: key, error: null };
           } catch (error) {
             return { error: error };
-          }
-        },
-        async onQueryStarted(
-          data,
-          {
-            dispatch,
-            getState,
-            extra,
-            requestId,
-            queryFulfilled,
-            getCacheEntry,
-          }
-        ) {
-          const user = userApi.endpoints.getUser.select()(getState()).data;
-          try {
-            await queryFulfilled;
-            if (
-              data.type === "userThumbnail" ||
-              data.type === "userCoverPhoto"
-            ) {
-              dispatch(
-                userApi.util.invalidateTags([{ type: "user", id: data.id }])
-              );
-            }
-          } catch (error) {
-            console.log(error);
           }
         },
       }),

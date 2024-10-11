@@ -6,6 +6,7 @@ import Input from "../components/Input";
 import Textarea from "../components/Textarea";
 import Button from "../components/Button";
 import { useAddCommunityMutation, useUploadImgMutation } from "../store";
+import { SearchUsers } from "../components/Search/SearchUsers";
 const CreateCommunityPage = () => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
@@ -19,6 +20,7 @@ const CreateCommunityPage = () => {
   const [rule, setRule] = useState({ title: "", content: "" });
   const [banner, setBanner] = useState(null);
   const [icon, setIcon] = useState(null);
+  const [selectUsers, setSelectUsers] = useState([]);
   useEffect(() => {
     if (currentUser) {
       if (currentUser.identity !== "admin") {
@@ -60,6 +62,7 @@ const CreateCommunityPage = () => {
       formData,
       icon: iconKey,
       banner: bannerKey,
+      managers: selectUsers,
     }).unwrap();
 
     nav(`/c/${newCom.name}`);
@@ -128,6 +131,13 @@ const CreateCommunityPage = () => {
         />
       </div>
       <div className="w-full mt-4">
+        <h1>managers:</h1>
+        <div className="mx-16 my-2">
+          <SearchUsers
+            selectUser={selectUsers}
+            setSelectUser={setSelectUsers}
+          />
+        </div>
         <h1>rules</h1>
         <Input
           className="mb-4"

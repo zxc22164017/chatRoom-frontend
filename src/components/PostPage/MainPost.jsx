@@ -66,7 +66,7 @@ const MainPost = () => {
               name={author.username}
               info={time}
             />
-            <Dropdown author={author} postId={data._id} />
+            <Dropdown author={author} post={data} />
           </div>
           <div className="mt-4 whitespace-pre text-wrap">
             <p>{data.content}</p>

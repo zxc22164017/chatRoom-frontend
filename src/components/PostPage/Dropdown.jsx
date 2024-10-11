@@ -5,15 +5,28 @@ import Button from "../Button";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import NavBarDropdownOption from "../NavBar/NavBarDropdownOption";
 import { useNavigate } from "react-router-dom";
+import DoubleConfirmModal from "../../models/DoubleConfirmModal";
+import { useDeletePostMutation } from "../../store";
 
-const Dropdown = ({ className, author, postId }) => {
+const Dropdown = ({ className, author, post }) => {
   const currentUser = useGetLoginInfo();
   const nav = useNavigate();
   const divElement = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(false);
+  const [deletePost, postResult] = useDeletePostMutation();
+
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+  const handleDelete = () => {
+    deletePost(post);
+  };
+  useEffect(() => {
+    if (postResult.isSuccess) {
+      nav("/");
+    }
+  }, [postResult]);
   useEffect(() => {
     const handler = (e) => {
       if (!divElement.current) {
@@ -35,12 +48,17 @@ const Dropdown = ({ className, author, postId }) => {
       <>
         <NavBarDropdownOption
           onChange={() => {
-            nav(`/post/edit/${postId}`);
+            nav(`/post/edit/${post._id}`);
           }}
         >
           Edit Post
         </NavBarDropdownOption>
-        <NavBarDropdownOption className={"hover:text-red-500 hover:bg-red-100"}>
+        <NavBarDropdownOption
+          onChange={() => {
+            setShow(true);
+          }}
+          className={"hover:text-red-500 hover:bg-red-100"}
+        >
           Delete Post
         </NavBarDropdownOption>
       </>
@@ -51,6 +69,14 @@ const Dropdown = ({ className, author, postId }) => {
 
   return (
     <div ref={divElement} className={`relative mr-4 ${className}`}>
+      {show && (
+        <DoubleConfirmModal
+          onChange={() => {
+            setShow(false);
+          }}
+          handleDelete={handleDelete}
+        />
+      )}
       <Button
         onClick={handleOpen}
         rounded

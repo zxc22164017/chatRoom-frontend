@@ -112,6 +112,17 @@ const commentApi = createApi({
           };
         },
       }),
+      deleteComment: builder.mutation({
+        query: (comment) => {
+          return {
+            url: "/",
+            method: "DELETE",
+            body: {
+              comment,
+            },
+          };
+        },
+      }),
     };
   },
 });
@@ -121,5 +132,6 @@ export const {
   useAddCommentMutation,
   usePatchCommentMutation,
   useLikeCommentMutation,
+  useDeleteCommentMutation,
 } = commentApi;
 export default commentApi;

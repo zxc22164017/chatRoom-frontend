@@ -83,9 +83,6 @@ const MainContent = () => {
             </div>
             {admin && (
               <div className="flex self-end gap-2">
-                <Button rounded secondary className="w-36 h-8 ">
-                  Add manager
-                </Button>
                 <Button
                   rounded
                   primary
