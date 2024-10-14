@@ -1,6 +1,6 @@
 import react, { Suspense, useState } from "react";
 import Button from "../components/Button";
-import logo from "../assets/logo.svg";
+
 const LoginModel = react.lazy(() => import("../models/LoginModel"));
 const RegisterModel = react.lazy(() => import("../models/RegisterModel"));
 const ForgetPasswordModal = react.lazy(() =>
@@ -41,7 +41,7 @@ const LandingPage = () => {
       {forgetPassword}
       <div className=" h-36 w-36 xl:h-96 xl:w-96 ml-48 md:ml-0 mb-36 md:mb-10 xl:mb-0 xl:mr-72 z-10 ">
         <img
-          src={logo}
+          src="./logo.svg"
           rel="preload"
           className="w-full h-full object-fill"
           alt="logo"

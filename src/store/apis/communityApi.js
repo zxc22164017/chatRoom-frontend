@@ -4,7 +4,7 @@ import { useDetectLogin } from "../../hooks/useDetectLogin";
 const CommunityApi = createApi({
   reducerPath: "community",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://127.0.0.1:8080/community",
+    baseUrl: "http://localhost:8080/community",
     fetchFn: async (...args) => {
       // await pause(10000);
       return fetch(...args);

@@ -1,0 +1,28 @@
+name: Deploy Node App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Login to docker hub
+        run: docker login -u${{secrets.DOCKER_USERNAME}} -p${{secrets.DOCKER_PASSWORD}}
+      - name: Build Docker Image
+        run: docker build -t zxc22164017/reactjs-app .
+      - name: Publish Image to Docker hub
+        run: docker push zxc22164017/reactjs-app:latest
+
+  delpoy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull Image from docker hub
+        run: docker pull zxc22164017/reactjs-app:latest
+      - name: Run Docker Container
+        run: docker run -d -p 8080:8080 --name reactjs-app-container  zxc22164017/reactjs-app
