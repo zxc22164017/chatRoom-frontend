@@ -27,4 +27,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f reactjs-app-container
       - name: Run Docker Container
-        run: docker run -d -p 8080:8080 --name reactjs-app-container  zxc22164017/reactjs-app
+        run: docker run -d -p 5173:80 --name reactjs-app-container  zxc22164017/reactjs-app
