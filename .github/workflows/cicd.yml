@@ -24,5 +24,7 @@ jobs:
     steps:
       - name: Pull Image from docker hub
         run: docker pull zxc22164017/reactjs-app:latest
+      - name: Delete old container
+        run: docker rm -f reactjs-app-container
       - name: Run Docker Container
         run: docker run -d -p 8080:8080 --name reactjs-app-container  zxc22164017/reactjs-app
