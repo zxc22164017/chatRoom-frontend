@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React, { Suspense } from "react";
-import Root from "./pages/Root";
-import Index from "./pages";
-import { useGetUserQuery } from "./store";
-import LoadingPage from "./pages/LoadingPage";
+import Root from "./pages/Root.jsx";
+import Index from "./pages/Index.jsx";
+import { useGetUserQuery } from "./store/index.js";
+import LoadingPage from "./pages/LoadingPage.jsx";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useDetectLogin } from "./hooks/useDetectLogin.js";
 import LoadingFancy from "./components/Loading/LoadingFancy.jsx";
