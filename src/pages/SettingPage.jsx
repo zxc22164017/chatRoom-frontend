@@ -8,7 +8,7 @@ const SettingPage = () => {
   return (
     <>
       <SideBar />
-      <div className="bg-white ml-12 md:mx-80 min-w-sm flex flex-grow flex-col mt-14">
+      <div className="bg-white ml-12 xl:mx-80 min-w-sm flex flex-grow flex-col mt-14">
         <Header options={options} />
         <Outlet />
       </div>

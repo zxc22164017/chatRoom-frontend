@@ -10,6 +10,7 @@ const Dropdown = ({
   onChange,
   text,
   optClassname,
+  community,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,16 +56,19 @@ const Dropdown = ({
           {options.map((option) => {
             return (
               <div
-                className="hover:bg-sky-100 rounded cursor-pointer p-1"
+                className="hover:bg-sky-100 rounded cursor-pointer p-1 flex items-center group"
                 onClick={() => {
                   handleOptionClick(option);
                 }}
                 key={option.value}
               >
-                {option?.icon && (
-                  <Thumbnail className={"h-10 w-10"} image={option.icon} />
+                {community && (
+                  <Thumbnail className={"h-10 w-10 mr-2"} image={option.icon} />
                 )}
-                {option.label}
+                <p className="text-nowrap truncate"> {option.label}</p>
+                <span className="text-xs absolute p-1 bg-white opacity-0 group-hover:opacity-100 delay-300 transition-all duration-300">
+                  {option.label}
+                </span>
               </div>
             );
           })}

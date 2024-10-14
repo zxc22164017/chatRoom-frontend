@@ -56,6 +56,7 @@ const PersonalInfo = ({ id }) => {
       "thumbnail",
       "coverPhoto",
       "identity",
+      "info",
     ];
     const { keys, filteredObject } = filterObj(keysToFilter, data);
 
@@ -108,6 +109,9 @@ const PersonalInfo = ({ id }) => {
           <div className="flex w-48 p-2  md:hidden flex-col text-center ">
             {renderInfo}
           </div>
+        </div>
+        <div className="px-10 py-4 whitespace-pre">
+          <p className="">{data.info}</p>
         </div>
       </div>
     );

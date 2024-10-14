@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import UserResult from "../Search/UserResult";
 import { useGetPostsQuery } from "../../store";
 import Skeleton from "../Loading/Skeleton";
 import Post from "../Posts/Post";
@@ -8,7 +7,7 @@ import Alert from "../Alert";
 const MainContent = ({}) => {
   const [page, setPage] = useState(0);
   const [noMore, setNoMore] = useState(false);
-  const { data, error, isLoading } = useGetPostsQuery(page);
+  const { data, error, isLoading, isFetching } = useGetPostsQuery(page);
   function scrollEvent() {
     if (
       window.scrollY + window.innerHeight >=
@@ -55,8 +54,9 @@ const MainContent = ({}) => {
   }
 
   return (
-    <div className="bg-white ml-12 md:mx-96 min-w-sm flex flex-grow flex-col mt-14">
+    <div className="bg-white ml-12 xl:mx-96 min-w-sm flex flex-grow flex-col mt-14">
       {content}
+      {isFetching && <Skeleton times={1} className={"w-full h-20"} />}
       {noMore && (
         <div className="flex justify-center items-center">
           <p className="">no more data</p>

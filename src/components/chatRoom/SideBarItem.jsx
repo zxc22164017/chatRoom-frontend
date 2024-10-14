@@ -38,7 +38,7 @@ const SideBarItem = ({ object, currentUser }) => {
   return (
     <>
       <UserTemplate
-        className={"hidden md:flex p-2"}
+        className={"hidden lg:flex p-2"}
         onClick={handleClick}
         name={name}
         info={info}
@@ -46,7 +46,7 @@ const SideBarItem = ({ object, currentUser }) => {
       ></UserTemplate>
       <Thumbnail
         image={img}
-        className={"h-10 w-10 m-2 block md:hidden"}
+        className={"h-10 w-10 m-2 block lg:hidden"}
         onClick={handleClick}
       />
     </>

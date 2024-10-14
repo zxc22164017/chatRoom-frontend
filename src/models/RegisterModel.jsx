@@ -1,7 +1,7 @@
+import React, { useEffect, useState } from "react";
 import Page01 from "../components/RegisterForm/Page01";
 import Page02 from "../components/RegisterForm/Page02";
 import Page03 from "../components/RegisterForm/Page03";
-import React, { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Progress from "../components/Progress";

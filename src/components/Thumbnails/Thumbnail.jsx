@@ -1,6 +1,8 @@
 import { MdFace6 } from "react-icons/md";
 import classNames from "classnames";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 const Thumbnail = ({
   className,
   children,
@@ -20,11 +22,14 @@ const Thumbnail = ({
   );
 
   let content;
-
   if (image) {
     content = (
-      <img
+      <LazyLoadImage
         className="object-cover object-center h-full w-full"
+        rel="dns-prefetch"
+        effect="blur"
+        width={"100%"}
+        height={"100%"}
         src={`https://chat-room-asdzxc1234448.s3.ap-northeast-1.amazonaws.com/${image}`}
         alt="profile"
       />

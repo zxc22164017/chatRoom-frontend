@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "../Dropdown";
 import postApi from "../../store/apis/postApi";
 import { userApi } from "../../store/apis/userApi";
+import logo from "../../assets/logo.svg";
 const NavBar = () => {
   const dispatch = useDispatch();
   const { searchType, input } = useSelector((state) => {
@@ -41,7 +42,10 @@ const NavBar = () => {
             nav("/");
           }}
         >
-          <h1 className="text-white font-bold text-2xl">Logo </h1>
+          <img className="w-10 h-10" src={logo} alt="logo" />
+          <h1 className="hidden md:block text-white font-bold text-2xl">
+            Fremo{" "}
+          </h1>
         </div>
         <form onSubmit={handleSubmit} className="flex w-1/3 h-9">
           <div>

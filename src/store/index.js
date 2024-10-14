@@ -48,6 +48,7 @@ export {
   useGetProfileInfoQuery,
   useAddFriendMutation,
   usePatchUserMutation,
+  useForgetPasswordMutation,
 } from "./apis/userApi";
 export {
   useGetMessageQuery,
@@ -59,6 +60,7 @@ export {
   useGetSingleRoomQuery,
   useAddRoomMutation,
   usePatchRoomMutation,
+  useLeaveRoomMutation,
 } from "./apis/chatRoomApi";
 export { useUploadImgMutation } from "./apis/uploadApi";
 export {

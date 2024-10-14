@@ -72,7 +72,7 @@ const MainPost = () => {
             <p>{data.content}</p>
             {data.image && (
               <Thumbnail
-                className={"max-w-max max-h-max rounded-none"}
+                className={"max-w-max my-4 max-h-max rounded-none"}
                 image={data.image}
               />
             )}
@@ -90,6 +90,7 @@ const MainPost = () => {
             <Textarea
               htmlFor={"comment"}
               value={formData}
+              isLoading={result.isLoading}
               onChange={(e) => {
                 setformData(e.target.value);
               }}
@@ -109,7 +110,7 @@ const MainPost = () => {
   }
 
   return (
-    <div className="bg-white ml-12 md:mx-80 p-4 min-w-sm flex flex-grow flex-col mt-14">
+    <div className="bg-white ml-12 xl:mx-80 p-4 min-w-sm flex flex-grow flex-col mt-14">
       {content}
     </div>
   );

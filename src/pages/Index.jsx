@@ -1,16 +1,25 @@
+import React, { Suspense } from "react";
 import { useDetectLogin } from "../hooks/useDetectLogin";
-import LandingPage from "./LandingPage";
-import HomePage from "./HomePage";
+import LoadingPage from "./LoadingPage";
 
-import Alert from "../components/Alert";
+const LandingPage = React.lazy(() => import("./LandingPage"));
+const HomePage = React.lazy(() => import("./HomePage"));
 
 const Index = () => {
   const loginOrNot = useDetectLogin();
   if (!loginOrNot) {
-    return <LandingPage />;
+    return (
+      <Suspense fallback={<LoadingPage />}>
+        <LandingPage />
+      </Suspense>
+    );
   }
   if (loginOrNot) {
-    return <HomePage />;
+    return (
+      <Suspense fallback={<LoadingPage />}>
+        <HomePage />
+      </Suspense>
+    );
   }
 };
 

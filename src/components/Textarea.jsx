@@ -11,6 +11,7 @@ const Textarea = ({
   handleImage,
   noSubmit,
   resetImage,
+  isLoading,
   ...rest
 }) => {
   const textRef = useRef();
@@ -51,6 +52,7 @@ const Textarea = ({
         <div className="hidden group-hover:flex justify-between">
           <UploadImg handleImage={handleImage} />
           <Button
+            disabled={isLoading}
             primary
             rounded
             className=" h-9 w-24  transition-all duration-150 "

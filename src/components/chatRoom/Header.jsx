@@ -59,7 +59,7 @@ const Header = ({ setShow }) => {
   };
 
   return (
-    <div className="shadow flex items-center justify-between px-2  h-16 ">
+    <div className="shadow flex items-center justify-between px-2 py-2  h-16 ">
       <div
         className=" group hover:bg-slate-400 hover:cursor-pointer h-full rounded flex items-center "
         onClick={handleNav}

@@ -1,21 +1,32 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React, { Suspense } from "react";
 import Root from "./pages/Root";
-import ChatPage from "./pages/ChatPage";
 import Index from "./pages";
-import ProfilePage from "./pages/ProfilePage";
 import { useGetUserQuery } from "./store";
-import CommunityPage from "./pages/CommunityPage.jsx";
 import LoadingPage from "./pages/LoadingPage";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { useDetectLogin } from "./hooks/useDetectLogin.js";
-import CreatePostPage from "./pages/CreatePostPage.jsx";
-import PostPage from "./pages/PostPage.jsx";
-import SearchPage from "./pages/SearchPage.jsx";
-import SettingPage from "./pages/SettingPage.jsx";
-import Profile from "./components/SettingPage/Profile.jsx";
-import EditPostPage from "./pages/EditPostPage.jsx";
-import CreateCommunityPage from "./pages/CreateCommunityPage.jsx";
-import EditCommunityPage from "./pages/EditCommunityPage.jsx";
+import LoadingFancy from "./components/Loading/LoadingFancy.jsx";
+const Profile = React.lazy(() =>
+  import("./components/SettingPage/Profile.jsx")
+);
+const CommunityPage = React.lazy(() => import("./pages/CommunityPage.jsx"));
+const ChatPage = React.lazy(() => import("./pages/ChatPage.jsx"));
+const ProfilePage = React.lazy(() => import("./pages/ProfilePage.jsx"));
+const CreatePostPage = React.lazy(() => import("./pages/CreatePostPage.jsx"));
+const PostPage = React.lazy(() => import("./pages/PostPage.jsx"));
+const SearchPage = React.lazy(() => import("./pages/SearchPage.jsx"));
+const SettingPage = React.lazy(() => import("./pages/SettingPage.jsx"));
+const EditPostPage = React.lazy(() => import("./pages/EditPostPage.jsx"));
+const NotFound = React.lazy(() => import("./pages/NotFound.jsx"));
+
+const CreateCommunityPage = React.lazy(() =>
+  import("./pages/CreateCommunityPage.jsx")
+);
+
+const EditCommunityPage = React.lazy(() =>
+  import("./pages/EditCommunityPage.jsx")
+);
 
 const router = createBrowserRouter([
   {
@@ -28,49 +39,101 @@ const router = createBrowserRouter([
       },
       {
         path: "/chat/:_id",
-        element: <ChatPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <ChatPage />
+          </Suspense>
+        ),
       },
       {
         path: "/profile/:_id",
-        element: <ProfilePage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <ProfilePage />
+          </Suspense>
+        ),
       },
       {
         path: "/newPost",
-        element: <CreatePostPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <CreatePostPage />
+          </Suspense>
+        ),
       },
       {
         path: "/post/:_id",
-        element: <PostPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <PostPage />
+          </Suspense>
+        ),
       },
       {
         path: "/c/:name",
-        element: <CommunityPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <CommunityPage />
+          </Suspense>
+        ),
       },
       {
         path: "/search",
-        element: <SearchPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <SearchPage />
+          </Suspense>
+        ),
       },
       {
         path: "/post/edit/:_id",
-        element: <EditPostPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <EditPostPage />
+          </Suspense>
+        ),
       },
       {
         path: "/rhufiewjifewfwepfNewCommunity",
-        element: <CreateCommunityPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <CreateCommunityPage />
+          </Suspense>
+        ),
       },
       {
         path: "/editCommunity/:communityName",
-        element: <EditCommunityPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <EditCommunityPage />
+          </Suspense>
+        ),
       },
       {
         path: "/setting/",
-        element: <SettingPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <SettingPage />
+          </Suspense>
+        ),
         children: [
           {
             index: true,
-            element: <Profile />,
+            element: (
+              <Suspense fallback={<LoadingFancy />}>
+                <Profile />
+              </Suspense>
+            ),
           },
         ],
+      },
+      {
+        path: "*",
+        element: (
+          <Suspense fallback={<LoadingFancy />}>
+            <NotFound />
+          </Suspense>
+        ),
       },
     ],
   },

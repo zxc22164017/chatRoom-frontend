@@ -9,7 +9,7 @@ const ProfilePage = () => {
   const { _id } = useParams();
 
   return (
-    <div className="mt-14 flex flex-col md:mx-80 flex-grow">
+    <div className="mt-14 flex flex-col xl:mx-80 flex-grow">
       <PersonalInfo id={_id} />
       <PersonalPostList userId={_id} />
     </div>

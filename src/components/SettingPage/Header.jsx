@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Header = ({ options }) => {
   const location = useLocation();
   const nav = useNavigate();
-  console.log(location.pathname);
 
   const renderButtons = options.map((option) => {
     const isCurrent =

@@ -27,7 +27,7 @@ const Footer = ({
     <div className={`flex items-center justify-between mt-1 ${className}`}>
       <div className="flex items-center gap-2">
         <div className="flex items-center ">
-          <FaHeart className={`text-red-500 ${iconClassName}`} />
+          <FaHeart className={`text-rose-500 ${iconClassName}`} />
           <p className={`text-xs ml-1 ${textClassName}`}>{likes.length}</p>
         </div>
         <div className="flex items-center ">
@@ -45,7 +45,7 @@ const Footer = ({
           className=" border-none active:ring-0 active:scale-90"
         >
           <FaHeart
-            className={`text-2xl ${liked ? "text-red-500" : "text-gray-400"}`}
+            className={`text-xl ${liked ? "text-rose-500" : "text-gray-400"}`}
           />
         </Button>
       </div>

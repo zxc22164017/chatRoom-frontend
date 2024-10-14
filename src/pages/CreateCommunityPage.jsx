@@ -69,9 +69,9 @@ const CreateCommunityPage = () => {
   };
 
   return (
-    <div className="bg-white ml-12 md:mx-96 min-w-sm flex flex-grow flex-col mt-14 ">
+    <div className="bg-white ml-12 px-2 xl:mx-96 min-w-sm flex flex-grow flex-col mt-14 ">
       <div>
-        <h1>Set Banner</h1>
+        <h1 className="font-bold">Set Banner</h1>
         {banner && (
           <img
             className="mb-2 w-full h-64 hover:cursor-pointer"
@@ -91,7 +91,7 @@ const CreateCommunityPage = () => {
         </div>
       </div>
       <div>
-        <h1>set icon</h1>
+        <h1 className="font-bold">set icon</h1>
         {icon && (
           <img
             className="mb-2 h-36 w-36 ml-2 rounded-full hover:cursor-pointer"
@@ -131,14 +131,14 @@ const CreateCommunityPage = () => {
         />
       </div>
       <div className="w-full mt-4">
-        <h1>managers:</h1>
+        <h1 className="font-bold">managers:</h1>
         <div className="mx-16 my-2">
           <SearchUsers
             selectUser={selectUsers}
             setSelectUser={setSelectUsers}
           />
         </div>
-        <h1>rules</h1>
+        <h1 className="font-bold">rules</h1>
         <Input
           className="mb-4"
           text={"title"}
@@ -168,9 +168,11 @@ const CreateCommunityPage = () => {
         </Button>
         {renderRules}
       </div>
-      <Button onClick={handleSubmit} primary className="w-1/2 my-10">
-        new community
-      </Button>
+      <div className="w-full flex items-center justify-center">
+        <Button onClick={handleSubmit} primary className=" w-1/2 my-10">
+          new community
+        </Button>
+      </div>
     </div>
   );
 };

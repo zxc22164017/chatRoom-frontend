@@ -6,7 +6,7 @@ import { useSigninUserMutation } from "../store";
 import { useNavigate } from "react-router-dom";
 import LoadingFancy from "../components/Loading/LoadingFancy";
 
-const LoginModel = ({ onChange, onRegister }) => {
+const LoginModel = ({ onChange, onRegister, onForget }) => {
   const [signinUser, results] = useSigninUserMutation();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -49,7 +49,14 @@ const LoginModel = ({ onChange, onRegister }) => {
         Login
       </Button>
 
-      <Button rounded className="w-full my-4">
+      <Button
+        rounded
+        className="w-full my-4"
+        onClick={() => {
+          onChange();
+          onForget();
+        }}
+      >
         Forget Password?
       </Button>
       <div className="mt-10">

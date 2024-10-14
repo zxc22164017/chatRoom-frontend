@@ -38,11 +38,12 @@ const CommunityAndRules = ({ formData, setFormData, editable, community }) => {
             <HiMagnifyingGlass />
           )}
           <Dropdown
-            className="border-none shadow-none bg-white"
+            className="border-none shadow-none bg-white "
             options={options}
-            optClassname={"w-full bg-white"}
+            optClassname={"w-full bg-white "}
             text={"Community"}
             onChange={handleOption}
+            community
             value={selectOption}
           />
         </div>

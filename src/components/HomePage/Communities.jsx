@@ -12,8 +12,8 @@ const Communities = () => {
   const [show, setShow] = useState(false);
   const header = (
     <>
-      <RiGroup2Line className="w-full h-full md:h-8 md:w-8 mx-2 text-violet-500" />
-      <h1 className="hidden md:block text-xl ">Communities</h1>
+      <RiGroup2Line className="w-full h-full lg:h-8 lg:w-8 mx-2 text-violet-500" />
+      <h1 className="hidden lg:block text-xl ">Communities</h1>
     </>
   );
   let communities;
@@ -39,8 +39,8 @@ const Communities = () => {
     <>
       <ExpandablePanel
         header={header}
-        outerClassName={"hidden md:block border-t-2 "}
-        headerClassName={"p-0 hover:bg-topic-300 h-20 md:p-4"}
+        outerClassName={"hidden xl:block border-t-2 "}
+        headerClassName={"p-0 hover:bg-topic-300 h-20 xl:p-4"}
       >
         {communities}
       </ExpandablePanel>
@@ -48,9 +48,9 @@ const Communities = () => {
         onClick={() => {
           setShow(true);
         }}
-        className="flex md:hidden items-center w-full h-20 md:p-4   hover:cursor-pointer hover:bg-topic-300"
+        className="flex xl:hidden items-center w-full h-20 xl:p-4   hover:cursor-pointer hover:bg-topic-300"
       >
-        <RiGroup2Line className=" w-full h-full md:h-8 md:w-8 mx-2 text-violet-500" />
+        <RiGroup2Line className=" w-full h-full xl:h-8 xl:w-8 mx-2 text-violet-500" />
       </div>
       {show && (
         <Drawer setShow={setShow}>

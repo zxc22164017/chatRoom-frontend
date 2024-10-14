@@ -95,7 +95,7 @@ const EditCommunityPage = () => {
   };
 
   return (
-    <div className="bg-white ml-12 md:mx-96 min-w-sm flex flex-grow flex-col mt-14 ">
+    <div className="bg-white ml-12 xl:mx-96 min-w-sm flex flex-grow flex-col mt-14 ">
       <ThumbnailWithPreview
         previewImg={banner}
         setPreviewImg={setBanner}

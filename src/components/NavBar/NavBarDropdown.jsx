@@ -32,10 +32,9 @@ const NavBarDropdown = () => {
     logout(userInfo._id);
     setIsOpen(false);
     localStorage.removeItem("jwt");
-    nav("/");
     setTimeout(() => {
       location.reload();
-    }, 500);
+    }, 200);
   };
 
   useEffect(() => {

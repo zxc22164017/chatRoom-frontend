@@ -28,6 +28,7 @@ const EditComment = ({ comment, setEdit }) => {
       <Textarea
         text={"edit"}
         value={formData}
+        isLoading={patchResult.isLoading}
         onChange={(e) => {
           setFormData(e.target.value);
         }}

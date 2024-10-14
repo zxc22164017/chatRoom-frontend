@@ -47,6 +47,7 @@ const Profile = () => {
     "thumbnail",
     "coverPhoto",
     "identity",
+    "info",
   ];
   let renderInfo;
   if (currentUser) {
@@ -104,7 +105,7 @@ const Profile = () => {
         img={currentUser?.coverPhoto}
         setPreviewImg={setCoverPhoto}
         htmlFor={"coverPhoto"}
-        className="h-64  w-full rounded-sm ml-0 hover:ring-0 active:blur-md active:ring-0 active:scale-100"
+        className="h-64  w-full rounded-sm z-0 ml-0 hover:ring-0 active:blur-md active:ring-0 active:scale-100"
       />
 
       <ThumbnailWithPreview
@@ -112,7 +113,7 @@ const Profile = () => {
         img={currentUser?.thumbnail}
         setPreviewImg={setThumbnail}
         htmlFor={"thumbnail"}
-        className={"h-28 w-28 -mt-14 rounded-full"}
+        className={"h-28 w-28 z-10 -mt-14 rounded-full"}
       />
       <div className="group w-full">
         <Textarea

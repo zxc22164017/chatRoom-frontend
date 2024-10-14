@@ -4,17 +4,22 @@ import { useGetCommentQuery } from "../../store";
 import { useParams } from "react-router-dom";
 import LoadingFancy from "../Loading/LoadingFancy";
 import { useEffect, useState } from "react";
+import Skeleton from "../Loading/Skeleton";
 const CommentSection = () => {
   const [page, setPage] = useState(0);
   const { _id } = useParams();
-  const { data, error, isLoading } = useGetCommentQuery({ postId: _id, page });
+  const { data, error, isLoading, isFetching } = useGetCommentQuery({
+    postId: _id,
+    page,
+  });
   const [noMore, setNoMore] = useState(false);
   function scrollEvent() {
     if (
       window.scrollY + window.innerHeight >=
         document.documentElement.scrollHeight &&
       !noMore &&
-      !isLoading
+      !isLoading &&
+      !isFetching
     )
       setPage(page + 1);
   }
@@ -26,7 +31,7 @@ const CommentSection = () => {
     return () => {
       window.removeEventListener("scroll", scrollEvent);
     };
-  }, [page, isLoading]);
+  }, [page, isLoading, isFetching]);
   useEffect(() => {
     if (error?.status === 404) {
       setNoMore(true);
@@ -54,7 +59,12 @@ const CommentSection = () => {
     });
   }
 
-  return <div className=" mb-2">{content}</div>;
+  return (
+    <div className=" mb-2">
+      {content}
+      {isFetching && <Skeleton times={1} className={"w-full h-20"} />}
+    </div>
+  );
 };
 
 export default CommentSection;

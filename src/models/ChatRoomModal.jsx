@@ -30,7 +30,6 @@ const ChatRoomModal = ({ onChange }) => {
   );
   const handleSelect = (user) => {
     setSelectUser([...selectUser, { _id: user._id, username: user.username }]);
-    setSearch("");
   };
   const handleDelete = (user) => {
     const result = selectUser.filter((item) => {
@@ -107,7 +106,7 @@ const ChatRoomModal = ({ onChange }) => {
     <Modal onChange={onChange}>
       <form
         onSubmit={handlSubmit}
-        className="flex flex-col w-full items-center"
+        className="flex flex-col  w-full items-center "
       >
         <h1 className="font-bold ">New chat room</h1>
         <div className="border-t-2 mt-2 w-full flex items-center border-collapse">
@@ -131,10 +130,8 @@ const ChatRoomModal = ({ onChange }) => {
             placeholder="Search..."
           />
         </div>
-        <div className="h-[340px] flex flex-col flex-grow">
-          {renderSearchResult}
-        </div>
-        <Button primary rounded>
+        <div className="  flex flex-col flex-grow">{renderSearchResult}</div>
+        <Button primary rounded className="absolute bottom-7 w-1/2">
           Chat
         </Button>
       </form>

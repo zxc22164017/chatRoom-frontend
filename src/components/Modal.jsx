@@ -12,9 +12,9 @@ const Modal = ({ onChange, children, actionBar, className }) => {
 
   return ReactDOM.createPortal(
     <div>
-      <div className="fixed inset-0 bg-black opacity-50"></div>
+      <div className="fixed inset-0 z-40  bg-black opacity-50"></div>
       <div
-        className={`fixed z-50 inset-y-10 inset-x-10 lg:inset-x-1/3 p-10 rounded-md bg-white ${className}`}
+        className={`fixed z-50 inset-y-10 inset-x-10 xl:inset-x-1/3 p-10 rounded-md bg-white ${className}`}
       >
         <div className="absolute top-2 left-2 rounded-full hover:ring-2 hover:cursor-pointer ">
           <GrClose

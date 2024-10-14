@@ -22,15 +22,27 @@ const chatRoomApi = createApi({
   endpoints(builder) {
     return {
       getRooms: builder.query({
-        providesTags: (result, error, userId) => {
+        providesTags: (result, error, { userId }) => {
           return [{ type: "userRooms", id: userId }];
         },
-        query: (userId) => {
+        query: ({ userId, page }) => {
           return {
             url: "/",
             method: "GET",
-            params: { userId },
+            params: { userId, page },
           };
+        },
+        serializeQueryArgs({ endpointName }) {
+          return endpointName;
+        },
+        merge: (currentCacheData, newItems, { arg }) => {
+          if (arg.page === 0) {
+            return newItems;
+          }
+          currentCacheData.push(...newItems);
+        },
+        forceRefetch({ currentArg, previousArg }) {
+          return currentArg !== previousArg;
         },
       }),
       getSingleRoom: builder.query({
@@ -75,6 +87,18 @@ const chatRoomApi = createApi({
           };
         },
       }),
+      leaveRoom: builder.mutation({
+        invalidatesTags: (result, error, { userId }) => {
+          return [{ type: "userRooms", id: userId }];
+        },
+        query: ({ roomId, userId }) => {
+          return {
+            url: `/${roomId}`,
+            params: { userId },
+            method: "DELETE",
+          };
+        },
+      }),
     };
   },
 });
@@ -91,5 +115,6 @@ export const {
   useGetSingleRoomQuery,
   useAddRoomMutation,
   usePatchRoomMutation,
+  useLeaveRoomMutation,
 } = chatRoomApi;
 export { chatRoomApi };

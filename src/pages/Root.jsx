@@ -1,21 +1,47 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useDetectLogin } from "../hooks/useDetectLogin";
 import NavBar from "../components/NavBar/NavBar";
 import BackToTop from "../components/BackToTop";
+import { useEffect, useRef, useState } from "react";
+
 function Root() {
   let content;
+  const nav = useNavigate();
+  const jwt = useDetectLogin();
+  const [show, setShow] = useState(false);
+  const div = useRef();
 
-  if (useDetectLogin()) {
+  useEffect(() => {
+    if (!jwt) {
+      nav("/");
+    }
+  }, [jwt]);
+  const showScrollToBack = () => {
+    if (window.scrollY > 500) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", showScrollToBack);
+    return () => {
+      window.removeEventListener("scroll", showScrollToBack);
+    };
+  }, []);
+
+  if (jwt) {
     content = (
-      <div className=" flex flex-col min-h-screen bg-topic-500">
+      <div ref={div} className=" flex flex-col min-h-screen bg-topic-500">
         <NavBar />
         <Outlet />
-        <BackToTop />
+        {show && <BackToTop />}
       </div>
     );
   } else {
     content = (
-      <div className="  min-h-screen bg-topic-500">
+      <div className="relative max-h-svh bg-topic-500 overflow-hidden">
         <Outlet />
       </div>
     );

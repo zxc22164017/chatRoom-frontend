@@ -50,6 +50,18 @@ const userApi = createApi({
           };
         },
       }),
+      forgetPassword: builder.mutation({
+        query: (formData) => {
+          return {
+            url: "/forget",
+            method: "PATCH",
+            body: {
+              email: formData.email,
+              password: formData.password,
+            },
+          };
+        },
+      }),
       logout: builder.mutation({
         query: (_id) => {
           return {
@@ -175,6 +187,7 @@ export const {
   useSearchUsersQuery,
   useGetProfileInfoQuery,
   usePatchUserMutation,
+  useForgetPasswordMutation,
 } = userApi;
 
 export { userApi };

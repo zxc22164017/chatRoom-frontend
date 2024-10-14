@@ -68,6 +68,10 @@ const MainContent = ({}) => {
   return (
     <div className="bg-white ml-12 md:mx-96 min-w-sm flex flex-grow flex-col mt-14">
       {content}
+      {userResult.isFetching ||
+        (postResult.isFetching && (
+          <Skeleton times={1} className={"w-full h-20"} />
+        ))}
     </div>
   );
 };

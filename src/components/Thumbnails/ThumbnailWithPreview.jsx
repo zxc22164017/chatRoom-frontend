@@ -16,7 +16,7 @@ const ThumbnailWithPreview = ({
             setPreviewImg(null);
           }}
           src={URL.createObjectURL(previewImg)}
-          className={className}
+          className={` ${className}`}
         />
       ) : (
         <Thumbnail

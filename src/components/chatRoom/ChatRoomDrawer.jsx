@@ -5,22 +5,28 @@ import {
   useGetSingleRoomQuery,
   useUploadImgMutation,
   usePatchRoomMutation,
+  useLeaveRoomMutation,
 } from "../../store";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import Button from "../Button";
 import Input from "../Input";
 import ThumbnailWithPreview from "../Thumbnails/ThumbnailWithPreview";
+import DoubleConfirmModal from "../../models/DoubleConfirmModal";
 const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
   const nav = useNavigate();
   const { _id } = useParams();
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
   const [img, setImg] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const { data, error, isLoading } = useGetSingleRoomQuery(_id);
   const [patchRoom, patchResult] = usePatchRoomMutation();
   const [uploadImg, result] = useUploadImgMutation();
   const currentUser = useGetLoginInfo();
+  const [leaveRoom, leaveResult] = useLeaveRoomMutation({
+    fixedCacheKey: "leaveRoom",
+  });
 
   const handleSave = async () => {
     let key;
@@ -34,6 +40,9 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
 
     setEdit(false);
   };
+  const handleLeave = () => {
+    leaveRoom({ roomId: _id, userId: currentUser._id });
+  };
   useEffect(() => {
     if (data?.name) {
       setName(data.name);
@@ -44,6 +53,13 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
       window.location.reload();
     }
   }, [patchResult]);
+  useEffect(() => {
+    if (leaveResult.isSuccess) {
+      setShow(false);
+      nav(`/chat/${currentUser._id}`);
+      leaveResult.reset();
+    }
+  }, [leaveResult]);
 
   let content;
   if (data) {
@@ -121,10 +137,23 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
             >
               Add users
             </Button>
-            <Button danger rounded>
+            <Button
+              onClick={() => {
+                setShowModal(true);
+              }}
+              danger
+              rounded
+            >
               Leave Chatroom
             </Button>
           </div>
+          {showModal && (
+            <DoubleConfirmModal
+              onChange={() => setShowModal(false)}
+              handleDelete={handleLeave}
+              className="border-2 shadow-lg"
+            />
+          )}
         </>
       );
     } else {

@@ -24,7 +24,7 @@ const Post = ({ post }) => {
           {community.name} • {time}
         </p>
       </div>
-      <h1 className="text-2xl">{post.title}</h1>
+      <h1 className="text-2xl font-semibold">{post.title}</h1>
       <p className="truncate overflow-hidden text-nowrap mt-2 mb-1 text-gray-600">
         {post.content}
       </p>
