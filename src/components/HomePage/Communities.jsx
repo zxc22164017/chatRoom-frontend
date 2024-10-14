@@ -3,7 +3,7 @@ import { useGetCommunitiesQuery } from "../../store";
 import { RiGroup2Line } from "react-icons/ri";
 import ExpandablePanel from "../ExpandablePanel";
 import Thumbnail from "../Thumbnails/Thumbnail";
-import Drawer from "../drawer";
+import Drawer from "../Drawer.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Communities = () => {

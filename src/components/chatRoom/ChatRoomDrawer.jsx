@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Drawer from "../drawer";
+import Drawer from "../Drawer.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSingleRoomQuery,
