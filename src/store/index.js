@@ -12,7 +12,7 @@ import {
   changeSearchType,
   changeSearchInput,
   changeSkipSearch,
-} from "./slices/SearchTypeSlice";
+} from "./slices/searchTypeSlice.js";
 
 const store = configureStore({
   reducer: {
