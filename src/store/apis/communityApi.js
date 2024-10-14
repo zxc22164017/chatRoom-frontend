@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { useDetectLogin } from "../../hooks/useDetectLogin";
+import { SERVER } from "../../config";
 
 const CommunityApi = createApi({
   reducerPath: "community",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/community",
+    baseUrl: `${SERVER}/community`,
     fetchFn: async (...args) => {
       // await pause(10000);
       return fetch(...args);

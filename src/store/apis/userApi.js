@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 import { useDetectLogin } from "../../hooks/useDetectLogin";
+import { SERVER } from "../../config";
 
 const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://127.0.0.1:8080/user",
+    baseUrl: `${SERVER}/user`,
     fetchFn: async (...args) => {
       // await pause(10000);
       return fetch(...args);

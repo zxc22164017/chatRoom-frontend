@@ -1,11 +1,9 @@
 import { io } from "socket.io-client";
 import { useDetectLogin } from "../../hooks/useDetectLogin";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import useGetLoginInfo from "../../hooks/useGetLoginInfo";
+
 import { userApi } from "./userApi";
-import { store } from "..";
-import { useSelector } from "react-redux";
-import { chatRoomApi } from "./chatRoomApi";
+import { SERVER } from "../../config";
 
 export const createSocket = () => {
   let socket;
@@ -13,7 +11,7 @@ export const createSocket = () => {
   return async () => {
     if (!socket) {
       const token = useDetectLogin();
-      socket = io(`http://127.0.0.1:8080`, {
+      socket = io(`${SERVER}`, {
         extraHeaders: {
           authorization: `Bearer ${token}`,
         },
@@ -43,7 +41,7 @@ const getSocket = createSocket();
 const socketApi = createApi({
   reducerPath: "socketApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://127.0.0.1:8080/chat",
+    baseUrl: `${SERVER}/chat`,
     prepareHeaders: (headers) => {
       const token = useDetectLogin();
 

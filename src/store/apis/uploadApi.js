@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { useDetectLogin } from "../../hooks/useDetectLogin";
 import axios from "axios";
-import { userApi } from "./userApi";
+import { SERVER } from "../../config";
 
 const uploadApi = createApi({
   reducerPath: "uploadApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://127.0.0.1:8080/upload",
+    baseUrl: `${SERVER}/upload`,
     prepareHeaders: (headers) => {
       const token = useDetectLogin();
 
