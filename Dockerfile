@@ -11,6 +11,6 @@ FROM nginx:1.27.2-alpine
 
 WORKDIR /user/share/nginx/html
 RUN rm -rf *
-COPY --from=build /app/dist .
+COPY --from=dist /app/dist .
 EXPOSE 80
 ENTRYPOINT [ "nginx","-g","daemon off;" ]
