@@ -7,10 +7,10 @@ COPY . .
 RUN npm run build
 
 
-FROM nginx:1.23-alpine
+FROM nginx:1.27.2-alpine
 
 WORKDIR /user/share/nginx/html
 RUN rm -rf *
 COPY --from=build /app/dist .
 EXPOSE 80
-ENTRYPOINT [ "nginx","-g","deamon off:" ]
+ENTRYPOINT [ "nginx","-g","deamon off;" ]
