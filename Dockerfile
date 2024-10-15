@@ -15,7 +15,6 @@ FROM nginx:1.27.2-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 
-RUN ls -l /app/build
 
 COPY --from=build /app/build .
 EXPOSE 80
