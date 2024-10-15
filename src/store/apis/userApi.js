@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { useDetectLogin } from "../../hooks/useDetectLogin";
 import { SERVER } from "../../config";
+console.log(SERVER);
 
 const userApi = createApi({
   reducerPath: "userApi",
