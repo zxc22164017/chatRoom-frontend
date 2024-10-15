@@ -7,7 +7,7 @@ COPY . .
 RUN echo "Files copied:" && ls -l /app  # List all files
 RUN npm run build && echo "Build succeeded" || echo "Build failed"
 
-RUN ls -l /app/dist
+RUN echo "Listing /app after build:" && ls -l /app && echo "Done listing."
 
 
 FROM nginx:1.27.2-alpine
