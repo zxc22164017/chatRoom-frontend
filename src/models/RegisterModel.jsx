@@ -52,7 +52,9 @@ const RegisterModel = ({ onChange, onLogin }) => {
     signupUser({ formData });
   };
   useEffect(() => {
-    if (results.error) {
+    if (results.error?.originalStatus === 400) {
+      setError(results.error.data);
+    } else if (results.error) {
       setError("internal server error");
     }
   }, [results.error]);
