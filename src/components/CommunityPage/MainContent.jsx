@@ -49,7 +49,7 @@ const MainContent = () => {
           <Thumbnail
             image={data?.banner}
             className={
-              "bg-gray-700 h-64  rounded-sm ml-0 ring-0 hover:cursor-auto"
+              "bg-gray-700 h-48 md:h-64  rounded-sm ml-0 ring-0 hover:cursor-auto"
             }
           />
           <Thumbnail
@@ -69,7 +69,7 @@ const MainContent = () => {
             className="h-10 w-18 flex items-center text-gray-400 border-none active:ring-0 mr-4 hover:text-blue-400 transition-all duration-100"
           >
             <FaInfoCircle className="h-5 w-5 pr-1" />
-            <p className="text-sm  md:text-lg ">rules</p>
+            <p className="hidden md:block  text-lg ">rules</p>
           </Button>
           {show && (
             <RuleDrawer
