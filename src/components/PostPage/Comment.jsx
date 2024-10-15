@@ -27,7 +27,7 @@ const Comment = ({ comment, setPage, index, setNoMore }) => {
   };
 
   return (
-    <div className="p-2 border-b-2 relative group/outer">
+    <div className="md:p-2 border-b-2 relative group/outer">
       <div className="flex items-center justify-between">
         <UserTemplate
           onClick={() => {
@@ -53,7 +53,7 @@ const Comment = ({ comment, setPage, index, setNoMore }) => {
         <EditComment setEdit={setEdit} comment={comment} />
       ) : (
         <>
-          <p className="ml-4 ">{comment.content}</p>
+          <p className="ml-4 mb-4">{comment.content}</p>
           {comment.image && (
             <Thumbnail
               className={"rounded-none max-w-md"}
@@ -68,7 +68,7 @@ const Comment = ({ comment, setPage, index, setNoMore }) => {
               className=" border-none active:ring-0 active:scale-90"
             >
               <FaHeart
-                className={`text-2xl ${
+                className={`text-lg md:text-2xl ${
                   liked ? "text-red-500" : "text-gray-400"
                 }`}
               />

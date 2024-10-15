@@ -55,12 +55,12 @@ const MainContent = () => {
           <Thumbnail
             image={data?.icon}
             className={
-              "absolute w-36 h-36 -bottom-[72px] left-4 hover:cursor-auto"
+              "absolute w-20 h-20 md:w-36 md:h-36 -bottom-10 md:-bottom-[72px] left-4 hover:cursor-auto"
             }
           />
         </div>
         <div className="flex h-20 mb-4 items-center justify-between">
-          <h1 className="text-4xl ml-40 font-bold">{data.name}</h1>
+          <h1 className="text-lg md:text-4xl ml-40 font-bold">{data.name}</h1>
           <Button
             type="button"
             onClick={() => {
@@ -69,7 +69,7 @@ const MainContent = () => {
             className="h-10 w-18 flex items-center text-gray-400 border-none active:ring-0 mr-4 hover:text-blue-400 transition-all duration-100"
           >
             <FaInfoCircle className="h-5 w-5 pr-1" />
-            <p className="text-lg ">rules</p>
+            <p className="text-sm  md:text-lg ">rules</p>
           </Button>
           {show && (
             <RuleDrawer

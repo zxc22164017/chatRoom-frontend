@@ -13,7 +13,7 @@ const Header = ({ community }) => {
           nav(-1);
         }}
         rounded
-        className="h-8 p-1 -ml-4 w-8 bg-gray-200 border-none"
+        className="h-8 p-1 md:-ml-4 w-8 bg-gray-200 border-none"
       >
         <FaArrowLeft className="h-full w-full" />
       </Button>
