@@ -21,7 +21,7 @@ const SideBar = ({}) => {
       userId: currentUser._id,
       page,
     },
-    { skip: !currentUser }
+    { skip: currentUser === undefined }
   );
   const handleScroll = (e) => {
     if (e.target.scrollHeight > e.target.clientHeight) {
