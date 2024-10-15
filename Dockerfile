@@ -9,7 +9,7 @@ RUN npm run build
 
 FROM nginx:1.27.2-alpine
 
-WORKDIR /user/share/nginx/html
+WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=build /app/dist .
 EXPOSE 80
