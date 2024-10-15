@@ -7,7 +7,7 @@ import Button from "../Button";
 
 const SideBar = ({}) => {
   const nav = useNavigate();
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {

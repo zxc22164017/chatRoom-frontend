@@ -10,19 +10,21 @@ import { useLeaveRoomMutation } from "../../store";
 
 const SideBar = ({}) => {
   const [showModal, setShowModal] = useState(false);
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [page, setPage] = useState(0);
   const [noMore, setNoMore] = useState(false);
   const [, leaveResult] = useLeaveRoomMutation({
     fixedCacheKey: "leaveRoom",
   });
+  const [skip, setSkip] = useState(true);
   const { data, error, isLoading } = useGetRoomsQuery(
     {
-      userId: currentUser._id,
+      userId: currentUser?._id,
       page,
     },
-    { skip: !currentUser }
+    { skip: skip }
   );
+
   const handleScroll = (e) => {
     if (e.target.scrollHeight > e.target.clientHeight) {
       if (
@@ -33,6 +35,11 @@ const SideBar = ({}) => {
       }
     }
   };
+  useEffect(() => {
+    if (currentUser) {
+      setSkip(false);
+    }
+  }, [currentUser]);
   useEffect(() => {
     if (error) {
       if (error.status === 404) {

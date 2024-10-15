@@ -9,7 +9,7 @@ import { useDeleteCommentMutation } from "../../store";
 import DoubleConfirmModal from "../../models/DoubleConfirmModal";
 
 const DropdownComment = ({ className, author, setEdit, comment }) => {
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [deleteComment, commentResult] = useDeleteCommentMutation();
 
   const nav = useNavigate();

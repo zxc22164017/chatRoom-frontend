@@ -12,28 +12,12 @@ import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { useNavigate } from "react-router-dom";
 
 const PersonalInfo = ({ id }) => {
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const { data, error, isLoading } = useGetProfileInfoQuery(id);
   const nav = useNavigate();
   const dateConvert = useConvertToDate;
   const filterObj = useFilterObject;
   const check = useCheckIsCurrentUser(id);
-  // const [upload, result] = useUploadImgMutation();
-
-  // const handleThumbnail = (e) => {
-  //   upload({
-  //     file: e.target.files[0],
-  //     type: "userThumbnail",
-  //     id: currentUser._id,
-  //   });
-  // };
-  // const handleCoverPhoto = (e) => {
-  //   upload({
-  //     file: e.target.files[0],
-  //     type: "userCoverPhoto",
-  //     id: currentUser._id,
-  //   });
-  // };
 
   let content;
 

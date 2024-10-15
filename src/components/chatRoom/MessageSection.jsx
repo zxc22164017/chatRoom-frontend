@@ -10,7 +10,7 @@ const MessageSection = ({ sendMessageResult }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const roomId = useParams()._id;
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
 
   const { data, isLoading } = useGetMessageQuery(roomId);
   const chatRoomElement = useRef();

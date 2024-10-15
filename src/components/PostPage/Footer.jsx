@@ -14,7 +14,7 @@ const Footer = ({
   textClassName,
 }) => {
   const { _id } = useParams();
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [likePost, result] = useLikePostMutation();
 
   const [liked, setLiked] = useState(likes.includes(currentUser._id));

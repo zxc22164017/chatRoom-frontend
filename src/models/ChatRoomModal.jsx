@@ -6,9 +6,10 @@ import { useAddRoomMutation, useSearchUsersQuery } from "../store";
 import useDeBounce from "../hooks/useDeBounce";
 import UserTemplate from "../components/UserTemplate";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
+import LoadingDot from "../components/Loading/LoadingDot";
 
 const ChatRoomModal = ({ onChange }) => {
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [search, setSearch] = useState("");
   const [skipSearch, setSkipSearch] = useState(true);
   const result = useSearchUsersQuery(

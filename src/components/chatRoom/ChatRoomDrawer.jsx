@@ -23,7 +23,7 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
   const { data, error, isLoading } = useGetSingleRoomQuery(_id);
   const [patchRoom, patchResult] = usePatchRoomMutation();
   const [uploadImg, result] = useUploadImgMutation();
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [leaveRoom, leaveResult] = useLeaveRoomMutation({
     fixedCacheKey: "leaveRoom",
   });

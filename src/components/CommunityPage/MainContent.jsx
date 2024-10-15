@@ -11,7 +11,7 @@ import PostSection from "./PostSection";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 
 const MainContent = () => {
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const nav = useNavigate();
   const { name } = useParams();
   const { data, error, isLoading } = useGetSingleCommunityQuery(name);

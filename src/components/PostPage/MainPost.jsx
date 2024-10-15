@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSinglePostQuery,
@@ -35,8 +35,12 @@ const MainPost = () => {
       formData: formData,
       image: key,
     });
-    window.location.reload();
   };
+  useEffect(() => {
+    if (result.isSuccess) {
+      window.location.reload();
+    }
+  }, [result]);
 
   if (isLoading) {
     content = (

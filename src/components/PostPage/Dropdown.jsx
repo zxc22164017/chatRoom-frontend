@@ -9,7 +9,7 @@ import DoubleConfirmModal from "../../models/DoubleConfirmModal";
 import { useDeletePostMutation } from "../../store";
 
 const Dropdown = ({ className, author, post }) => {
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const nav = useNavigate();
   const divElement = useRef();
   const [isOpen, setIsOpen] = useState(false);
