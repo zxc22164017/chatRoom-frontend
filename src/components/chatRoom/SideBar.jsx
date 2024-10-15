@@ -24,7 +24,6 @@ const SideBar = ({}) => {
     },
     { skip: skip }
   );
-  console.log(currentUser, skip);
 
   const handleScroll = (e) => {
     if (e.target.scrollHeight > e.target.clientHeight) {
