@@ -16,10 +16,13 @@ const SideBar = ({}) => {
   const [, leaveResult] = useLeaveRoomMutation({
     fixedCacheKey: "leaveRoom",
   });
-  const { data, error, isLoading } = useGetRoomsQuery({
-    userId: currentUser?._id,
-    page,
-  });
+  const { data, error, isLoading } = useGetRoomsQuery(
+    {
+      userId: currentUser._id,
+      page,
+    },
+    { skip: !currentUser }
+  );
   const handleScroll = (e) => {
     if (e.target.scrollHeight > e.target.clientHeight) {
       if (
