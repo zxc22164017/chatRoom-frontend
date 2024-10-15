@@ -136,7 +136,7 @@ const Profile = () => {
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
       <Button
-        disabled={formData.password === ""}
+        disabled={formData.password === "" || result.isLoading}
         rounded
         primary={formData.password !== ""}
         onClick={handleSubmit}
