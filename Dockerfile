@@ -4,9 +4,10 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
-RUN npm run build
+RUN echo "Files copied:" && ls -l /app  # List all files
+RUN npm run build && echo "Build succeeded" || echo "Build failed"
 
-RUN ls -l /app
+RUN ls -l /app/dist || ls -l /app/build
 
 
 FROM nginx:1.27.2-alpine
@@ -15,6 +16,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 
 RUN ls -l /app/build
+
 COPY --from=build /app/build .
 EXPOSE 80
 ENTRYPOINT [ "nginx","-g","daemon off;" ]
