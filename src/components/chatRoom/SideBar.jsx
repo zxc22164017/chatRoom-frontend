@@ -48,7 +48,6 @@ const SideBar = ({}) => {
   }, [leaveResult]);
 
   let content;
-  console.log(data);
 
   if (isLoading) {
     content = <Skeleton />;

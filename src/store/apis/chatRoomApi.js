@@ -26,7 +26,6 @@ const chatRoomApi = createApi({
           return [{ type: "userRooms", id: userId }];
         },
         query: ({ userId, page }) => {
-          console.log(userId, page);
           return {
             url: "/",
             method: "GET",
