@@ -19,7 +19,7 @@ const SideBar = ({}) => {
   const [skip, setSkip] = useState(true);
   const { data, error, isLoading } = useGetRoomsQuery(
     {
-      userId: currentUser._id,
+      userId: currentUser?._id,
       page,
     },
     { skip: skip }
