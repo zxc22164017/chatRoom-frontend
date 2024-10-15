@@ -60,7 +60,7 @@ const CommentSection = () => {
   }
 
   return (
-    <div className=" mb-2">
+    <div className=" mb-4">
       {content}
       {isFetching && <Skeleton times={1} className={"w-full h-20"} />}
     </div>

@@ -58,15 +58,25 @@ const MainContent = ({}) => {
   }
 
   if (userResult.isError || postResult.isError) {
-    content = (
-      <div>
-        <Alert error={"Internal server error"} />
-      </div>
-    );
+    if (userResult.error?.status === 404 || postResult.error?.status === 404) {
+      content = (
+        <div className="w-full h-full flex items-center justify-center p-10">
+          <h1 className="text-4xl font-extrabold  text-slate-500">
+            No Search Result
+          </h1>
+        </div>
+      );
+    } else {
+      content = (
+        <div className="flex items-center justify-center">
+          <Alert error={"Internal server error"} />
+        </div>
+      );
+    }
   }
 
   return (
-    <div className="bg-white ml-12 md:mx-96 min-w-sm flex flex-grow flex-col mt-14">
+    <div className="bg-white ml-12 xl:mx-96 min-w-sm flex flex-grow flex-col mt-14">
       {content}
       {userResult.isFetching ||
         (postResult.isFetching && (
