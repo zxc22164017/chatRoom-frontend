@@ -13,7 +13,7 @@ const userApi = createApi({
     },
     prepareHeaders: (headers) => {
       const token = useDetectLogin();
-
+      console.log(token);
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
         return headers;
