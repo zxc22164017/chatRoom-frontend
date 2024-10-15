@@ -1,13 +1,11 @@
 import React from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
+import LoadingFancy from "../components/Loading/LoadingFancy";
 
-const DoubleConfirmModal = ({ onChange, handleDelete, ...rest }) => {
-  return (
-    <Modal
-      className={`inset-y-60 sm:inset-x-40 md:inset-x-60 ${rest.className}`}
-      onChange={onChange}
-    >
+const DoubleConfirmModal = ({ onChange, isLoading, handleDelete, ...rest }) => {
+  let content = (
+    <>
       <h1 className="text-3xl font-extrabold text-red-500">Are You Sure?</h1>
       <p>
         This action is not{" "}
@@ -21,6 +19,21 @@ const DoubleConfirmModal = ({ onChange, handleDelete, ...rest }) => {
           Yes
         </Button>
       </div>
+    </>
+  );
+  if (isLoading) {
+    content = (
+      <div className="w-full h-full flex justify-center items-center">
+        <LoadingFancy />
+      </div>
+    );
+  }
+  return (
+    <Modal
+      className={`inset-y-60 sm:inset-x-40 md:inset-x-60 ${rest.className}`}
+      onChange={onChange}
+    >
+      {content}
     </Modal>
   );
 };

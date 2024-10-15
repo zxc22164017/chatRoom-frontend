@@ -71,6 +71,7 @@ const DropdownComment = ({ className, author, setEdit, comment }) => {
     <div ref={divElement} className={`relative mr-4 ${className}`}>
       {show && (
         <DoubleConfirmModal
+          isLoading={commentResult.isLoading}
           onChange={() => {
             setShow(false);
           }}

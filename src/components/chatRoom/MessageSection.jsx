@@ -39,7 +39,11 @@ const MessageSection = ({ sendMessageResult }) => {
   }, [result.error]);
   let messages;
   if (isLoading) {
-    messages = <LoadingFancy />;
+    messages = (
+      <div className="w-full h-full flex items-center justify-center">
+        <LoadingFancy />
+      </div>
+    );
   } else if (data) {
     messages = data.map((message, index) => {
       if (message.sender._id === currentUser._id) {

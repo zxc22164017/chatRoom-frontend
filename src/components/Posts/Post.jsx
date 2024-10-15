@@ -19,7 +19,7 @@ const Post = ({ post }) => {
       }}
     >
       <div className="flex mt-1 text-gray-500">
-        <Thumbnail className={"w-6 h-6"} />
+        <Thumbnail className={"w-6 h-6"} image={community.icon} />
         <p className="text-sm mx-2 ">
           {community.name} • {time}
         </p>

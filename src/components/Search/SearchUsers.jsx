@@ -4,7 +4,7 @@ import Input from "../Input";
 import useDeBounce from "../../hooks/useDeBounce";
 import { useSearchUsersQuery } from "../../store";
 import UserTemplate from "../UserTemplate";
-
+import LoadingDot from "../Loading/LoadingDot";
 export function SearchUsers({ setSelectUser, selectUser, existUsers }) {
   const [search, setSearch] = useState("");
   const [skipSearch, setSkipSearch] = useState(true);
@@ -108,7 +108,7 @@ export function SearchUsers({ setSelectUser, selectUser, existUsers }) {
         />
       </div>
       <div className="h-[340px] flex flex-col flex-grow">
-        {renderSearchResult}
+        {result.isFetching ? <LoadingDot /> : renderSearchResult}
       </div>
     </>
   );

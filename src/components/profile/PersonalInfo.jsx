@@ -18,22 +18,6 @@ const PersonalInfo = ({ id }) => {
   const dateConvert = useConvertToDate;
   const filterObj = useFilterObject;
   const check = useCheckIsCurrentUser(id);
-  // const [upload, result] = useUploadImgMutation();
-
-  // const handleThumbnail = (e) => {
-  //   upload({
-  //     file: e.target.files[0],
-  //     type: "userThumbnail",
-  //     id: currentUser._id,
-  //   });
-  // };
-  // const handleCoverPhoto = (e) => {
-  //   upload({
-  //     file: e.target.files[0],
-  //     type: "userCoverPhoto",
-  //     id: currentUser._id,
-  //   });
-  // };
 
   let content;
 

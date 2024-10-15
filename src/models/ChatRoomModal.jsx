@@ -6,6 +6,7 @@ import { useAddRoomMutation, useSearchUsersQuery } from "../store";
 import useDeBounce from "../hooks/useDeBounce";
 import UserTemplate from "../components/UserTemplate";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
+import LoadingDot from "../components/Loading/LoadingDot";
 
 const ChatRoomModal = ({ onChange }) => {
   const currentUser = useGetLoginInfo();
@@ -130,7 +131,9 @@ const ChatRoomModal = ({ onChange }) => {
             placeholder="Search..."
           />
         </div>
-        <div className="  flex flex-col flex-grow">{renderSearchResult}</div>
+        <div className="  flex flex-col flex-grow">
+          {result.isFetching ? <LoadingDot /> : renderSearchResult}
+        </div>
         <Button primary rounded className="absolute bottom-7 w-1/2">
           Chat
         </Button>

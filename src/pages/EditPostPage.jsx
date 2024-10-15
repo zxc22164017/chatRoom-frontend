@@ -32,7 +32,12 @@ const EditPostPage = () => {
   const handleSubmitPost = async (e) => {
     e.preventDefault();
 
-    const key = (await uploadImg({ file: img })).data;
+    let key;
+    if (img) {
+      key = (await uploadImg({ file: img })).data;
+    } else {
+      key = data.image;
+    }
     patchPost({ formData, postId: _id, image: key });
   };
   useEffect(() => {

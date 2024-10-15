@@ -40,7 +40,9 @@ const CreatePostPage = () => {
   return (
     <div className=" bg-white flex flex-col items-center justify-between flex-grow mt-14  ">
       {result.isLoading || finalResult.isLoading ? (
-        <LoadingFancy />
+        <div className="flex flex-col flex-grow items-center justify-center">
+          <LoadingFancy />
+        </div>
       ) : (
         <form onSubmit={handleSubmitPost} className=" w-full md:w-[720px] ">
           {result.isError &&

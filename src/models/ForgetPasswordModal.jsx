@@ -36,7 +36,11 @@ const ForgetPasswordModal = ({ onChange }) => {
         setError("Internal server error");
       }
     } else if (result.isLoading) {
-      content = <LoadingFancy />;
+      content = (
+        <div className="flex flex-col flex-grow items-center justify-center">
+          <LoadingFancy />
+        </div>
+      );
     } else if (result.isSuccess) {
       onChange();
     }
