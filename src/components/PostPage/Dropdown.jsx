@@ -74,6 +74,7 @@ const Dropdown = ({ className, author, post }) => {
           onChange={() => {
             setShow(false);
           }}
+          isLoading={postResult.isLoading}
           handleDelete={handleDelete}
         />
       )}

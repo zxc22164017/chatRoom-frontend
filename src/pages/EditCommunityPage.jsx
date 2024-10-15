@@ -168,7 +168,12 @@ const EditCommunityPage = () => {
         </Button>
         {renderRules}
       </div>
-      <Button onClick={handleSubmit} primary className="w-1/2 my-10">
+      <Button
+        onClick={handleSubmit}
+        disabled={patchResult.isLoading}
+        primary
+        className="w-1/2 my-10"
+      >
         Save
       </Button>
     </div>

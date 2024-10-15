@@ -111,7 +111,13 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
           </div>
           <div className="mt-6">
             {edit ? (
-              <Button primary rounded className="my-2" onClick={handleSave}>
+              <Button
+                primary
+                rounded
+                className="my-2"
+                onClick={handleSave}
+                disabled={result.isLoading}
+              >
                 save
               </Button>
             ) : (
@@ -119,6 +125,7 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
                 primary
                 rounded
                 className="my-2"
+                disabled={result.isLoading}
                 onClick={() => {
                   setEdit(true);
                 }}
@@ -150,6 +157,7 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
           {showModal && (
             <DoubleConfirmModal
               onChange={() => setShowModal(false)}
+              isLoading={leaveResult.isLoading}
               handleDelete={handleLeave}
               className="border-2 shadow-lg"
             />

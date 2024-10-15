@@ -46,7 +46,7 @@ const SideBarItem = ({ object, currentUser }) => {
       ></UserTemplate>
       <Thumbnail
         image={img}
-        className={"h-10 w-10 m-2 block lg:hidden"}
+        className={"h-10 w-10 m-2 block lg:hidden hover:cursor-pointer"}
         onClick={handleClick}
       />
     </>

@@ -131,7 +131,9 @@ const ChatRoomModal = ({ onChange }) => {
             placeholder="Search..."
           />
         </div>
-        <div className="  flex flex-col flex-grow">{renderSearchResult}</div>
+        <div className="  flex flex-col flex-grow">
+          {result.isFetching ? <LoadingDot /> : renderSearchResult}
+        </div>
         <Button primary rounded className="absolute bottom-7 w-1/2">
           Chat
         </Button>
