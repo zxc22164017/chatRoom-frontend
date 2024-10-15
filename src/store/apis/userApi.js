@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { useDetectLogin } from "../../hooks/useDetectLogin";
 import { SERVER } from "../../config";
-console.log(SERVER);
 
 const userApi = createApi({
   reducerPath: "userApi",
@@ -13,7 +12,6 @@ const userApi = createApi({
     },
     prepareHeaders: (headers) => {
       const token = useDetectLogin();
-      console.log(token);
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
         return headers;
@@ -76,6 +74,7 @@ const userApi = createApi({
       }),
       getUser: builder.query({
         providesTags: (result, error) => {
+          console.log(result);
           return [{ type: "user", id: result._id }];
         },
         query: () => {
