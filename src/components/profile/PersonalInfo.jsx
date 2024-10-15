@@ -12,7 +12,7 @@ import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { useNavigate } from "react-router-dom";
 
 const PersonalInfo = ({ id }) => {
-  const currentUser = useGetLoginInfo();
+  const currentUser = useGetLoginInfo().then((res) => res);
   const { data, error, isLoading } = useGetProfileInfoQuery(id);
   const nav = useNavigate();
   const dateConvert = useConvertToDate;

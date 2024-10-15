@@ -1,10 +1,13 @@
 import { useGetUserQuery } from "../store";
 
 export default function useGetLoginInfo() {
-  // const userInfo = useSelector((state) => {
-  //   return state.user.userInfo;
-  // });
+  const { data, isSuccess } = useGetUserQuery();
 
-  const { data } = useGetUserQuery();
-  return data;
+  return new Promise((resolve, reject) => {
+    if (isSuccess) {
+      resolve(data);
+    } else {
+      reject();
+    }
+  });
 }

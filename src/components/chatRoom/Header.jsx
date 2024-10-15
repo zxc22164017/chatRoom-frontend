@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ setShow }) => {
   const nav = useNavigate();
   const { _id } = useParams();
-  const currentUser = useGetLoginInfo();
+  const currentUser = useGetLoginInfo().then((res) => res);
   let content;
   let userToDisplay;
   const { data, error, isLoading } = useGetSingleRoomQuery(_id);

@@ -15,7 +15,7 @@ import ThumbnailWithPreview from "../components/Thumbnails/ThumbnailWithPreview"
 const EditCommunityPage = () => {
   const { communityName } = useParams();
   const nav = useNavigate();
-  const currentUser = useGetLoginInfo();
+  const currentUser = useGetLoginInfo().then((res) => res);
   const [patchCommunity, patchResult] = usePatchCommunityMutation();
   const [uploadImg, uploadResult] = useUploadImgMutation();
   const { data } = useGetSingleCommunityQuery(communityName);

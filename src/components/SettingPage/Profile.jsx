@@ -12,7 +12,7 @@ import Textarea from "../Textarea";
 import Input from "../Input";
 
 const Profile = () => {
-  const currentUser = useGetLoginInfo();
+  const currentUser = useGetLoginInfo().then((res) => res);
   const dateConvert = useConvertToDate;
   const filterObj = useFilterObject;
   const [formData, setFormData] = useState({});

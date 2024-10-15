@@ -8,7 +8,7 @@ import UserTemplate from "../components/UserTemplate";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
 
 const ChatRoomModal = ({ onChange }) => {
-  const currentUser = useGetLoginInfo();
+  const currentUser = useGetLoginInfo().then((res) => res);
   const [search, setSearch] = useState("");
   const [skipSearch, setSkipSearch] = useState(true);
   const result = useSearchUsersQuery(

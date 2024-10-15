@@ -11,7 +11,7 @@ import DropdownComment from "./DropdownComment";
 import EditComment from "./EditComment";
 const Comment = ({ comment, setPage, index, setNoMore }) => {
   const nav = useNavigate();
-  const currentUser = useGetLoginInfo();
+  const currentUser = useGetLoginInfo().then((res) => res);
   const { _id } = useParams();
   const { author } = comment;
   const time = useConvertToDate("time", comment.postTime);

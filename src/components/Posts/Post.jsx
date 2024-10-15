@@ -4,7 +4,6 @@ import Thumbnail from "../Thumbnails/Thumbnail";
 
 import useConvertToDate from "../../hooks/useConvertToDate";
 import { useNavigate } from "react-router-dom";
-import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 
 const Post = ({ post }) => {
   const nav = useNavigate();
