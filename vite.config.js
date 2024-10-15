@@ -7,11 +7,11 @@ export default defineConfig({
   base: "/",
   plugins: [react(), compression({ threshold: 50000, algorithm: "gzip" })],
   preview: {
-    port: 5173,
+    port: 80,
     strictPort: true,
   },
   server: {
-    port: 5173,
+    port: 80,
     strictPort: true,
     host: true,
     origin: "http://localhost:5173",
