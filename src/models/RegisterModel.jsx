@@ -53,7 +53,7 @@ const RegisterModel = ({ onChange, onLogin }) => {
   };
   useEffect(() => {
     if (results.error) {
-      setError(results.error.data);
+      setError("internal server error");
     }
   }, [results.error]);
 

@@ -22,6 +22,9 @@ const LoginModel = ({ onChange, onRegister, onForget }) => {
     } catch (error) {
       if (error.originalStatus === 401) {
         setError("email or password is not correct");
+      } else {
+        setError("internal server error ");
+        console.log(error);
       }
     }
   };
