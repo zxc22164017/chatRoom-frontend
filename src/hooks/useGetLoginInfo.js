@@ -1,7 +1,7 @@
 import { useGetUserQuery } from "../store";
 
 export default function useGetLoginInfo() {
-  const data = useGetUserQuery();
-  console.log(data);
-  return data;
+  const result = useGetUserQuery();
+  console.log(result.currentData);
+  return result.currentData;
 }
