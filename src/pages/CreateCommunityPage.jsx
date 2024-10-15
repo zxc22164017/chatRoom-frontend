@@ -169,7 +169,12 @@ const CreateCommunityPage = () => {
         {renderRules}
       </div>
       <div className="w-full flex items-center justify-center">
-        <Button onClick={handleSubmit} primary className=" w-1/2 my-10">
+        <Button
+          onClick={handleSubmit}
+          disabled={result.isLoading}
+          primary
+          className=" w-1/2 my-10"
+        >
           new community
         </Button>
       </div>

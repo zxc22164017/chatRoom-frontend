@@ -52,7 +52,10 @@ const MessageSection = ({ sendMessageResult }) => {
 
   useEffect(() => {
     if (chatRoomElement) {
-      chatRoomElement.current.scrollTop = chatRoomElement.current.scrollHeight;
+      chatRoomElement.current.scroll({
+        top: chatRoomElement.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   }, [chatRoomElement, sendMessageResult]);
 

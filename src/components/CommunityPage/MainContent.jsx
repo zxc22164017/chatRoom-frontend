@@ -37,7 +37,11 @@ const MainContent = () => {
 
   let content;
   if (isLoading) {
-    content = <LoadingFancy />;
+    content = (
+      <div className="w-full h-full flex justify-center items-center">
+        <LoadingFancy />
+      </div>
+    );
   } else if (data) {
     content = (
       <>
