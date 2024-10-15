@@ -16,7 +16,6 @@ const SideBar = ({}) => {
   const [, leaveResult] = useLeaveRoomMutation({
     fixedCacheKey: "leaveRoom",
   });
-  console.log(currentUser, skip);
   const [skip, setSkip] = useState(true);
   const { data, error, isLoading } = useGetRoomsQuery(
     {
@@ -25,6 +24,7 @@ const SideBar = ({}) => {
     },
     { skip: skip }
   );
+  console.log(currentUser, skip);
 
   const handleScroll = (e) => {
     if (e.target.scrollHeight > e.target.clientHeight) {
