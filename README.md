@@ -1,6 +1,6 @@
 # Overview
 
-This project is a MERN stacK forum with a real-time chat room, allowing users post threads, comment, and chat with other users
+This project is a MERN stack forum with a real-time chat room, allowing users post threads, comment, and chat with other users
 
 # Click here to see [Demo](http://ec2-52-195-177-191.ap-northeast-1.compute.amazonaws.com)
 
