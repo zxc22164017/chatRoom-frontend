@@ -9,7 +9,7 @@ Deployed on [AWS EC2](https://aws.amazon.com/tw/ec2/)
 ![image](https://github.com/user-attachments/assets/46a53a17-a580-43c8-b0cd-6c6627c0ec66)
 
 # Built with
-Frontend
+### [frontend](https://github.com/zxc22164017)
 * [Vite](https://vite.dev/)-Build tool for frontend
 * [React](https://react.dev/)- Frontend framework
 * [React Router](https://reactrouter.com/en/main)- React library for route and navigation
@@ -18,7 +18,7 @@ Frontend
 * [Tailwind CSS](https://tailwindcss.com/)-CSS framework
 * [Socket.io](https://socket.io/)-websocket for streaming data
   
-[Backend](https://github.com/zxc22164017/chatRoom-backend)
+### [Backend](https://github.com/zxc22164017/chatRoom-backend)
 * [Node.js](https://nodejs.org/zh-tw)-Runtime environment for JS
 * [Express.js](https://expressjs.com/zh-tw/)-framework for RESTful APIs
 * [Socket.io](https://socket.io/)-websocket for streaming data
