@@ -47,9 +47,9 @@ const NavBar = () => {
             nav("/");
           }}
         >
-          <img className="w-12 h-12" src={logo} alt="logo" />
+          <img className="w-14 h-14" src={logo} alt="logo" />
           <h1 className="hidden md:block text-white font-bold text-2xl">
-            Fremo{" "}
+            Fremo
           </h1>
         </div>
         <form onSubmit={handleSubmit} className="flex w-1/3 h-9">
