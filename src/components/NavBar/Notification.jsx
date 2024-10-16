@@ -26,7 +26,7 @@ const Notification = () => {
     }
   }, [data]);
 
-  let content = <div className="text-sm">Nothing happen today</div>;
+  let content = <div className="text-sm">Nothing happened</div>;
 
   if (data) {
     if (data?.length !== 0) {
