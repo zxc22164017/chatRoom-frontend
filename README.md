@@ -24,7 +24,7 @@ Backend
 * [Socket.io](https://socket.io/)-websocket for streaming data
 * [Passportjs](https://www.passportjs.org/)-Middleware for authentication
 * [Bcrypt](https://www.npmjs.com/package/bcrypt)-Library for hashing data
-* [jwt-simple](https://www.npmjs.com/package/jwt-simple)-a standard for authentication
+* [JSON web token](https://jwt.io/)-a standard method for representing claims securely between two parties
 * [AWS S3](https://aws.amazon.com/tw/s3/)-cloud platform to store images
 * [MongoDB](https://www.mongodb.com/community/forums/t/advice-for-chat-schema-design/114166)-Document database to store data
 * [Mongoose](https://mongoosejs.com/)-nodejs ODM
