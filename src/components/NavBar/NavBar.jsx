@@ -7,6 +7,7 @@ import {
   changeSearchInput,
   changeSkipSearch,
 } from "../../store";
+import Notification from "./Notification";
 import NavBarDropdown from "./NavBarDropdown";
 import { BsPencilSquare } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,6 +105,7 @@ const NavBar = () => {
           >
             <BsPencilSquare className="h-full w-full text-white" />
           </Button>
+          <Notification />
 
           <NavBarDropdown />
         </div>

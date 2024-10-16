@@ -66,6 +66,7 @@ const LoginModel = ({ onChange, onRegister, onForget }) => {
         <Button
           rounded
           className="w-full my-4"
+          type="button"
           onClick={() => {
             onChange();
             onForget();
@@ -79,6 +80,7 @@ const LoginModel = ({ onChange, onRegister, onForget }) => {
           </p>
           <Button
             rounded
+            type="button"
             secondary
             className="mt-4"
             onClick={() => {
