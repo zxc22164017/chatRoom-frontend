@@ -18,7 +18,7 @@ Frontend
 * [Tailwind CSS](https://tailwindcss.com/)-CSS framework
 * [Socket.io](https://socket.io/)-websocket for streaming data
   
-Backend
+[Backend](https://github.com/zxc22164017/chatRoom-backend)
 * [Node.js](https://nodejs.org/zh-tw)-Runtime environment for JS
 * [Express.js](https://expressjs.com/zh-tw/)-framework for RESTful APIs
 * [Socket.io](https://socket.io/)-websocket for streaming data
