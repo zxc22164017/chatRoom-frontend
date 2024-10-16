@@ -42,12 +42,12 @@ const NavBar = () => {
     <div className="fixed w-full top-0 z-20">
       <div className="bg-topic-900 h-14 shadow-lg flex justify-between items-center ">
         <div
-          className="flex pl-10 justify-end hover:cursor-pointer"
+          className="flex h-14 pl-10 justify-center items-center hover:cursor-pointer"
           onClick={() => {
             nav("/");
           }}
         >
-          <img className="w-14 h-14" src={logo} alt="logo" />
+          <img className="w-14 h-full" src={logo} alt="logo" />
           <h1 className="hidden md:block text-white font-bold text-2xl">
             Fremo
           </h1>

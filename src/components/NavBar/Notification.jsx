@@ -4,6 +4,7 @@ import { useGetNotificationQuery } from "../../store";
 import Panel from "../Panel";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
+import useConvertToDate from "../../hooks/useConvertToDate";
 
 const Notification = () => {
   const { data, isFetching, error } = useGetNotificationQuery();
@@ -37,9 +38,9 @@ const Notification = () => {
               nav(`/chat/${item.roomId}`);
             }}
             key={index}
-            className="text-sm hover:bg-sky-100 p-2 border-b-2 hover:cursor-pointer active:bg-sky-200"
+            className="relative text-sm hover:bg-sky-100 p-2 border-b-2 hover:cursor-pointer active:bg-sky-200"
           >
-            {index} {item.notification}
+            {item.notification}
           </div>
         );
       });
