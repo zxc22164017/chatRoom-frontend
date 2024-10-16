@@ -11,7 +11,7 @@ const Notification = () => {
   const nav = useNavigate();
   const [notify, setNotify] = useState(false);
   const [show, setShow] = useState(false);
-  const [audio] = useState(new Audio("./notification.mp3"));
+  //   const [audio] = useState(new Audio("./notification.mp3"));
 
   const handleShow = () => {
     setNotify(false);
@@ -21,7 +21,6 @@ const Notification = () => {
   useEffect(() => {
     if (data) {
       if (data.length !== 0) {
-        audio.play();
         setNotify(true);
       }
     }
