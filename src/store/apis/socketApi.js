@@ -81,7 +81,6 @@ const socketApi = createApi({
           socket.on("recieveMessage", listener);
           await cacheEntryRemoved;
           socket.removeListener("recieveMessage", listener);
-          socket.disconnect();
         },
       }),
       sendMessage: builder.mutation({
@@ -103,7 +102,7 @@ const socketApi = createApi({
         ) {
           const user = userApi.endpoints.getUser.select()(getState()).data;
           const { roomId } = data;
-          console.log("socket", data);
+          // console.log("socket", data);
           const patchResult = dispatch(
             socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
               draft.push({
@@ -122,7 +121,7 @@ const socketApi = createApi({
 
           try {
             const result = await queryFulfilled;
-            console.log("socket-after ", result);
+            // console.log("socket-after ", result);
             dispatch(
               socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
                 const index = draft.findIndex((item) => !item._id);
@@ -173,6 +172,24 @@ const socketApi = createApi({
           }
         },
       }),
+      getNotification: builder.query({
+        queryFn: () => ({ data: [] }),
+        async onCacheEntryAdded(
+          args,
+          { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
+        ) {
+          const socket = await getSocket();
+          const listener = (data) => {
+            updateCachedData((currentCacheData) => {
+              currentCacheData.unshift(data);
+            });
+          };
+          socket.on("notification", listener);
+          await cacheEntryRemoved;
+          socket.removeListener("notification", listener);
+          socket.disconnect();
+        },
+      }),
     };
   },
 });
@@ -181,5 +198,6 @@ export const {
   useGetMessageQuery,
   useSendMessageMutation,
   useGetMoreMessageMutation,
+  useGetNotificationQuery,
 } = socketApi;
 export { socketApi };

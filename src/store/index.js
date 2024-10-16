@@ -54,6 +54,7 @@ export {
   useGetMessageQuery,
   useSendMessageMutation,
   useGetMoreMessageMutation,
+  useGetNotificationQuery,
 } from "./apis/socketApi";
 export {
   useGetRoomsQuery,
