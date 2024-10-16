@@ -83,7 +83,7 @@ const CreatePostPage = () => {
               }}
             />
           )}
-          <div className="flex items-center justify-between mb-4 ">
+          <div className="flex items-center px-2 justify-between mb-4 ">
             <UploadImg handleImage={handleImage} />
             <Button primary rounded className="h-10 w-20 mr-4">
               <h1>Post</h1>

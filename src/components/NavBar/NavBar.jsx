@@ -47,7 +47,7 @@ const NavBar = () => {
             nav("/");
           }}
         >
-          <img className="w-14 h-14" src={logo} alt="logo" />
+          <img className="w-full h-full" src={logo} alt="logo" />
           <h1 className="hidden md:block text-white font-bold text-2xl">
             Fremo
           </h1>
