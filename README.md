@@ -28,7 +28,11 @@ Deployed on [AWS EC2](https://aws.amazon.com/tw/ec2/)
 * [AWS S3](https://aws.amazon.com/tw/s3/)-cloud platform to store images
 * [MongoDB](https://www.mongodb.com/community/forums/t/advice-for-chat-schema-design/114166)-Document database to store data
 * [Mongoose](https://mongoosejs.com/)-nodejs ODM
-  
+
+  ### Deployment
+  * [Docker](https://www.docker.com/)-image container
+  * [CICD](https://github.com/resources/articles/devops/ci-cd)-automatic deployment
+  * [nginx](https://nginx.org/)-proxy reverse
 
 
 
