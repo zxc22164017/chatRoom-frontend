@@ -7,6 +7,7 @@ This project is a MERN stack forum with a real-time chat room, allowing users po
 Deployed on [AWS EC2](https://aws.amazon.com/tw/ec2/)
 
 ![image](https://github.com/user-attachments/assets/46a53a17-a580-43c8-b0cd-6c6627c0ec66)
+![462424549_1791354808338940_6437250330774830373_n](https://github.com/user-attachments/assets/2baf304f-7a9d-469f-a371-0af6bfd09235)
 
 # Built with
 ### [frontend](https://github.com/zxc22164017)
