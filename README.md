@@ -34,6 +34,56 @@ Deployed on [AWS EC2](https://aws.amazon.com/tw/ec2/)
 * [CICD](https://github.com/resources/articles/devops/ci-cd)-automatic deployment
 * [nginx](https://nginx.org/)-proxy reverse
 
+# Key features
+Create posts to share with other users
+
+https://github.com/user-attachments/assets/ec46a700-a5e9-41b7-963f-a0670f85331d
+
+Like & leave comments
+
+
+https://github.com/user-attachments/assets/4cf25c99-a098-4a5d-99ee-b39d547e9eca
+
+Real-time chatroom & notification
+
+https://github.com/user-attachments/assets/982ab454-800b-43ba-af74-770e731a66cc
+
+### other features
+
+##### User System
+* Authentication login, signup
+* Customized user profile, allowing users to upload thumbnail, cover photo, edit username, personal info ...
+* Friended with other users
+* Search for users
+##### Post system
+* Edit, post, delete posts
+* Like and comment
+* Search for posts
+##### Custom chat room
+* Add multiple users into one chat room
+* Edit chat room thumbnails and name
+* Leave unwanted chat room
+
+### Future
+* Fix bugs happens on EC2 environment
+* WebRTC for real-time video chat
+* Redis implementation for backend caching
+* And More....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
