@@ -65,7 +65,7 @@ https://github.com/user-attachments/assets/982ab454-800b-43ba-af74-770e731a66cc
 * Leave unwanted chat room
 
 ### Future
-* Fix bugs happens on EC2 environment
+* Fix bugs happen on EC2 environment
 * WebRTC for real-time video chat
 * Redis implementation for backend caching
 * And More....
