@@ -186,8 +186,6 @@ const socketApi = createApi({
           };
           socket.on("notification", listener);
           await cacheEntryRemoved;
-          socket.removeListener("notification", listener);
-          socket.disconnect();
         },
       }),
     };
