@@ -80,7 +80,8 @@ const socketApi = createApi({
           };
           socket.on("recieveMessage", listener);
           await cacheEntryRemoved;
-          socket.removeListener("recieveMessage", listener);
+          socket.emit("leave-room");
+          socket.off("recieveMessage", listener);
         },
       }),
       sendMessage: builder.mutation({
@@ -178,16 +179,21 @@ const socketApi = createApi({
           args,
           { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
         ) {
-          const socket = await getSocket();
-          const listener = (data) => {
-            updateCachedData((currentCacheData) => {
-              currentCacheData.unshift(data);
-            });
-          };
-          socket.on("notification", listener);
-          await cacheEntryRemoved;
-          socket.removeListener("notification", listener);
-          socket.disconnect();
+          try {
+            const socket = await getSocket();
+            const listener = (data) => {
+              updateCachedData((currentCacheData) => {
+                currentCacheData.unshift(data);
+              });
+            };
+            socket.on("notification", listener);
+            console.log("notification attatched");
+            await cacheEntryRemoved;
+            socket.off("notification", listener);
+            console.log("notification dettatched");
+          } catch (error) {
+            console.log(error);
+          }
         },
       }),
     };

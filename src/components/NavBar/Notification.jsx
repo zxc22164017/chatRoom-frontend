@@ -10,7 +10,7 @@ const Notification = () => {
   const nav = useNavigate();
   const [notify, setNotify] = useState(false);
   const [show, setShow] = useState(false);
-  const [audio] = useState(new Audio("./notification.mp3"));
+  //   const [audio] = useState(new Audio("./notification.mp3"));
 
   const handleShow = () => {
     setNotify(false);
@@ -20,13 +20,12 @@ const Notification = () => {
   useEffect(() => {
     if (data) {
       if (data.length !== 0) {
-        audio.play();
         setNotify(true);
       }
     }
   }, [data]);
 
-  let content = <div className="text-sm">Nothing happen today</div>;
+  let content = <div className="text-sm">Nothing happened</div>;
 
   if (data) {
     if (data?.length !== 0) {
@@ -37,9 +36,9 @@ const Notification = () => {
               nav(`/chat/${item.roomId}`);
             }}
             key={index}
-            className="text-sm hover:bg-sky-100 p-2 border-b-2 hover:cursor-pointer active:bg-sky-200"
+            className="relative text-sm hover:bg-sky-100 p-2 border-b-2 hover:cursor-pointer active:bg-sky-200"
           >
-            {index} {item.notification}
+            {item.notification}
           </div>
         );
       });

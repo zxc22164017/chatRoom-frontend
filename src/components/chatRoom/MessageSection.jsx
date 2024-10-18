@@ -5,6 +5,7 @@ import LoadingFancy from "../Loading/LoadingFancy";
 import { useParams } from "react-router-dom";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { useDispatch } from "react-redux";
+import { socketApi } from "../../store/apis/socketApi";
 
 const MessageSection = ({ sendMessageResult }) => {
   const dispatch = useDispatch();
@@ -37,6 +38,21 @@ const MessageSection = ({ sendMessageResult }) => {
       setNoMore(true);
     }
   }, [result.error]);
+  useEffect(() => {
+    return () => {
+      dispatch(socketApi.util.resetApiState());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (chatRoomElement) {
+      chatRoomElement.current.scroll({
+        top: chatRoomElement.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [chatRoomElement, sendMessageResult]);
+
   let messages;
   if (isLoading) {
     messages = (
@@ -53,15 +69,6 @@ const MessageSection = ({ sendMessageResult }) => {
       }
     });
   }
-
-  useEffect(() => {
-    if (chatRoomElement) {
-      chatRoomElement.current.scroll({
-        top: chatRoomElement.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [chatRoomElement, sendMessageResult]);
 
   return (
     <div
