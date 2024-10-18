@@ -5,7 +5,6 @@ import Panel from "../Panel";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
 
-
 const Notification = () => {
   const { data, isFetching, error } = useGetNotificationQuery();
   const nav = useNavigate();

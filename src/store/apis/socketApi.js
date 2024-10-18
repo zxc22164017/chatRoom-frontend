@@ -80,6 +80,7 @@ const socketApi = createApi({
           };
           socket.on("recieveMessage", listener);
           await cacheEntryRemoved;
+          socket.emit("leave-room");
           socket.off("recieveMessage", listener);
         },
       }),
@@ -178,19 +179,19 @@ const socketApi = createApi({
           args,
           { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
         ) {
-          const socket = await getSocket();
-          const listener = (data) => {
-            updateCachedData((currentCacheData) => {
-              currentCacheData.unshift(data);
-            });
-          };
           try {
+            const socket = await getSocket();
+            const listener = (data) => {
+              updateCachedData((currentCacheData) => {
+                currentCacheData.unshift(data);
+              });
+            };
             socket.on("notification", listener);
+            await cacheEntryRemoved;
+            socket.off("notification", listener);
           } catch (error) {
             console.log(error);
           }
-          await cacheEntryRemoved;
-          socket.off("notification", listener);
         },
       }),
     };
