@@ -178,21 +178,19 @@ const socketApi = createApi({
           args,
           { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
         ) {
+          const socket = await getSocket();
+          const listener = (data) => {
+            updateCachedData((currentCacheData) => {
+              currentCacheData.unshift(data);
+            });
+          };
           try {
-            const socket = await getSocket();
-            const listener = (data) => {
-              updateCachedData((currentCacheData) => {
-                currentCacheData.unshift(data);
-              });
-            };
             socket.on("notification", listener);
-            console.log("notification attatched");
-            await cacheEntryRemoved;
-            socket.off("notification", listener);
-            console.log("notification dettatched");
           } catch (error) {
             console.log(error);
           }
+          await cacheEntryRemoved;
+          socket.off("notification", listener);
         },
       }),
     };
