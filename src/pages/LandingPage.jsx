@@ -53,7 +53,7 @@ const LandingPage = () => {
           One Emotion
         </h3>
 
-        <div className="mb-12">
+        <div className="mb-14">
           <Button
             className="w-2/3 mb-5"
             primary
