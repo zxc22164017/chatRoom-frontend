@@ -49,9 +49,11 @@ const LandingPage = () => {
       </div>
       <div className="flex flex-col z-10  xl:w-1/4 ">
         <h1 className="font-bold text-4xl xl:text-6xl my-5">One Frame</h1>
-        <h3 className="text-2xl font-bold mb-10 text-gray-700 ">One Emotion</h3>
+        <h3 className="text-2xl font-bold md:mb-10 text-gray-700 ">
+          One Emotion
+        </h3>
 
-        <div className="">
+        <div className="mb-2">
           <Button
             className="w-2/3 mb-5"
             primary
