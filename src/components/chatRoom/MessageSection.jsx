@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { useDispatch } from "react-redux";
 import { socketApi } from "../../store/apis/socketApi";
-
+import ChatRoomLanding from "./ChatRoomLanding.jsx";
 const MessageSection = ({ sendMessageResult }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -82,6 +82,7 @@ const MessageSection = ({ sendMessageResult }) => {
         </div>
       )}
       {messages}
+      {currentUser._id === roomId && <ChatRoomLanding />}
     </div>
   );
 };

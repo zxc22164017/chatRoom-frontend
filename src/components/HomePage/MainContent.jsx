@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useGetPostsQuery } from "../../store";
+import { changeSearchType, useGetPostsQuery } from "../../store";
 import Skeleton from "../Loading/Skeleton";
 import Post from "../Posts/Post";
 import Alert from "../Alert";
+import { useDispatch } from "react-redux";
 
 const MainContent = ({}) => {
   const [page, setPage] = useState(0);
+  const dispatch = useDispatch();
   const [noMore, setNoMore] = useState(false);
   const { data, error, isLoading, isFetching } = useGetPostsQuery(page);
   function scrollEvent() {
@@ -18,6 +20,7 @@ const MainContent = ({}) => {
     }
   }
   useEffect(() => {
+    dispatch(changeSearchType({ label: "posts", value: "posts" }));
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
   useEffect(() => {

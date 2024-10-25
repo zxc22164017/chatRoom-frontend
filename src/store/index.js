@@ -12,6 +12,8 @@ import {
   changeSearchType,
   changeSearchInput,
   changeSkipSearch,
+  changeSearchPage,
+  changeNoMore,
 } from "./slices/searchTypeSlice.js";
 
 const store = configureStore({
@@ -89,4 +91,11 @@ export {
   usePatchCommentMutation,
   useDeleteCommentMutation,
 } from "./apis/commentApi";
-export { store, changeSearchType, changeSearchInput, changeSkipSearch };
+export {
+  store,
+  changeSearchType,
+  changeSearchInput,
+  changeSkipSearch,
+  changeSearchPage,
+  changeNoMore,
+};
