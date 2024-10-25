@@ -9,7 +9,7 @@ import { useAddCommunityMutation, useUploadImgMutation } from "../store";
 import { SearchUsers } from "../components/Search/SearchUsers";
 const CreateCommunityPage = () => {
   const nav = useNavigate();
-  const currentUser = useGetLoginInfo().then((res) => res);
+  const currentUser = useGetLoginInfo();
   const [addCommunity, result] = useAddCommunityMutation();
   const [uploadImg, uploadResult] = useUploadImgMutation();
   const [formData, setFormData] = useState({

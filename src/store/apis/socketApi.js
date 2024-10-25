@@ -187,10 +187,8 @@ const socketApi = createApi({
               });
             };
             socket.on("notification", listener);
-            console.log("notification attatched");
             await cacheEntryRemoved;
             socket.off("notification", listener);
-            console.log("notification dettatched");
           } catch (error) {
             console.log(error);
           }

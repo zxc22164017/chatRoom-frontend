@@ -49,9 +49,11 @@ const LandingPage = () => {
       </div>
       <div className="flex flex-col z-10  xl:w-1/4 ">
         <h1 className="font-bold text-4xl xl:text-6xl my-5">One Frame</h1>
-        <h3 className="text-2xl font-bold mb-10 text-gray-700 ">One Emotion</h3>
+        <h3 className="text-2xl font-bold md:mb-10 text-gray-700 ">
+          One Emotion
+        </h3>
 
-        <div className="">
+        <div className="mb-14">
           <Button
             className="w-2/3 mb-5"
             primary
@@ -78,15 +80,6 @@ const LandingPage = () => {
         <div className=" absolute right-0  rounded-full rounded-r-none bg-topic-200   h-[1300px] w-[780px] "></div>
         <div className=" absolute right-0  rounded-full rounded-r-none bg-topic-100   h-[1300px] w-[740px] "></div>
         <div className=" absolute right-0  rounded-full rounded-r-none bg-topic-50   h-[1300px] w-[712px] "></div>
-      </div>
-      <div className="block xl:hidden  absolute bg-topic-400 w-screen h-2/3 bottom-0 left-0 rounded-tr-full">
-        <div className="block xl:hidden  absolute bg-topic-300 -translate-x-10 translate-y-10 w-full h-full bottom-0 left-0 rounded-tr-full">
-          <div className="block xl:hidden  absolute bg-topic-200 -translate-x-8 translate-y-8 w-full h-full bottom-0 left-0 rounded-tr-full">
-            <div className="block xl:hidden  absolute bg-topic-100 -translate-x-6 translate-y-6 w-full h-full bottom-0 left-0 rounded-tr-full">
-              <div className="block xl:hidden  absolute bg-topic-50 -translate-x-3 translate-y-3 w-full h-full bottom-0 left-0 rounded-tr-full"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

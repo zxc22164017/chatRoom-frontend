@@ -9,7 +9,7 @@ const Panel = ({ children, className, ...rest }) => {
   );
   return (
     <div className={finalClassNames} {...rest}>
-      {children}{" "}
+      {children}
     </div>
   );
 };

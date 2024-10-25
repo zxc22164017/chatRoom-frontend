@@ -28,7 +28,7 @@ const Drawer = ({ setShow, children, ...rest }) => {
           />
         </div>
         <div
-          className={`flex flex-col pt-10 items-center h-full ${rest.className} `}
+          className={`flex flex-col pt-10 items-center h-full overflow-y-auto ${rest.className} `}
         >
           {children}
         </div>
