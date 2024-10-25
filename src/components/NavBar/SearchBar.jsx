@@ -49,6 +49,7 @@ const SearchBar = ({ setShow, show }) => {
   const deBounce = useCallback(
     useDeBounce((input) => {
       if (input !== "") {
+        dispatch(changeSearchPage(0));
         dispatch(changeSkipSearch(false));
       }
     }, 500),
