@@ -99,7 +99,7 @@ export default {
         spinSlow: "spin 4s linear infinite",
         changeColor: "changeColor 4s cubic-bezier(0, 0, 0.2, 1) infinite",
         slide: "slide 6s ease-in-out infinite",
-        btnHover: "hover .6s ease-in-out infinite",
+        btnHover: "hover 1s ease-in-out infinite",
       },
     },
   },
