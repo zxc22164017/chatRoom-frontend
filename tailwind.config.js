@@ -83,6 +83,11 @@ export default {
           "50%": { transform: "translateX(25%)" },
           "100%": { transform: "translateX(-25%)" },
         },
+        hover: {
+          "0%": { transform: "scaleX(1.1)" },
+          "50%": { transform: "scaleX(1.2)" },
+          "100%": { transform: "scaleX(1.1)" },
+        },
       },
       animation: {
         loadingCircle: "circle .5s alternate infinite ease",
@@ -94,6 +99,7 @@ export default {
         spinSlow: "spin 4s linear infinite",
         changeColor: "changeColor 4s cubic-bezier(0, 0, 0.2, 1) infinite",
         slide: "slide 6s ease-in-out infinite",
+        btnHover: "hover .3s ease-in-out infinite",
       },
     },
   },
