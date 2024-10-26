@@ -84,9 +84,9 @@ export default {
           "100%": { transform: "translateX(-25%)" },
         },
         hover: {
-          "0%": { transform: "scaleX(1.1)" },
-          "50%": { transform: "scaleX(1.2)" },
-          "100%": { transform: "scaleX(1.1)" },
+          "0%": { transform: "scale(1.1)" },
+          "50%": { transform: "scale(1.2)" },
+          "100%": { transform: "scale(1.1)" },
         },
       },
       animation: {
@@ -99,7 +99,7 @@ export default {
         spinSlow: "spin 4s linear infinite",
         changeColor: "changeColor 4s cubic-bezier(0, 0, 0.2, 1) infinite",
         slide: "slide 6s ease-in-out infinite",
-        btnHover: "hover .3s ease-in-out infinite",
+        btnHover: "hover .6s ease-in-out infinite",
       },
     },
   },
