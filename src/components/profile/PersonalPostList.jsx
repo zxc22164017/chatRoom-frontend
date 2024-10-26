@@ -33,7 +33,7 @@ const PersonalPostList = ({ userId }) => {
     if (data.length === 0) {
       content = (
         <div className="flex p-4 h-40 justify-center items-center">
-          <h1 className="text-3xl  text-gray-400 font-extrabold">
+          <h1 className="text-3xl  text-emerald-400 font-extrabold">
             Haven't post anything yet
           </h1>
         </div>

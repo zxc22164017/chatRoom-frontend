@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { useGetUserQuery, useLogoutMutation } from "../../store";
 import { FaCog } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const NavBarDropdown = () => {
   const nav = useNavigate();
@@ -87,17 +88,26 @@ const NavBarDropdown = () => {
         onClick={handleOpen}
         image={userInfo?.thumbnail}
       />
-      {isOpen && (
-        <Panel
-          className={
-            "absolute block right-0 z-10 mt-2 w-[280px] origin-top-right  rounded-md bg-white shadow-lg  "
-          }
-        >
-          {option01}
-          {option02}
-          {option03}
-        </Panel>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ ease: "easeInOut", duration: 0.2 }}
+          >
+            <Panel
+              className={
+                "absolute block right-0 z-10 mt-2 w-[280px] origin-top-right  rounded-md bg-white shadow-lg  "
+              }
+            >
+              {option01}
+              {option02}
+              {option03}
+            </Panel>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

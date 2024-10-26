@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Button from "./Button";
+import { motion } from "framer-motion";
 
 import UploadImg from "./UploadImg";
 const Textarea = ({
@@ -15,13 +16,33 @@ const Textarea = ({
   ...rest
 }) => {
   const textRef = useRef();
-
   useEffect(() => {
     textRef.current.style.height = "auto";
     textRef.current.style.height = textRef.current.scrollHeight + "px";
   }, [value]);
+  const animation = {
+    initial: {
+      display: "none",
+      y: -50,
+      scaleY: 0,
+    },
+    animate: {
+      display: "flex",
+      y: 0,
+      scaleY: 1,
+    },
+  };
+  const [isHover, setIsHover] = useState(false);
+
   return (
-    <div
+    <motion.div
+      initial={{ height: 60 }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+      whileHover={{ height: "auto" }}
+      onHoverStart={() => setIsHover(true)}
+      onHoverEnd={() => {
+        setIsHover(false);
+      }}
       className={` bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full ${rest.className}`}
     >
       <textarea
@@ -49,19 +70,23 @@ const Textarea = ({
         </div>
       )}
       {!noSubmit && (
-        <div className="hidden group-hover:flex justify-between">
+        <motion.div
+          variants={animation}
+          animate={isHover ? "hover" : "initial"}
+          className="flex group justify-between"
+        >
           <UploadImg handleImage={handleImage} />
           <Button
             disabled={isLoading}
             primary
             rounded
-            className=" h-9 w-24  transition-all duration-150 "
+            className="  h-9 w-24  transition-all duration-150 "
           >
             {text}
           </Button>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

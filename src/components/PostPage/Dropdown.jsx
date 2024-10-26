@@ -7,6 +7,7 @@ import NavBarDropdownOption from "../NavBar/NavBarDropdownOption";
 import { useNavigate } from "react-router-dom";
 import DoubleConfirmModal from "../../models/DoubleConfirmModal";
 import { useDeletePostMutation } from "../../store";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Dropdown = ({ className, author, post }) => {
   const currentUser = useGetLoginInfo();
@@ -85,15 +86,24 @@ const Dropdown = ({ className, author, post }) => {
       >
         <IoMdMore className="w-full h-full" />
       </Button>
-      {isOpen && (
-        <Panel
-          className={
-            "absolute block right-0 z-10 mt-2 w-32 origin-top-right  rounded-md bg-white shadow-lg  "
-          }
-        >
-          {content}
-        </Panel>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ ease: "easeInOut", duration: 0.2 }}
+          >
+            <Panel
+              className={
+                "absolute block right-0 z-10 mt-2 w-32 origin-top-right  rounded-md bg-white shadow-lg  "
+              }
+            >
+              {content}
+            </Panel>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

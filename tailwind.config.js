@@ -56,9 +56,10 @@ export default {
           "0%": { transform: "translateX(0%)", opacity: "1" },
           "100%": { transform: "translateX(100%)", opacity: "0" },
         },
-        expand: {
-          "0%": { transform: "translateY(-100%)", opacity: "0" },
-          "100%": { transform: "translateY(0%) ", opacity: "1" },
+        up: {
+          "0%": { transform: "translateY(0%)" },
+          "50%": { transform: "translateY(-12%) " },
+          "100%": { transform: "translateY(0%)" },
         },
         collapse: {
           "0%": { transform: "translateY(0%)", opacity: "1" },
@@ -77,16 +78,22 @@ export default {
           "90%": { color: "rgb(219 39 119)" },
           "100%": { color: "rgb(159 18 57)" },
         },
+        slide: {
+          "0%": { transform: "translateX(-25%)" },
+          "50%": { transform: "translateX(25%)" },
+          "100%": { transform: "translateX(-25%)" },
+        },
       },
       animation: {
         loadingCircle: "circle .5s alternate infinite ease",
         loadingShadow: " shadow .5s alternate infinite ease;",
         slideIn: "slideIn .5s cubic-bezier(0, 0, 0.2, 1)",
         slideOut: "slideOut .5s cubic-bezier(0, 0, 0.2, 1)",
-        expand: "expand .1s cubic-bezier(0, 0, 0.2, 1)",
+        up: "up .6s cubic-bezier(0, 0, 0.2, 1) infinite",
         collapse: "collapse .1s cubic-bezier(0, 0, 0.2, 1)",
         spinSlow: "spin 4s linear infinite",
         changeColor: "changeColor 4s cubic-bezier(0, 0, 0.2, 1) infinite",
+        slide: "slide 6s ease-in-out infinite",
       },
     },
   },

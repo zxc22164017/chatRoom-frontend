@@ -14,7 +14,7 @@ const UserTemplate = ({
   ...rest
 }) => {
   const classes = classNames(
-    "flex items-center overflow-hidden  hover:bg-slate-200 mx-2 h-auto rounded justify-between",
+    "flex items-center overflow-hidden  hover:bg-sky-100 mx-2 h-auto rounded justify-between",
     className
   );
   const thumbnailClasses = classNames(

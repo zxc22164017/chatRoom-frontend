@@ -12,8 +12,8 @@ const Communities = () => {
   const [show, setShow] = useState(false);
   const header = (
     <>
-      <RiGroup2Line className="w-full h-full lg:h-8 lg:w-8 mx-2 text-violet-500" />
-      <h1 className="hidden lg:block text-xl ">Communities</h1>
+      <RiGroup2Line className="h-8 w-8  text-violet-500" />
+      <h1 className="hidden group-hover:block text-xl ">Communities</h1>
     </>
   );
   let communities;
@@ -26,10 +26,12 @@ const Communities = () => {
             setShow(false);
           }}
           key={community._id}
-          className="  h-14 px-2 flex items-center rounded-md hover:bg-topic-300 hover:cursor-pointer"
+          className="  h-14  flex items-center rounded-md hover:bg-sky-100 hover:cursor-pointer"
         >
-          <Thumbnail className={"h-10 w-10 "} image={community.icon} />
-          <h2 className="mx-2 text-slate-600">{community.name}</h2>
+          <Thumbnail className={"h-8 w-8 "} image={community.icon} />
+          <h2 className="mx-2 xl:hidden group-hover:block text-slate-600">
+            {community.name}
+          </h2>
         </div>
       );
     });
@@ -40,7 +42,7 @@ const Communities = () => {
       <ExpandablePanel
         header={header}
         outerClassName={"hidden xl:block border-t-2 "}
-        headerClassName={"p-0 hover:bg-topic-300 h-20 xl:p-4"}
+        headerClassName={"p-0 hover:bg-sky-100 h-20"}
       >
         {communities}
       </ExpandablePanel>
@@ -48,7 +50,7 @@ const Communities = () => {
         onClick={() => {
           setShow(true);
         }}
-        className="flex xl:hidden items-center w-full h-20 xl:p-4   hover:cursor-pointer hover:bg-topic-300"
+        className="flex xl:hidden items-center w-full h-20 xl:p-4   hover:cursor-pointer hover:bg-sky-100"
       >
         <RiGroup2Line className=" w-full h-full xl:h-8 xl:w-8 mx-2 text-violet-500" />
       </div>

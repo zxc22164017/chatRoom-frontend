@@ -3,6 +3,7 @@ import classNames from "classnames";
 import Thumbnail from "../components/Thumbnails/Thumbnail";
 import { GoChevronDown } from "react-icons/go";
 import Panel from "./Panel";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Dropdown = ({
   options,
@@ -15,6 +16,7 @@ const Dropdown = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const divElement = useRef();
+
   const handleClick = () => {
     setIsOpen((current) => !current);
   };
@@ -51,29 +53,41 @@ const Dropdown = ({
       <label className="absolute hover:cursor-text text-md text-gray-500 duration-150 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
         {text}
       </label>
-      {isOpen && (
-        <Panel className={optionClassname}>
-          {options.map((option) => {
-            return (
-              <div
-                className="hover:bg-sky-100 rounded cursor-pointer p-1 flex items-center group"
-                onClick={() => {
-                  handleOptionClick(option);
-                }}
-                key={option.value}
-              >
-                {community && (
-                  <Thumbnail className={"h-10 w-10 mr-2"} image={option.icon} />
-                )}
-                <p className="text-nowrap truncate"> {option.label}</p>
-                <span className="text-xs absolute p-1 bg-white opacity-0 group-hover:opacity-100 delay-300 transition-all duration-300">
-                  {option.label}
-                </span>
-              </div>
-            );
-          })}
-        </Panel>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ ease: "easeInOut", duration: 0.2 }}
+          >
+            <Panel className={optionClassname}>
+              {options.map((option) => {
+                return (
+                  <div
+                    className="hover:bg-sky-100 rounded cursor-pointer p-1 flex items-center group"
+                    onClick={() => {
+                      handleOptionClick(option);
+                    }}
+                    key={option.value}
+                  >
+                    {community && (
+                      <Thumbnail
+                        className={"h-10 w-10 mr-2"}
+                        image={option.icon}
+                      />
+                    )}
+                    <p className="text-nowrap truncate"> {option.label}</p>
+                    <span className="text-xs absolute p-1 bg-white opacity-0 group-hover:opacity-100 delay-300 transition-all duration-300">
+                      {option.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </Panel>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

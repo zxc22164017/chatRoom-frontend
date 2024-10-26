@@ -9,6 +9,7 @@ import Button from "../Button";
 import AddUsersModal from "../../models/AddUsersModal";
 import { useParams } from "react-router-dom";
 import UploadImg from "../UploadImg";
+import { AnimatePresence } from "framer-motion";
 
 const ChatRoom = ({}) => {
   const roomId = useParams()._id;
@@ -37,14 +38,17 @@ const ChatRoom = ({}) => {
   const renderDrawer = show && (
     <ChatRoomDrawer setShow={setShow} setShowUsers={setShowUsers} />
   );
-  const renderAddUser = showUsers && (
-    <AddUsersModal
-      onChange={() => {
-        setShowUsers(false);
-      }}
-    />
+  const renderAddUser = (
+    <AnimatePresence mode="wait">
+      {showUsers && (
+        <AddUsersModal
+          onChange={() => {
+            setShowUsers(false);
+          }}
+        />
+      )}
+    </AnimatePresence>
   );
-
   return (
     <div id="scrollable div" className="w-full flex flex-col">
       <Header setShow={setShow} />
@@ -70,6 +74,7 @@ const ChatRoom = ({}) => {
           <IoSend className="text-xl " />
         </Button>
       </form>
+
       {renderDrawer}
       {renderAddUser}
     </div>
