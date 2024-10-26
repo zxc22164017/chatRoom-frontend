@@ -84,9 +84,9 @@ export default {
           "100%": { transform: "translateX(-25%)" },
         },
         hover: {
-          "0%": { transform: "scale(1.1)" },
-          "50%": { transform: "scale(1.2)" },
-          "100%": { transform: "scale(1.1)" },
+          "0%": { transform: "scale(1.05)" },
+          "50%": { transform: "scale(1.1)" },
+          "100%": { transform: "scale(1.05)" },
         },
       },
       animation: {
