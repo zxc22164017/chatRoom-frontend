@@ -3,7 +3,7 @@ import React from "react";
 
 const LoadingPage = () => {
   return (
-    <div className="flex  min-h-screen justify-center items-center bg-topic-500">
+    <div className="flex  min-h-screen justify-center items-center bg-topic-100">
       <LoadingFancy />
     </div>
   );
