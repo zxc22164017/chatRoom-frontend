@@ -78,9 +78,9 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="fixed inset-y-0 -inset-x-1/2  animate-slide rotate-45  bg-gradient-to-bl from-topic-100 to-amber-100 opacity-50 blur"></div>
-      <div className="fixed   inset-y-0 right-0 w-1/2  [animation-delay:0.6s] animate-slide  bg-gradient-to-l from-sky-100 to-emerald-300 opacity-40 blur"></div>
-      <div className="fixed   inset-y-0 left-0 w-full  [animation-delay:1.2s] animate-slide  bg-gradient-to-l from-emerald-300 to-sky-300 opacity-40 blur"></div>
-      <div className="fixed  inset-y-0 left-0 w-1/2  [animation-delay:1.8s] animate-slide  bg-gradient-to-l from-sky-300 to-sky-100 opacity-40 blur"></div>
+      <div className="fixed   inset-y-0 right-0 w-1/2  [animation-delay:0.6s] animate-slide  bg-gradient-to-l from-sky-100 to-emerald-300 opacity-40 blur-lg"></div>
+      <div className="fixed   inset-y-0 left-0 w-full  [animation-delay:1.2s] animate-slide  bg-gradient-to-l from-emerald-300 to-sky-300 opacity-40 blur-lg"></div>
+      <div className="fixed  inset-y-0 left-0 w-1/2  [animation-delay:1.8s] animate-slide  bg-gradient-to-l from-sky-300 to-sky-100 opacity-40 blur-lg"></div>
     </div>
   );
 };
