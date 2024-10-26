@@ -4,6 +4,7 @@ import { useGetNotificationQuery } from "../../store";
 import Panel from "../Panel";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Notification = () => {
   const { data, isFetching, error } = useGetNotificationQuery();
@@ -56,15 +57,25 @@ const Notification = () => {
           <div className="absolute h-2 w-2 top-0 right-0 rounded-full bg-green-500"></div>
         )}
       </Button>
-      {show && (
-        <Panel
-          className={
-            "max-h-60 overflow-y-auto absolute right-0 z-10 mt-2 w-48  rounded-md bg-white shadow-lg "
-          }
-        >
-          {content}
-        </Panel>
-      )}
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            key="notification"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ ease: "easeInOut", duration: 0.2 }}
+          >
+            <Panel
+              className={
+                "max-h-60 overflow-y-auto absolute right-0 z-10 mt-2 w-48  rounded-md bg-white shadow-lg "
+              }
+            >
+              {content}
+            </Panel>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

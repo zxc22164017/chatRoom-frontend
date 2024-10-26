@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 import classNames from "classnames";
+import { motion, AnimatePresence, animate } from "framer-motion";
 
 const ExpandablePanel = ({
   header,
@@ -10,21 +11,12 @@ const ExpandablePanel = ({
   headerClassName,
 }) => {
   const [expend, setExpend] = useState(false);
-  const [collapse, setCollapse] = useState(false);
   const handleExpend = () => {
-    if (expend === true) {
-      setCollapse(true);
-      setTimeout(() => {
-        setExpend(false);
-        setCollapse(false);
-      }, 100);
-    } else setExpend(!expend);
+    setExpend(!expend);
   };
   const outerClasses = classNames(" rounded", outerClassName);
   const expandClasses = classNames(
-    `py-4 px-2 text-sm text-gray-700  text-pretty ${
-      collapse ? "animate-collapse" : "animate-expand"
-    }`,
+    `py-4 px-2 text-sm text-gray-700 grid  text-pretty `,
     expandClassName
   );
   const headerClasses = classNames(
@@ -42,7 +34,19 @@ const ExpandablePanel = ({
           {expend ? <GoChevronLeft /> : <GoChevronDown />}
         </div>
       </div>
-      {expend && <div className={expandClasses}>{children}</div>}
+      <AnimatePresence>
+        {expend && (
+          <motion.div
+            initial={{ y: -100, height: 0, opacity: 0 }}
+            animate={{ y: 0, height: "100%", opacity: 1 }}
+            transition={{ ease: "easeInOut", duration: 0.3 }}
+            exit={{ y: -100, height: 0, opacity: 0 }}
+            className={expandClasses}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

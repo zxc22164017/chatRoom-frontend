@@ -12,7 +12,7 @@ const Post = ({ post }) => {
 
   return (
     <div
-      className="w-full border-b-2 rounded p-2 hover:bg-slate-200 hover:cursor-pointer"
+      className="w-full border-b-2 rounded p-2 hover:bg-sky-100 hover:cursor-pointer"
       onClick={() => {
         nav(`/post/${post._id}`);
       }}

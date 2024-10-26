@@ -21,13 +21,13 @@ const SideBar = ({}) => {
   };
 
   return (
-    <div className="block w-12 h-1/3 rounded  xl:w-60 fixed top-14 xl:mt-0 xl:h-full xl:rounded-none">
+    <div className="block w-14 z-10 h-1/3 rounded bg-white shadow-xl xl:hover:w-60 transition-all duration-200 fixed group top-14 xl:mt-0 xl:h-full xl:rounded-none">
       <div
         onClick={handleNavChat}
-        className="flex items-center w-full h-20 xl:p-4   hover:cursor-pointer hover:bg-topic-300"
+        className="flex items-center w-full h-20   hover:cursor-pointer hover:bg-sky-100"
       >
-        <IoChatboxEllipsesSharp className="text-sky-500 w-full h-full xl:h-8 xl:w-8 mx-2" />
-        <h1 className="hidden xl:block text-xl">chat room</h1>
+        <IoChatboxEllipsesSharp className="text-sky-500 h-8 w-8 mx-2" />
+        <h1 className="hidden xl:group-hover:block text-xl ">chat room</h1>
       </div>
       <Communities />
       {isAdmin && (

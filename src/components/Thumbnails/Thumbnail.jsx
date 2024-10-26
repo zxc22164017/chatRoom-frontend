@@ -25,7 +25,7 @@ const Thumbnail = ({
   if (image) {
     content = (
       <LazyLoadImage
-        className="object-cover object-center h-full w-full"
+        className="object-cover object-center h-full z-0 w-full"
         rel="dns-prefetch"
         effect="blur"
         width={"100%"}

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import useConvertToDate from "../../hooks/useConvertToDate";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import useIsUrl from "../../hooks/useIsUrl";
+import { motion } from "framer-motion";
 
 import classNames from "classnames";
 
@@ -36,8 +37,8 @@ const Message = ({ sender, reciever, message, ...rest }) => {
     }
   );
   const classInner = classNames("rounded-md h-auto  p-2 ", {
-    "bg-amber-100 ": sender,
-    "bg-violet-100 ": reciever,
+    "bg-sky-200 ": sender,
+    "bg-emerald-100 ": reciever,
   });
 
   const date = useConvertToDate("time", message.createTime);

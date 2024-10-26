@@ -83,7 +83,7 @@ const SideBar = ({}) => {
         <h1 className=" hidden lg:block font-bold text-2xl pl-2  ">Chats</h1>
         <Button
           className={
-            "rounded-full border-none lg:mx-4 h-12 w-12 hover:bg-slate-200"
+            "rounded-full border-none lg:mx-4 h-12 w-12 hover:bg-sky-200"
           }
           onClick={() => {
             setShowModal(true);

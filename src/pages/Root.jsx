@@ -33,7 +33,7 @@ function Root() {
 
   if (jwt) {
     content = (
-      <div ref={div} className=" flex flex-col min-h-screen bg-topic-500">
+      <div ref={div} className=" flex flex-col min-h-screen bg-topic-100">
         <NavBar />
         <Outlet />
         {show && <BackToTop />}
@@ -41,7 +41,7 @@ function Root() {
     );
   } else {
     content = (
-      <div className="relative max-h-svh bg-topic-500 overflow-hidden">
+      <div className="relative max-h-svh bg-topic-100 overflow-hidden">
         <Outlet />
       </div>
     );

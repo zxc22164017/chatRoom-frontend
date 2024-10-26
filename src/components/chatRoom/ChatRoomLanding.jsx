@@ -10,11 +10,11 @@ const ChatRoomLanding = () => {
 
   return (
     <div className="h-full w-full flex flex-col items-center gap-4 justify-center">
-      <h1 className="font-extrabold text-4xl text-violet-500">
+      <h1 className="font-extrabold text-4xl text-sky-500">
         Click the side bar to start chatting
       </h1>
       <p className="text-lg text-gray-400">or</p>
-      <h2 className="font-bold text-3xl text-amber-500">
+      <h2 className="font-bold text-3xl text-emerald-500">
         Use the search bar above to find users
       </h2>
     </div>

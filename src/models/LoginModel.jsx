@@ -18,7 +18,7 @@ const LoginModel = ({ onChange, onRegister, onForget }) => {
       localStorage.setItem("jwt", payload.token);
       setTimeout(() => {
         location.reload();
-      }, 1000);
+      }, 200);
     } catch (error) {
       if (error.originalStatus === 401) {
         setError("email or password is not correct");
@@ -69,6 +69,7 @@ const LoginModel = ({ onChange, onRegister, onForget }) => {
           type="button"
           onClick={() => {
             onChange();
+
             onForget();
           }}
         >
