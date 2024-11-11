@@ -82,7 +82,7 @@ const MessageSection = ({ sendMessageResult }) => {
         </div>
       )}
       {messages}
-      {currentUser._id === roomId && <ChatRoomLanding />}
+      {currentUser?._id === roomId && <ChatRoomLanding />}
     </div>
   );
 };
