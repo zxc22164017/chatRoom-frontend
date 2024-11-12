@@ -30,9 +30,12 @@ Deployed on [AWS EC2](https://aws.amazon.com/tw/ec2/)
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)-Library for hashing data
 - [JSON web token](https://jwt.io/)-a standard method for representing claims securely between two parties
 - [AWS S3](https://aws.amazon.com/tw/s3/)-cloud platform to store images
-- [MongoDB](https://www.mongodb.com/community/forums/t/advice-for-chat-schema-design/114166)-Document database to store data
 - [Mongoose](https://mongoosejs.com/)-nodejs ODM
-- [Redis](https://redis.io/)-nonSQL database for caching data
+
+### Database
+
+- [MongoDB](https://www.mongodb.com/community/forums/t/advice-for-chat-schema-design/114166)-Document database to store data
+- [Redis](https://redis.io/)-nonSQL database for caching data,serving as cache for MongoDB here
 
 ### Deployment
 
