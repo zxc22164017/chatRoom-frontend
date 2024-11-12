@@ -183,7 +183,11 @@ const socketApi = createApi({
             const socket = await getSocket();
             const listener = (data) => {
               updateCachedData((currentCacheData) => {
-                currentCacheData.unshift(data);
+                if (Array.isArray(data)) {
+                  currentCacheData.unshift(...data);
+                } else {
+                  currentCacheData.unshift(data);
+                }
               });
             };
             socket.on("notification", listener);

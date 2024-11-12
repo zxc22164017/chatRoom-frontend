@@ -15,7 +15,7 @@ const Drawer = ({ setShow, children, ...rest }) => {
 
   return ReactDOM.createPortal(
     <div>
-      <div className="fixed inset-0 z-20 bg-black opacity-50"></div>
+      <div className="fixed  inset-0 z-20 bg-black opacity-50"></div>
       <div
         className={`fixed z-50 inset-y-0 right-0 w-96  rounded-md bg-white  ${"animate-slideIn"} ${
           slideOut && "animate-slideOut"

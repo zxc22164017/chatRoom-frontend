@@ -39,7 +39,7 @@ const Notification = () => {
             key={index}
             className="relative text-sm hover:bg-sky-100 p-2 border-b-2 hover:cursor-pointer active:bg-sky-200"
           >
-            {item.notification}
+            {item?.notification}
           </div>
         );
       });
