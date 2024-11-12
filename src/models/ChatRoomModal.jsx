@@ -99,8 +99,10 @@ const ChatRoomModal = ({ onChange }) => {
 
     const users = selectUser.map((user) => user._id);
     users.push(currentUser._id);
+
     addRoom({ users, name });
     onChange();
+    location.reload();
   };
 
   return (
