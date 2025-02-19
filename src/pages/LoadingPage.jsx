@@ -1,5 +1,4 @@
 import LoadingFancy from "../components/Loading/LoadingFancy";
-import React from "react";
 
 const LoadingPage = () => {
   return (

@@ -74,7 +74,11 @@ const userApi = createApi({
       }),
       getUser: builder.query({
         providesTags: (result, error) => {
-          return [{ type: "user", id: result._id }];
+          if (!error) {
+            return [{ type: "user", id: result._id }];
+          } else {
+            return [{ type: "user", id: "error" }];
+          }
         },
         query: () => {
           return {

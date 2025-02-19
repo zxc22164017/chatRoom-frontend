@@ -1,4 +1,5 @@
-# Overview
+
+
 
 This project is a MERN stack forum with a real-time chat room, allowing users post threads, comment, and chat with other users
 
@@ -84,3 +85,4 @@ https://github.com/user-attachments/assets/982ab454-800b-43ba-af74-770e731a66cc
 - WebRTC for real-time video chat
 - Redis implementation for backend caching
 - And More....
+
