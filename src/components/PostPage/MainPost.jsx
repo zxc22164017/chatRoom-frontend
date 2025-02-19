@@ -57,7 +57,7 @@ const MainPost = () => {
         <Header community={data.community} />
         <div className="flex flex-col px-2 md:px-8">
           <h1 className="text-4xl my-4">{data.title}</h1>
-          <div className="flex w-full justify-between group">
+          <div className="flex w-full justify-between ">
             <UserTemplate
               onClick={() => {
                 nav(`/profile/${author._id}`);

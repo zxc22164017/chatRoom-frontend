@@ -23,7 +23,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Pull Image from docker hub
-        run: docker pull zxc22164017/reactjs-app:latest
+        run: sudo docker pull zxc22164017/reactjs-app:latest
       - name: Delete old container
         run: docker rm -f reactjs-app-container
       - name: Run Docker Container

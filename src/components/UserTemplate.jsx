@@ -17,22 +17,22 @@ const UserTemplate = ({
     className
   );
   const thumbnailClasses = classNames(
-    "h-14 w-14 group-active:scale-90",
+    "h-14 w-14 group-active/userTemplate:scale-90",
     thumbnailClassname
   );
   const firstLineClasses = classNames(
-    "text-lg group-hover:underline decoration-black group-active:text-blue-500 ",
+    "text-lg group-hover/userTemplate:underline decoration-black group-active/userTemplate:text-blue-500 ",
     firstLineClassname
   );
   const secondLineClasses = classNames(
-    "text-sm w-full text-ellipsis  text-slate-500 group-hover:underline  group-active:text-blue-500",
+    "text-sm w-full text-ellipsis  text-slate-500 group-hover/userTemplate:underline  group-active/userTemplate:text-blue-500",
     secondLineClassname
   );
 
   return (
     <div className={classes} {...rest}>
       <div
-        className=" flex items-center group hover:cursor-pointer  "
+        className=" flex items-center group/userTemplate hover:cursor-pointer  "
         {...rest}
       >
         <Thumbnail className={thumbnailClasses} image={image} alt={name} />
