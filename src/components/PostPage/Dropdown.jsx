@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Panel from "../Panel";
 import { IoMdMore } from "react-icons/io";
 import Button from "../Button";

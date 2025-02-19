@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Panel from "../Panel";
 import { IoMdMore } from "react-icons/io";
 import Button from "../Button";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import NavBarDropdownOption from "../NavBar/NavBarDropdownOption";
-import { useNavigate } from "react-router-dom";
 import { useDeleteCommentMutation } from "../../store";
 import DoubleConfirmModal from "../../models/DoubleConfirmModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +12,6 @@ const DropdownComment = ({ className, author, setEdit, comment }) => {
   const currentUser = useGetLoginInfo();
   const [deleteComment, commentResult] = useDeleteCommentMutation();
 
-  const nav = useNavigate();
   const divElement = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const [show, setShow] = useState(false);

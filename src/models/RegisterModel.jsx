@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Page01 from "../components/RegisterForm/Page01";
 import Page02 from "../components/RegisterForm/Page02";
 import Page03 from "../components/RegisterForm/Page03";
@@ -12,7 +12,6 @@ import LoadingDot from "../components/Loading/LoadingDot";
 
 const RegisterModel = ({ onChange, onLogin }) => {
   const [page, setPage] = useState(0);
-  const [time, setTime] = useState();
   const [error, setError] = useState("");
 
   const options = [

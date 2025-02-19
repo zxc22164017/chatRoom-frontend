@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Button from "../Button";
 import { BsFillTelephoneFill, BsFillInfoCircleFill } from "react-icons/bs";
 import Thumbnail from "../Thumbnails/Thumbnail";
@@ -14,7 +13,7 @@ const Header = ({ setShow }) => {
   const currentUser = useGetLoginInfo();
   let content;
   let userToDisplay;
-  const { data, error, isLoading } = useGetSingleRoomQuery(_id);
+  const { data, isLoading } = useGetSingleRoomQuery(_id);
 
   if (isLoading) {
     content = <Skeleton times={1} className={"h-full"} />;

@@ -90,17 +90,7 @@ const socketApi = createApi({
           const { roomId, input } = data;
           return socketEmitAsPromise(socket)(roomId, input);
         },
-        async onQueryStarted(
-          data,
-          {
-            dispatch,
-            getState,
-            extra,
-            requestId,
-            queryFulfilled,
-            getCacheEntry,
-          }
-        ) {
+        async onQueryStarted(data, { dispatch, getState, queryFulfilled }) {
           const user = userApi.endpoints.getUser.select()(getState()).data;
           const { roomId } = data;
           // console.log("socket", data);
@@ -153,17 +143,14 @@ const socketApi = createApi({
           data,
           {
             dispatch,
-            getState,
-            extra,
-            requestId,
+
             queryFulfilled,
-            getCacheEntry,
           }
         ) {
           const { roomId } = data;
           try {
             const result = (await queryFulfilled).data;
-            const patchResult = dispatch(
+            dispatch(
               socketApi.util.updateQueryData("getMessage", roomId, (draft) => {
                 draft.unshift(...result);
               })

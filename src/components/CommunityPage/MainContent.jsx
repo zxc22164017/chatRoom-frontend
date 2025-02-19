@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import Button from "../Button";
 import { FaInfoCircle } from "react-icons/fa";
@@ -48,12 +48,14 @@ const MainContent = () => {
         <div className="relative">
           <Thumbnail
             image={data?.banner}
+            alt={`${data.name} banner`}
             className={
               "bg-gray-700 h-48 md:h-64  rounded-sm ml-0 ring-0 hover:cursor-auto"
             }
           />
           <Thumbnail
             image={data?.icon}
+            alt={`${data.name} icon`}
             className={
               "absolute w-20 h-20 md:w-36 md:h-36 -bottom-10 md:-bottom-[72px] left-4 hover:cursor-auto"
             }

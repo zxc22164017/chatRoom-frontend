@@ -1,6 +1,4 @@
-import React from "react";
 import Thumbnail from "../Thumbnails/Thumbnail";
-import { useSelector, useDispatch } from "react-redux";
 import Panel from "../Panel";
 import { useState, useEffect, useRef } from "react";
 import NavBarDropdownOption from "./NavBarDropdownOption";
@@ -13,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const NavBarDropdown = () => {
   const nav = useNavigate();
   const divElement = useRef();
-  const [logout, result] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const userInfo = useGetUserQuery().data;
 
   const [isOpen, setIsOpen] = useState(false);

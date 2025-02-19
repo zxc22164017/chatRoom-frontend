@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Drawer from "../Drawer.jsx";
 import ExpandablePanel from "../ExpandablePanel";
 import Thumbnail from "../Thumbnails/Thumbnail";
@@ -45,9 +44,9 @@ const RuleDrawer = ({ setShow, community, managers }) => {
 
   return (
     <Drawer setShow={setShow} className="items-start">
-      <h1 className="text-xl mb-4 font-semibold ">
+      <span className="text-xl mb-4 font-semibold ">
         {community?.label || community?.name} rules
-      </h1>
+      </span>
       {managers && <h2>Managers</h2>}
       <div className="flex">{renderManagers}</div>
       <ol className="list-decimal">{renderRules}</ol>

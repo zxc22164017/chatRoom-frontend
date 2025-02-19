@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { BiSolidMessageAltDetail } from "react-icons/bi";
 import Button from "../Button";
@@ -15,7 +15,7 @@ const Footer = ({
 }) => {
   const { _id } = useParams();
   const currentUser = useGetLoginInfo();
-  const [likePost, result] = useLikePostMutation();
+  const [likePost] = useLikePostMutation();
 
   const [liked, setLiked] = useState(likes.includes(currentUser._id));
   const handleLike = () => {

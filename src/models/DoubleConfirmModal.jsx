@@ -1,4 +1,3 @@
-import React from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import LoadingFancy from "../components/Loading/LoadingFancy";

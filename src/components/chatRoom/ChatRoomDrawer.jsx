@@ -20,7 +20,7 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
   const [name, setName] = useState("");
   const [img, setImg] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const { data, error, isLoading } = useGetSingleRoomQuery(_id);
+  const { data } = useGetSingleRoomQuery(_id);
   const [patchRoom, patchResult] = usePatchRoomMutation();
   const [uploadImg, result] = useUploadImgMutation();
   const currentUser = useGetLoginInfo();
@@ -100,6 +100,7 @@ const ChatRoomDrawer = ({ setShow, setShowUsers }) => {
                       onClick={() => {
                         nav(`/profile/${user._id}`);
                       }}
+                      alt={user.username}
                     />
                     <p className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                       {user.username}

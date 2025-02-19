@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingFancy from "../components/Loading/LoadingFancy";
 import Alert from "../components/Alert";
 import CommunityAndRules from "../components/CreatePostPage/CommunityAndRules";
@@ -16,7 +16,7 @@ import {
 const EditPostPage = () => {
   const nav = useNavigate();
   const { _id } = useParams();
-  const { data, error, isLoading } = useGetSinglePostQuery(_id);
+  const { data, isLoading } = useGetSinglePostQuery(_id);
   const [patchPost, patchResult] = usePatchPostMutation();
   const [uploadImg, imgResult] = useUploadImgMutation();
   const [img, setImg] = useState(null);
@@ -101,7 +101,7 @@ const EditPostPage = () => {
           <div className="flex items-center justify-between ">
             <UploadImg handleImage={handleImage} />
             <Button primary rounded className="h-10 w-20 mr-4">
-              <h1>Post</h1>
+              Post
             </Button>
           </div>
         </form>

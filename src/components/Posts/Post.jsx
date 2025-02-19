@@ -18,12 +18,16 @@ const Post = ({ post }) => {
       }}
     >
       <div className="flex mt-1 text-gray-500">
-        <Thumbnail className={"w-6 h-6"} image={community.icon} />
+        <Thumbnail
+          className={"w-6 h-6"}
+          image={community.icon}
+          alt={community.name}
+        />
         <p className="text-sm mx-2 ">
           {community.name} • {time}
         </p>
       </div>
-      <h1 className="text-2xl font-semibold">{post.title}</h1>
+      <h2 className="text-2xl font-semibold">{post.title}</h2>
       <p className="truncate overflow-hidden text-nowrap mt-2 mb-1 text-gray-600">
         {post.content}
       </p>
@@ -31,6 +35,7 @@ const Post = ({ post }) => {
         {post.image && (
           <Thumbnail
             image={post.image}
+            alt={post.title}
             className="bg-slate-600 w-full mx-auto h-[390px] rounded-md"
           />
         )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetSinglePostQuery,
@@ -18,9 +18,9 @@ import Dropdown from "./Dropdown";
 const MainPost = () => {
   const nav = useNavigate();
   const { _id } = useParams();
-  const { data, error, isLoading } = useGetSinglePostQuery(_id);
+  const { data, isLoading } = useGetSinglePostQuery(_id);
   const [addComment, result] = useAddCommentMutation();
-  const [uploadImg, finalResult] = useUploadImgMutation();
+  const [uploadImg] = useUploadImgMutation();
   const convertToDate = useConvertToDate;
   const [formData, setformData] = useState("");
   const [img, setImg] = useState(null);
@@ -78,6 +78,7 @@ const MainPost = () => {
               <Thumbnail
                 className={"max-w-max my-4 max-h-max rounded-none"}
                 image={data.image}
+                alt={data.title}
               />
             )}
           </div>

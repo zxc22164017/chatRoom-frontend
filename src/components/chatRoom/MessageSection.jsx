@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useGetMessageQuery, useGetMoreMessageMutation } from "../../store";
 import Message from "./Message";
 import LoadingFancy from "../Loading/LoadingFancy";
@@ -61,7 +61,7 @@ const MessageSection = ({ sendMessageResult }) => {
       </div>
     );
   } else if (data) {
-    messages = data.map((message, index) => {
+    messages = data.map((message) => {
       if (message.sender._id === currentUser._id) {
         return <Message key={message._id} sender message={message} />;
       } else {

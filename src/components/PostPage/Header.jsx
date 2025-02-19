@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../Button";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import { FaArrowLeft } from "react-icons/fa";
@@ -23,7 +22,11 @@ const Header = ({ community }) => {
         }}
         className="flex items-center ml-2 hover:bg-sky-100 p-2 transition-colors duration-200 gap-2 hover:cursor-pointer"
       >
-        <Thumbnail className={"w-10 h-10"} image={community.icon} />
+        <Thumbnail
+          className={"w-10 h-10"}
+          image={community.icon}
+          alt={community.name}
+        />
         <h2>{community.name}</h2>
       </div>
     </div>

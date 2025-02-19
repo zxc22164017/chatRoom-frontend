@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGetCommunitiesQuery } from "../../store";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import Dropdown from "../Dropdown";
@@ -49,8 +49,12 @@ const CommunityAndRules = ({ formData, setFormData, editable, community }) => {
         </div>
       ) : (
         <div className="border-2 rounded-full w-1/3 px-4 py-2  flex items-center ">
-          <Thumbnail className={"h-8 w-8 "} image={community?.icon} />
-          <h1 className="w-full text-lg ml-2">{community.name}</h1>
+          <Thumbnail
+            className={"h-8 w-8 "}
+            image={community?.icon}
+            alt={community.name}
+          />
+          <span className="w-full text-lg ml-2">{community.name}</span>
         </div>
       )}
       <Button

@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 
 const Input = ({ text, type, id, onChange, value, ...rest }) => {

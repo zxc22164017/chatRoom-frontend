@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
 import { useNavigate, useParams } from "react-router-dom";
 import { SearchUsers } from "../components/Search/SearchUsers";
@@ -17,7 +17,7 @@ const EditCommunityPage = () => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
   const [patchCommunity, patchResult] = usePatchCommunityMutation();
-  const [uploadImg, uploadResult] = useUploadImgMutation();
+  const [uploadImg] = useUploadImgMutation();
   const { data } = useGetSingleCommunityQuery(communityName);
   const [formData, setFormData] = useState({
     name: "",

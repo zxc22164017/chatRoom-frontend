@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Textarea from "../Textarea";
 import ThumbnailWithPreview from "../Thumbnails/ThumbnailWithPreview";
 import Button from "../Button";
@@ -7,7 +7,7 @@ import { useUploadImgMutation, usePatchCommentMutation } from "../../store";
 const EditComment = ({ comment, setEdit }) => {
   const [formData, setFormData] = useState(comment.content);
   const [patchComment, patchResult] = usePatchCommentMutation();
-  const [uploadImg, uploadResult] = useUploadImgMutation();
+  const [uploadImg] = useUploadImgMutation();
   const [img, setImg] = useState();
   const handleSubmit = async () => {
     let key;
