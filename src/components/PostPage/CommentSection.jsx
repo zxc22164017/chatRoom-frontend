@@ -1,5 +1,4 @@
 import Comment from "./Comment";
-import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
 import { useGetCommentQuery } from "../../store";
 import { useParams } from "react-router-dom";
 import LoadingFancy from "../Loading/LoadingFancy";

@@ -24,7 +24,7 @@ const commentApi = createApi({
   endpoints(builder) {
     return {
       getComment: builder.query({
-        providesTags: (result, error, { postId }) => {
+        providesTags: (result) => {
           let tags;
           if (result) {
             tags = result.map((item) => {
@@ -68,17 +68,7 @@ const commentApi = createApi({
             },
           };
         },
-        async onQueryStarted(
-          data,
-          {
-            dispatch,
-            getState,
-            extra,
-            requestId,
-            queryFulfilled,
-            getCacheEntry,
-          }
-        ) {
+        async onQueryStarted(data, { dispatch, queryFulfilled }) {
           const { postId } = data;
           try {
             await queryFulfilled;

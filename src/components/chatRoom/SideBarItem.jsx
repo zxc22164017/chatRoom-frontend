@@ -1,6 +1,5 @@
 import UserTemplate from "../UserTemplate";
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Thumbnail from "../Thumbnails/Thumbnail";
 
@@ -48,6 +47,7 @@ const SideBarItem = ({ object, currentUser }) => {
         image={img}
         className={"h-10 w-10 m-2 block lg:hidden hover:cursor-pointer"}
         onClick={handleClick}
+        alt={name}
       />
     </>
   );

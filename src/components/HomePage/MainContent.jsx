@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { changeSearchType, useGetPostsQuery } from "../../store";
 import Skeleton from "../Loading/Skeleton";
 import Post from "../Posts/Post";
 import Alert from "../Alert";
 import { useDispatch } from "react-redux";
 
-const MainContent = ({}) => {
+const MainContent = () => {
   const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   const [noMore, setNoMore] = useState(false);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Input from "../Input";
 
 import useDeBounce from "../../hooks/useDeBounce";
@@ -96,7 +96,7 @@ export function SearchUsers({ setSelectUser, selectUser, existUsers }) {
   return (
     <>
       <div className="border-y-2 w-full  flex items-center ">
-        <h1>With:</h1>
+        <span>With:</span>
         <div className="flex flex-wrap">
           {renderExistedUsers} {renderSelect}
         </div>

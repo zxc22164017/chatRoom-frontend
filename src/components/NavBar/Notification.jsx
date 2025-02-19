@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { useGetNotificationQuery } from "../../store";
 import Panel from "../Panel";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Notification = () => {
-  const { data, isFetching, error } = useGetNotificationQuery();
+  const { data } = useGetNotificationQuery();
   const nav = useNavigate();
   const [notify, setNotify] = useState(false);
   const [show, setShow] = useState(false);

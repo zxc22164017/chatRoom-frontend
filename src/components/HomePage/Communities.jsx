@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGetCommunitiesQuery } from "../../store";
 import { RiGroup2Line } from "react-icons/ri";
 import ExpandablePanel from "../ExpandablePanel";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Communities = () => {
   const nav = useNavigate();
-  const { data, isLoading, error } = useGetCommunitiesQuery();
+  const { data } = useGetCommunitiesQuery();
   const [show, setShow] = useState(false);
   const header = (
     <>
@@ -56,7 +56,7 @@ const Communities = () => {
       </div>
       {show && (
         <Drawer setShow={setShow}>
-          <h1 className=" text-xl ">Communities</h1>
+          <span className=" text-xl ">Communities</span>
           {communities}
         </Drawer>
       )}

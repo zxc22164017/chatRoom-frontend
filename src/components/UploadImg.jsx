@@ -1,4 +1,3 @@
-import React from "react";
 import { CiImageOn } from "react-icons/ci";
 const UploadImg = ({ handleImage, htmlFor, ...rest }) => {
   return (

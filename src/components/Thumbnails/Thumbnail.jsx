@@ -1,6 +1,5 @@
 import { MdFace6 } from "react-icons/md";
 import classNames from "classnames";
-import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 const Thumbnail = ({
@@ -10,6 +9,7 @@ const Thumbnail = ({
   htmlFor,
   upload,
   image,
+  alt,
   ...rest
 }) => {
   const classes = classNames(
@@ -31,7 +31,7 @@ const Thumbnail = ({
         width={"100%"}
         height={"100%"}
         src={`https://chat-room-asdzxc1234448.s3.ap-northeast-1.amazonaws.com/${image}`}
-        alt="profile"
+        alt={alt ? alt : "profile"}
       />
     );
   } else if (children) {

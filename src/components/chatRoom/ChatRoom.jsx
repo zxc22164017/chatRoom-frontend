@@ -1,7 +1,7 @@
 import ChatRoomDrawer from "./ChatRoomDrawer";
 import MessageSection from "./MessageSection";
 import Header from "./Header";
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "../Input";
 import { IoSend } from "react-icons/io5";
 import { useSendMessageMutation, useUploadImgMutation } from "../../store";
@@ -11,14 +11,14 @@ import { useParams } from "react-router-dom";
 import UploadImg from "../UploadImg";
 import { AnimatePresence } from "framer-motion";
 
-const ChatRoom = ({}) => {
+const ChatRoom = () => {
   const roomId = useParams()._id;
   const [input, setInput] = useState("");
 
   const [show, setShow] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
   const [sendMessage, result] = useSendMessageMutation();
-  const [uploadImg, imgResult] = useUploadImgMutation();
+  const [uploadImg] = useUploadImgMutation();
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (input) {

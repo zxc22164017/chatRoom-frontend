@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Communities from "./Communities";
 import Button from "../Button";
 
-const SideBar = ({}) => {
+const SideBar = () => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -27,7 +27,7 @@ const SideBar = ({}) => {
         className="flex items-center w-full h-20   hover:cursor-pointer hover:bg-sky-100"
       >
         <IoChatboxEllipsesSharp className="text-sky-500 h-8 w-8 mx-2" />
-        <h1 className="hidden xl:group-hover:block text-xl ">chat room</h1>
+        <span className="hidden xl:group-hover:block text-xl ">chat room</span>
       </div>
       <Communities />
       {isAdmin && (

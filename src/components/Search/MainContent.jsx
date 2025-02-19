@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import UserResult from "../Search/UserResult";
 import {
   useSearchUsersQuery,
@@ -11,7 +11,7 @@ import Post from "../Posts/Post";
 import Alert from "../Alert";
 import { useSelector, useDispatch } from "react-redux";
 
-const MainContent = ({}) => {
+const MainContent = () => {
   const { searchType, input, skipSearch, page, noMore } = useSelector(
     (state) => {
       return state.search;

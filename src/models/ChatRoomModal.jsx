@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Modal from "../components/Modal";
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -16,7 +16,7 @@ const ChatRoomModal = ({ onChange }) => {
     { search, page: 0 },
     { skip: skipSearch || search === "" }
   );
-  const [addRoom, addResult] = useAddRoomMutation();
+  const [addRoom] = useAddRoomMutation();
   const [selectUser, setSelectUser] = useState([]);
   const [name, setName] = useState("");
   const deBounce = useCallback(

@@ -1,8 +1,7 @@
 import AddFriendButton from "./AddFriendButton";
-import React, { useEffect, useState } from "react";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import Button from "../Button";
-import { useGetProfileInfoQuery, useUploadImgMutation } from "../../store";
+import { useGetProfileInfoQuery } from "../../store";
 import LoadingDot from "../Loading/LoadingDot";
 import Alert from "../Alert";
 import useConvertToDate from "../../hooks/useConvertToDate";
@@ -58,11 +57,13 @@ const PersonalInfo = ({ id }) => {
         <Thumbnail
           htmlFor={"coverPhoto"}
           image={data.coverPhoto}
+          alt={`${data.username} coverPhoto`}
           className={"bg-gray-700 h-64  rounded-sm ml-0  "}
         />
         <Thumbnail
           htmlFor={"thumbnail"}
           image={data.thumbnail}
+          alt={`${data.username} profile`}
           className={
             "w-48 h-48 self-center -mt-24 z-10 border-2 border-black hover:border-none   "
           }

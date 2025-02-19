@@ -1,6 +1,6 @@
 import { SearchUsers } from "../components/Search/SearchUsers";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { useGetSingleRoomQuery, usePatchRoomMutation } from "../store";
@@ -10,8 +10,8 @@ import { useParams } from "react-router-dom";
 const AddUsersModal = ({ onChange }) => {
   const { _id } = useParams();
 
-  const [patchRoom, patchResult] = usePatchRoomMutation();
-  const { data, error, isLoading } = useGetSingleRoomQuery(_id);
+  const [patchRoom] = usePatchRoomMutation();
+  const { data } = useGetSingleRoomQuery(_id);
   const [selectUser, setSelectUser] = useState([]);
 
   const handlSubmit = (e) => {

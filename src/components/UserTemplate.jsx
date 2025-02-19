@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 import Thumbnail from "../components/Thumbnails/Thumbnail";
 
@@ -36,9 +35,9 @@ const UserTemplate = ({
         className=" flex items-center group/userTemplate hover:cursor-pointer  "
         {...rest}
       >
-        <Thumbnail className={thumbnailClasses} image={image} />
+        <Thumbnail className={thumbnailClasses} image={image} alt={name} />
         <div className="px-2 w-36 ">
-          <h1 className={firstLineClasses}>{name}</h1>
+          <span className={firstLineClasses}>{name}</span>
           <p className={secondLineClasses}>{info}</p>
         </div>
       </div>

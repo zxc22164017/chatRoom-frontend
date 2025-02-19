@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import UserTemplate from "../UserTemplate";
 import { FaHeart } from "react-icons/fa6";
 import Button from "../Button";
 import useConvertToDate from "../../hooks/useConvertToDate";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLikeCommentMutation } from "../../store";
 import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import Thumbnail from "../Thumbnails/Thumbnail";
@@ -12,11 +12,10 @@ import EditComment from "./EditComment";
 const Comment = ({ comment, setPage, index, setNoMore }) => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
-  const { _id } = useParams();
   const { author } = comment;
   const time = useConvertToDate("time", comment.postTime);
   const [liked, setLiked] = useState(comment.likes.includes(currentUser._id));
-  const [likeComment, result] = useLikeCommentMutation();
+  const [likeComment] = useLikeCommentMutation();
   const [edit, setEdit] = useState(false);
   const handleLike = () => {
     setLiked(!liked);
@@ -58,6 +57,7 @@ const Comment = ({ comment, setPage, index, setNoMore }) => {
             <Thumbnail
               className={"rounded-none max-w-md"}
               image={comment.image}
+              alt={comment.content}
             />
           )}
           <div className="absolute right-6 bottom-0">

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Panel from "../Panel";
 import { useNavigate } from "react-router-dom";
 import ResultPanelItem from "./ResultPanelItem";
