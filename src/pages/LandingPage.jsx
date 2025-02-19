@@ -1,4 +1,4 @@
-import react, { Suspense, useState } from "react";
+import react, { useState } from "react";
 import Button from "../components/Button";
 import { AnimatePresence } from "framer-motion";
 const LoginModel = react.lazy(() => import("../models/LoginModel"));

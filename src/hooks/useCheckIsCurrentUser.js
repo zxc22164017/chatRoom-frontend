@@ -1,9 +1,13 @@
 import { useGetUserQuery } from "../store";
 
 const useCheckIsCurrentUser = (userId) => {
-  const currentUser = useGetUserQuery().data;
+  try {
+    const currentUser = useGetUserQuery().data;
 
-  return userId === currentUser?._id ? true : false;
+    return userId === currentUser?._id ? true : false;
+  } catch (error) {
+    return false;
+  }
 };
 
 export default useCheckIsCurrentUser;

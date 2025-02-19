@@ -36,14 +36,15 @@ const Textarea = ({
 
   return (
     <motion.div
-      initial={{ height: 60 }}
+      initial={value ? false : { height: 60 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       whileHover={{ height: "auto" }}
+      whileFocus={{ height: "auto" }}
       onHoverStart={() => setIsHover(true)}
       onHoverEnd={() => {
-        setIsHover(false);
+        if (!value) setIsHover(false);
       }}
-      className={` bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full ${rest.className}`}
+      className={` bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full   ${rest.className}`}
     >
       <textarea
         ref={textRef}
