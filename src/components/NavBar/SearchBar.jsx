@@ -121,14 +121,14 @@ const SearchBar = ({ setShow, show }) => {
             <HiMagnifyingGlass />
           </Button>
         </form>
-        {isOpen && (
+        {/* {isOpen && (
           <ResultPanel
             className={"hidden md:block absolute"}
             userData={userResult?.data}
             postData={postResult?.data}
             setShow={setIsOpen}
           />
-        )}
+        )} */}
       </div>
       {show && (
         <form
