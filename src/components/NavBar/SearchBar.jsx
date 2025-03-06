@@ -104,20 +104,20 @@ const SearchBar = ({ setShow, show }) => {
                 dispatch(changeSearchType(option));
               }}
               options={options}
-              className="hidden md:flex bg-topic-300 rounded-r-none z-10 h-9"
-              optClassname={"bg-topic-300"}
+              className="hidden md:flex bg-contrast-100 rounded-r-none z-10 h-9"
+              optClassname={"bg-contrast-50"}
             />
           </div>
           <input
             type="text"
             onChange={handleInput}
-            className=" hidden md:block bg-topic-300 pl-2 focus:ring-0  w-full active:border-none rounded-r-l outline-none placeholder:text-topic-800"
+            className=" hidden md:block bg-contrast-50 pl-2 focus:ring-0  w-full active:border-none rounded-r-l outline-none placeholder:text-topic-800"
             placeholder={
               searchType?.label ? `Search for ${searchType?.label}` : "search"
             }
             value={input}
           />
-          <Button className="hidden md:block border-topic-700 w-10 rounded-r bg-topic-300  ">
+          <Button className="hidden md:block border-contrast-100 w-10 rounded-r bg-contrast-50  ">
             <HiMagnifyingGlass />
           </Button>
         </form>
@@ -133,7 +133,7 @@ const SearchBar = ({ setShow, show }) => {
       {show && (
         <form
           onSubmit={handleSubmit}
-          className="block md:hidden absolute w-full top-14 px-2 py-4 bg-topic-100"
+          className="block md:hidden absolute w-full top-14 px-2 py-4 bg-contrast-300"
         >
           <div>
             <Dropdown
@@ -142,8 +142,8 @@ const SearchBar = ({ setShow, show }) => {
                 dispatch(changeSearchType(option));
               }}
               options={options}
-              className="flex md:hidden bg-topic-200 rounded-r-none z-10 h-14"
-              optClassname={"bg-topic-50 w-full"}
+              className="flex md:hidden bg-contrast-200 rounded-r-none z-10 h-14"
+              optClassname={"bg-contrast-50 w-full"}
             />
           </div>
           <input
@@ -158,7 +158,7 @@ const SearchBar = ({ setShow, show }) => {
               dispatch(changeSkipSearch(true));
               dispatch(changeSearchInput(e.target.value));
             }}
-            className=" block md:hidden px-2 py-6 bg-topic-300 rounded-md text-lg focus:ring-0  w-full active:border-none rounded-r-l outline-none placeholder:text-topic-800"
+            className=" block md:hidden px-2 py-6 bg-contrast-100 rounded-md text-lg focus:ring-0  w-full active:border-none rounded-r-l outline-none placeholder:text-topic-800"
             placeholder={
               searchType?.label ? `Search for ${searchType?.label}` : "search"
             }

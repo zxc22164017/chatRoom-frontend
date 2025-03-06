@@ -16,8 +16,8 @@ const Skeleton = ({ times, className }) => {
           <div className=" flex items-center border-b-2 w-full hover:cursor-pointer ">
             <Thumbnail />
             <div className="px-2">
-              <div className=" bg-gray-300 rounded-full w-16 h-6 "></div>
-              <div className=" bg-gray-300 rounded-full mt-2 w-16 h-2"></div>
+              <div className=" bg-contrast-500 rounded-full w-16 h-6 "></div>
+              <div className=" bg-contrast-300 rounded-full mt-2 w-16 h-2"></div>
             </div>
           </div>
         </div>

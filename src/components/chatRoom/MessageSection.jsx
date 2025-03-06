@@ -72,7 +72,7 @@ const MessageSection = ({ sendMessageResult }) => {
 
   return (
     <div
-      className="flex flex-col  justify-start grow mx-2 overflow-y-auto overflow-x-hidden"
+      className="flex flex-col  justify-start grow px-2 overflow-y-auto overflow-x-hidden"
       ref={chatRoomElement}
       onScroll={handleInfiniteScroll}
     >

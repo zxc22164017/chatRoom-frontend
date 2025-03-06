@@ -15,8 +15,8 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="fixed w-full top-0 z-20">
-      <div className="bg-topic-900 h-14 shadow-lg flex justify-between items-center ">
+    <div className="fixed w-full top-0 z-20 shadow-lg">
+      <div className="bg-contrast-900 h-14 shadow-lg flex justify-between items-center ">
         <div
           className="block md:flex h-14 md:pl-10 justify-center items-center hover:cursor-pointer"
           onClick={() => {
