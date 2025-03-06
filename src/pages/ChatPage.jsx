@@ -4,7 +4,7 @@ import SideBar from "../components/chatRoom/SideBar";
 
 const ChatPage = () => {
   return (
-    <div className=" bg-white flex flex-grow mt-14 h-96 xl:mx-40  shadow">
+    <div className=" bg-white flex flex-grow mt-14 h-96 xl:mx-40  shadow-md">
       <SideBar />
       <ChatRoom />
     </div>

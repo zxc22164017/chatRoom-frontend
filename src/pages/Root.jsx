@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDetectLogin } from "../hooks/useDetectLogin";
 import NavBar from "../components/NavBar/NavBar";
 import BackToTop from "../components/BackToTop";
@@ -36,7 +36,7 @@ function Root() {
 
   if (jwt && isSuccess) {
     content = (
-      <div ref={div} className=" flex flex-col min-h-screen bg-topic-100">
+      <div ref={div} className=" flex flex-col min-h-screen bg-topic-50 ">
         <NavBar />
         <Outlet />
         {show && <BackToTop />}
@@ -44,7 +44,7 @@ function Root() {
     );
   } else {
     content = (
-      <div className="relative max-h-svh bg-topic-100 overflow-hidden">
+      <div className="relative max-h-svh bg-topic-50 overflow-hidden">
         <Outlet />
       </div>
     );

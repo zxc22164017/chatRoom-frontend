@@ -1,8 +1,6 @@
-import PropTypes from "prop-types";
 import useConvertToDate from "../../hooks/useConvertToDate";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import useIsUrl from "../../hooks/useIsUrl";
-import { motion } from "framer-motion";
 
 import classNames from "classnames";
 
@@ -29,16 +27,16 @@ const Message = ({ sender, reciever, message, ...rest }) => {
   }
 
   const classOuter = classNames(
-    "max-w-sm flex my-1 items-center group flex-wrap",
+    "max-w-sm flex  items-center group flex-wrap",
     rest.className,
     {
-      " self-end": sender,
+      " self-end text-end": sender,
       " self-start": reciever,
     }
   );
   const classInner = classNames("rounded-md h-auto  p-2 ", {
-    "bg-sky-200 ": sender,
-    "bg-emerald-100 ": reciever,
+    "bg-topic-100 ": sender,
+    "bg-contrast-50 ": reciever,
   });
 
   const date = useConvertToDate("time", message.createTime);
@@ -53,7 +51,7 @@ const Message = ({ sender, reciever, message, ...rest }) => {
       )}
       <div className="relative">
         <div className={classInner}>{content}</div>
-        <p className=" text-end  hidden text-xs  group-hover:block text-gray-500">
+        <p className="  opacity-0 text-xs group-hover:opacity-100   text-gray-500">
           {date}
         </p>
       </div>

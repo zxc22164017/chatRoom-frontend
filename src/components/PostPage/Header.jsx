@@ -6,13 +6,15 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ community }) => {
   const nav = useNavigate();
   return (
-    <div className="flex items-center  p-2 border-b-2">
+    <div
+      className={`flex items-center  p-2 bg-contrast-50 border-b-2 border-contrast-100`}
+    >
       <Button
         onClick={() => {
           nav(-1);
         }}
         rounded
-        className="h-8 p-1 md:-ml-4 w-8 hover:animate-changeColor bg-gray-200 border-none"
+        className="h-8 p-1  w-8 hover:animate-changeColor  border-none"
       >
         <FaArrowLeft className="h-full w-full" />
       </Button>
@@ -20,7 +22,7 @@ const Header = ({ community }) => {
         onClick={() => {
           nav(`/c/${community.name}`);
         }}
-        className="flex items-center ml-2 hover:bg-sky-100 p-2 transition-colors duration-200 gap-2 hover:cursor-pointer"
+        className="flex items-center ml-2 hover:bg-violet-900 p-2 transition-colors duration-200 gap-2 hover:cursor-pointer hover:text-violet-50"
       >
         <Thumbnail
           className={"w-10 h-10"}

@@ -55,16 +55,16 @@ const MainPost = () => {
     content = (
       <>
         <Header community={data.community} />
-        <div className="flex flex-col px-2 md:px-8">
-          <h1 className="text-4xl my-4">{data.title}</h1>
-          <div className="flex w-full justify-between ">
+        <div className="w-full bg-topic-50 pb-1 shadow">
+          <h1 className="text-5xl px-3 pb-2  font-semibold  ">{data.title}</h1>
+          <div className="flex w-full mt-1 justify-between items-center ">
             <UserTemplate
               onClick={() => {
                 nav(`/profile/${author._id}`);
               }}
               image={author.thumbnail}
               thumbnailClassname={"h-8 m-0 w-8 p-0 m-0"}
-              className={"m-0 p-0 h-9 hover:bg-transparent"}
+              className={"m-0 p-0 h-9 hover:bg-transparent "}
               firstLineClassname={"text-sm"}
               secondLineClassname={"text-xs"}
               name={author.username}
@@ -72,7 +72,9 @@ const MainPost = () => {
             />
             <Dropdown author={author} post={data} />
           </div>
-          <div className="mt-4 whitespace-pre text-wrap">
+        </div>
+        <div className="flex flex-col px-2 md:px-8">
+          <div className="mt-4 whitespace-pre text-wrap text-lg">
             <p>{data.content}</p>
             {data.image && (
               <Thumbnail
@@ -83,7 +85,7 @@ const MainPost = () => {
             )}
           </div>
           <Footer
-            className="mt-6"
+            className=" border-b-2 py-2"
             iconClassName="text-2xl"
             textClassName="text-sm"
             enableButton
@@ -115,7 +117,7 @@ const MainPost = () => {
   }
 
   return (
-    <div className="bg-white ml-14 xl:mx-80 p-1 md:p-4 min-w-sm flex flex-grow flex-col mt-14">
+    <div className="bg-white ml-14 xl:mx-80   min-w-sm flex flex-grow flex-col mt-14 shadow-md">
       {content}
     </div>
   );

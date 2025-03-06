@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
 
@@ -20,8 +19,8 @@ const Button = ({
       "px-3 py-1.5 border-2 flex items-center justify-center hover:animate-btnHover active:ring w-full active:scale-90 transition-all duration-150 ease-in-out",
       rest.className,
       {
-        "border-violet-500 bg-violet-500 text-white": primary,
-        "border-violet-800 bg-violet-800 text-white": secondary,
+        "border-contrast-500 bg-contrast-500 text-white": primary,
+        "border-contrast-800 bg-contrast-800 text-white": secondary,
         "border-green-500 bg-green-500 text-white": success,
         "border-yellow-500 bg-yellow-500 text-white": warning,
         "border-red-800 bg-red-500 text-white": danger,

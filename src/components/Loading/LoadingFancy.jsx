@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 const LoadingFancy = () => {
   const loadingCircle = classNames(
-    "absolute w-[20px] h-[20px] animate-loadingCircle bg-sky-500 origin-center rounded-full z-10 "
+    "absolute w-[20px] h-[20px] animate-loadingCircle bg-contrast-700 origin-center rounded-full z-10 "
   );
   const loadingShadow = classNames(
     "absolute w-[20px] h-[2px] bg-black opacity-50 blur-[2px] rounded-full top-[84px] origin-center animate-loadingShadow  "
@@ -28,7 +28,7 @@ const LoadingFancy = () => {
         }
       ></div>
 
-      <span className="absolute top-[82px] text-purple-500 font-bold text-2xl tracking-[12px] left-[15%]">
+      <span className="absolute top-[82px] text-contrast-500 font-bold text-2xl tracking-[12px] left-[15%]">
         Loading
       </span>
     </div>

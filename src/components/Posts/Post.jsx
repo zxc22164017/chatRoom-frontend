@@ -1,5 +1,5 @@
 import Footer from "../PostPage/Footer";
-import React, { useState } from "react";
+
 import Thumbnail from "../Thumbnails/Thumbnail";
 
 import useConvertToDate from "../../hooks/useConvertToDate";
@@ -12,7 +12,7 @@ const Post = ({ post }) => {
 
   return (
     <div
-      className="w-full border-b-2 rounded p-2 hover:bg-sky-100 hover:cursor-pointer"
+      className="w-full border-b-2 rounded py-2 px-5 hover:bg-sky-100 hover:cursor-pointer"
       onClick={() => {
         nav(`/post/${post._id}`);
       }}
@@ -36,7 +36,7 @@ const Post = ({ post }) => {
           <Thumbnail
             image={post.image}
             alt={post.title}
-            className="bg-slate-600 w-full mx-auto h-[390px] rounded-md"
+            className="bg-slate-600 w-full  mx-auto h-[390px] rounded-md"
           />
         )}
         <Footer likes={post.likes} comments={post.comments.length} />
