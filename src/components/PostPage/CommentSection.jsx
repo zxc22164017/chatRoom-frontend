@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import LoadingFancy from "../Loading/LoadingFancy";
 import { useEffect, useState } from "react";
 import Skeleton from "../Loading/Skeleton";
+import Alert from "../Alert";
 const CommentSection = () => {
   const [page, setPage] = useState(0);
   const { _id } = useParams();
@@ -12,6 +13,7 @@ const CommentSection = () => {
     page,
   });
   const [noMore, setNoMore] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   function scrollEvent() {
     if (
       window.scrollY + window.innerHeight >=
@@ -32,8 +34,13 @@ const CommentSection = () => {
     };
   }, [page, isLoading, isFetching]);
   useEffect(() => {
-    if (error?.status === 404) {
-      setNoMore(true);
+    if (error) {
+      if (error?.status === 404) {
+        setNoMore(true);
+        setErrorMsg("no more data");
+      } else {
+        setErrorMsg("error");
+      }
     }
   }, [error]);
 
@@ -62,6 +69,11 @@ const CommentSection = () => {
     <div className=" mb-4">
       {content}
       {isFetching && <Skeleton times={1} className={"w-full h-20"} />}
+      {errorMsg && (
+        <div className="h-8">
+          <Alert error={errorMsg} />
+        </div>
+      )}
     </div>
   );
 };

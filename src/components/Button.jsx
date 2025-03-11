@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { twMerge } from "tailwind-merge";
+import { animate, motion } from "framer-motion";
 
 const Button = ({
   children,
@@ -16,7 +17,7 @@ const Button = ({
 }) => {
   const classes = twMerge(
     classNames(
-      "px-3 py-1.5 border-2 flex items-center justify-center hover:animate-btnHover active:ring w-full active:scale-90 transition-all duration-150 ease-in-out",
+      "px-3 py-1.5 border-2 flex items-center justify-center ",
       rest.className,
       {
         "border-contrast-500 bg-contrast-500 text-white": primary,
@@ -24,7 +25,7 @@ const Button = ({
         "border-green-500 bg-green-500 text-white": success,
         "border-yellow-500 bg-yellow-500 text-white": warning,
         "border-red-800 bg-red-500 text-white": danger,
-        "border-gray-500 bg-gray-500 text-white hover:cursor-not-allowed hover:scale-100 active:ring-0 disabled":
+        "border-gray-500 bg-gray-500 text-white hover:cursor-not-allowed  disabled":
           disabled,
       },
       {
@@ -34,10 +35,32 @@ const Button = ({
     )
   );
 
+  const btnAnimation = {
+    initial: {
+      scale: 1,
+    },
+    hover: (disabled) =>
+      !disabled && {
+        scale: [1.05, 1.1, 1.05, 1.1],
+      },
+    tap: {
+      scale: 0.8,
+    },
+  };
+
   return (
-    <button {...rest} disabled={disabled} className={classes}>
+    <motion.button
+      custom={disabled}
+      variants={btnAnimation}
+      initial="initial"
+      whileHover={"hover"}
+      whileTap={"tap"}
+      {...rest}
+      disabled={disabled}
+      className={classes}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 };
 

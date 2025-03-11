@@ -20,7 +20,7 @@ const uploadApi = createApi({
     return {
       uploadImg: builder.mutation({
         async queryFn(
-          { file, type, id, tokenFromReg },
+          { file, tokenFromReg },
           baseQueryApi,
           extraOptions,
           baseQuery
@@ -38,7 +38,7 @@ const uploadApi = createApi({
               key = data.key;
             }
 
-            const res = await axios.put(presignedUrl, file, {
+           await axios.put(presignedUrl, file, {
               headers: {
                 "Content-Type": file.type,
               },

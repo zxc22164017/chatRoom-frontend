@@ -1,4 +1,3 @@
-import React from "react";
 import SideBar from "../components/HomePage/SideBar";
 import MainContent from "../components/CommunityPage/MainContent";
 

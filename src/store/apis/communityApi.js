@@ -31,7 +31,7 @@ const CommunityApi = createApi({
         },
       }),
       getSingleCommunity: builder.query({
-        providesTags: (result, error, name) => {
+        providesTags: (result) => {
           return [{ type: "community", id: result._id }];
         },
         query: (name) => {

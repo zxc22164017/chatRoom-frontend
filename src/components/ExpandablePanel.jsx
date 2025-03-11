@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 import classNames from "classnames";
-import { motion, AnimatePresence, animate } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ExpandablePanel = ({
   header,
@@ -23,6 +23,25 @@ const ExpandablePanel = ({
     "flex p-2 justify-between items-center  hover:cursor-pointer ",
     headerClassName
   );
+  const expandAnimation = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.3, // Stagger children by .3 seconds
+        y: { stiffness: 1000, velocity: -100 },
+      },
+    },
+    hidden: {
+      y: 100,
+      opacity: 0,
+      transition: {
+        when: "afterChildren",
+        y: { stiffness: 1000 },
+      },
+    },
+  };
 
   return (
     <div className={outerClasses}>
@@ -36,15 +55,14 @@ const ExpandablePanel = ({
       </div>
       <AnimatePresence>
         {expend && (
-          <motion.div
-            initial={{ y: -100, height: 0, opacity: 0 }}
-            animate={{ y: 0, height: "100%", opacity: 1 }}
-            transition={{ ease: "easeInOut", duration: 0.3 }}
-            exit={{ y: -100, height: 0, opacity: 0 }}
+          <motion.ul
+            variants={expandAnimation}
+            animate={expend ? "open" : "hidden"}
+            exit={"hidden"}
             className={expandClasses}
           >
             {children}
-          </motion.div>
+          </motion.ul>
         )}
       </AnimatePresence>
     </div>

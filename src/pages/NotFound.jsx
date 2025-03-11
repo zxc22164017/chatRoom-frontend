@@ -1,4 +1,4 @@
-import React from "react";
+
 import dead from "../assets/dead.svg";
 import four from "../assets/four.svg";
 import classNames from "classnames";

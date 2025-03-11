@@ -5,6 +5,7 @@ import ExpandablePanel from "../ExpandablePanel";
 import Thumbnail from "../Thumbnails/Thumbnail";
 import Drawer from "../Drawer.jsx";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Communities = () => {
   const nav = useNavigate();
@@ -16,11 +17,21 @@ const Communities = () => {
       <h1 className="hidden group-hover:block text-xl ">Communities</h1>
     </>
   );
+  const listAnimation = {
+    hidden: { opacity: 0 },
+    visible: (index) => ({
+      opacity: 1,
+      transition: { delay: index * 0.3 },
+    }),
+  };
+
   let communities;
   if (data) {
-    communities = data.map((community) => {
+    communities = data.map((community, index) => {
       return (
-        <div
+        <motion.li
+          custom={index}
+          variants={listAnimation}
           onClick={() => {
             nav(`/c/${community.name}`);
             setShow(false);
@@ -32,7 +43,7 @@ const Communities = () => {
           <h2 className="mx-2 xl:hidden group-hover:block text-slate-600">
             {community.name}
           </h2>
-        </div>
+        </motion.li>
       );
     });
   }

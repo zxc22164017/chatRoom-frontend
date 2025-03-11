@@ -32,12 +32,12 @@ const SideBar = () => {
       <Communities />
       {isAdmin && (
         <Button
-          className="overflow-hidden border-none "
+          className="overflow-hidden border-none w-full "
           onClick={() => {
             nav("/rhufiewjifewfwepfNewCommunity");
           }}
         >
-          add community
+          <p className="text-nowrap truncate">add community</p>
         </Button>
       )}
     </div>

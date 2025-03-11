@@ -115,16 +115,14 @@ const Profile = () => {
         htmlFor={"thumbnail"}
         className={"h-28 w-28 z-10 -mt-14 rounded-full"}
       />
-      <div className="group w-full">
-        <Textarea
-          className="my-2"
-          text={"info"}
-          noSubmit
-          onChange={(e) => {
-            setFormData({ ...formData, info: e.target.value });
-          }}
-        />
-      </div>
+      <Textarea
+        className="my-2"
+        text={"info"}
+        noSubmit
+        onChange={(e) => {
+          setFormData({ ...formData, info: e.target.value });
+        }}
+      />
       {renderInfo}
 
       <Input
