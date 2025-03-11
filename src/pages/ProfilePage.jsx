@@ -1,5 +1,5 @@
 import PersonalInfo from "../components/profile/PersonalInfo";
-import React from "react";
+
 
 import { useParams } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import useGetLoginInfo from "../hooks/useGetLoginInfo";
 import { useNavigate } from "react-router-dom";
 import UploadImg from "../components/UploadImg";
@@ -11,7 +11,7 @@ const CreateCommunityPage = () => {
   const nav = useNavigate();
   const currentUser = useGetLoginInfo();
   const [addCommunity, result] = useAddCommunityMutation();
-  const [uploadImg, uploadResult] = useUploadImgMutation();
+  const [uploadImg] = useUploadImgMutation();
   const [formData, setFormData] = useState({
     name: "",
     description: "",

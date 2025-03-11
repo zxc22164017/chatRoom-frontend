@@ -7,7 +7,7 @@ const Header = ({ community }) => {
   const nav = useNavigate();
   return (
     <div
-      className={`flex items-center  p-2 bg-contrast-50 border-b-2 border-contrast-100`}
+      className={`flex items-center  p-2 bg-topic-100 border-b-2 border-contrast-100`}
     >
       <Button
         onClick={() => {

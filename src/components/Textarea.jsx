@@ -36,25 +36,21 @@ const Textarea = ({
 
   return (
     <motion.div
-      initial={value ? false : { height: 60 }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
-      whileHover={{ height: "auto" }}
-      whileFocus={{ height: "auto" }}
       onHoverStart={() => setIsHover(true)}
       onHoverEnd={() => {
         if (!value) setIsHover(false);
       }}
       className={` bg-white group focus-within:border-blue-500 relative border-2 p-2 rounded-lg w-full   ${rest.className}`}
     >
-      <textarea
+      <motion.textarea
         ref={textRef}
         onChange={onChange}
         value={value}
         name=""
         id={htmlFor}
         placeholder=" "
-        className="w-full peer h-6 text-gray-900  bg-white border-0 outline-none  "
-      ></textarea>
+        className="w-full peer h-6 text-gray-900  bg-white border-0 outline-none  resize-none"
+      ></motion.textarea>
       <label
         htmlFor={htmlFor}
         className="absolute hover:cursor-text text-md text-gray-500 duration-150 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/4 peer-placeholder-shown:top-1/4 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
@@ -78,7 +74,7 @@ const Textarea = ({
         >
           <UploadImg handleImage={handleImage} />
           <Button
-            disabled={isLoading}
+            disabled={isLoading || !value}
             primary
             rounded
             className="  h-9 w-24  transition-all duration-150 "

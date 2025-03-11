@@ -8,7 +8,7 @@ import ChatRoomModal from "../../models/ChatRoomModal";
 import { useEffect, useState } from "react";
 import { useLeaveRoomMutation } from "../../store";
 
-const SideBar = ({}) => {
+const SideBar = () => {
   const [showModal, setShowModal] = useState(false);
   const currentUser = useGetLoginInfo();
   const [page, setPage] = useState(0);

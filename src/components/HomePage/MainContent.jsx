@@ -9,6 +9,7 @@ const MainContent = () => {
   const [page, setPage] = useState(0);
   const dispatch = useDispatch();
   const [noMore, setNoMore] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const { data, error, isLoading, isFetching } = useGetPostsQuery(page);
   function scrollEvent() {
     if (
@@ -30,8 +31,13 @@ const MainContent = () => {
     };
   }, [page]);
   useEffect(() => {
-    if (error?.status === 404) {
-      setNoMore(true);
+    if (error) {
+      if (error?.status === 404) {
+        setNoMore(true);
+        setErrorMsg("no more data");
+      } else {
+        setErrorMsg("Error");
+      }
     }
   }, [error]);
 
@@ -60,9 +66,9 @@ const MainContent = () => {
     <div className="bg-white shadow-md ml-14 xl:mx-96 min-w-sm flex flex-grow flex-col mt-14">
       {content}
       {isFetching && <Skeleton times={1} className={"w-full h-20"} />}
-      {noMore && (
-        <div className="flex justify-center items-center">
-          <p className="">no more data</p>
+      {errorMsg && (
+        <div className="flex justify-center items-center h-10">
+          <Alert error={errorMsg} />
         </div>
       )}
     </div>

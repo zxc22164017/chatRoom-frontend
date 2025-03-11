@@ -7,6 +7,7 @@ import useGetLoginInfo from "../../hooks/useGetLoginInfo";
 import { useDispatch } from "react-redux";
 import { socketApi } from "../../store/apis/socketApi";
 import ChatRoomLanding from "./ChatRoomLanding.jsx";
+import Alert from "../Alert.jsx";
 const MessageSection = ({ sendMessageResult }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -17,6 +18,7 @@ const MessageSection = ({ sendMessageResult }) => {
   const chatRoomElement = useRef();
   const [getMoreMessage, result] = useGetMoreMessageMutation();
   const [noMore, setNoMore] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const handleInfiniteScroll = (e) => {
     if (
       e.target.scrollTop === 0 &&
@@ -34,8 +36,13 @@ const MessageSection = ({ sendMessageResult }) => {
     setPage(1);
   }, [roomId]);
   useEffect(() => {
-    if (result.error?.status === 404) {
-      setNoMore(true);
+    if (result.error) {
+      if (result.error?.status === 404) {
+        setNoMore(true);
+        setErrorMsg("no more");
+      } else {
+        setErrorMsg("error");
+      }
     }
   }, [result.error]);
   useEffect(() => {
@@ -83,6 +90,7 @@ const MessageSection = ({ sendMessageResult }) => {
       )}
       {messages}
       {currentUser?._id === roomId && <ChatRoomLanding />}
+      {errorMsg && <Alert error={errorMsg} />}
     </div>
   );
 };
