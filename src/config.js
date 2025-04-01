@@ -1,7 +1,5 @@
 const config = {
-
-  SERVER: "http://52.195.177.191:8080",
-
+  SERVER: "http://18.179.30.122:8080",
 };
 
 export const { SERVER } = config;
